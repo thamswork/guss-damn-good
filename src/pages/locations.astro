@@ -3,83 +3,68 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 
 const branches = [
-  { name:"Siam Paragon", address:"991 Rama I Rd, Pathum Wan, Bangkok", hours:"10:00–22:00", delivery:true, phone:"+66 2 123 4567", maps:"https://maps.google.com", thumb:"https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&q=70", formats:["scoop","sundae","milkshake","cake"] },
-  { name:"Central World", address:"4/1-4/2 Rama I Rd, Pathum Wan, Bangkok", hours:"10:00–22:00", delivery:true, phone:"+66 2 234 5678", maps:"https://maps.google.com", thumb:"https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=400&q=70", formats:["scoop","sundae","soft_serve"] },
-  { name:"EmQuartier", address:"689 Sukhumvit Rd, Khlong Toei, Bangkok", hours:"10:00–22:00", delivery:false, phone:"+66 2 345 6789", maps:"https://maps.google.com", thumb:"https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=400&q=70", formats:["scoop","sundae","milkshake"] },
-  { name:"The Mall Ngamwongwan", address:"Ngam Wong Wan Rd, Nonthaburi", hours:"10:00–21:00", delivery:false, phone:"+66 2 456 7890", maps:"https://maps.google.com", thumb:"https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400&q=70", formats:["scoop","sundae"] },
-  { name:"Central Chidlom", address:"1027 Phloen Chit Rd, Lumpini, Bangkok", hours:"10:00–21:00", delivery:false, phone:"+66 2 567 8901", maps:"https://maps.google.com", thumb:"https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=400&q=70", formats:["scoop","cake"] },
-  { name:"Terminal 21 Asok", address:"88 Sukhumvit Soi 19, Watthana, Bangkok", hours:"10:00–22:00", delivery:true, phone:"+66 2 678 9012", maps:"https://maps.google.com", thumb:"https://images.unsplash.com/photo-1519999482648-25049ddd37b1?w=400&q=70", formats:["scoop","sundae","popsicle"] },
-  { name:"Mega Bangna", address:"39 Bangna-Trad Rd, Bang Phli, Samut Prakan", hours:"10:00–22:00", delivery:false, phone:"+66 2 789 0123", maps:"https://maps.google.com", thumb:"https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=400&q=70", formats:["scoop","sundae","soft_serve"] },
-  { name:"Central Pinklao", address:"7/222 Barommaratchachonnani Rd, Bangkok", hours:"10:00–21:00", delivery:false, phone:"+66 2 890 1234", maps:"https://maps.google.com", thumb:"https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&q=70", formats:["scoop"] },
-  { name:"ICONSIAM", address:"299 Charoen Nakhon Rd, Khlong Ton Sai", hours:"10:00–22:00", delivery:true, phone:"+66 2 901 2345", maps:"https://maps.google.com", thumb:"https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=400&q=70", formats:["scoop","sundae","milkshake","cake"] },
+  { name:"Siam Paragon",        address:"991 Rama I Rd, Pathum Wan",              hours:"10:00–22:00", delivery:true,  maps:"https://maps.google.com", thumb:"https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&q=70", formats:["Scoop","Sundae","Shake","Cake"] },
+  { name:"Central World",       address:"4/1 Rama I Rd, Pathum Wan",              hours:"10:00–22:00", delivery:true,  maps:"https://maps.google.com", thumb:"https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=500&q=70", formats:["Scoop","Sundae","Soft Serve"] },
+  { name:"EmQuartier",          address:"689 Sukhumvit Rd, Khlong Toei",          hours:"10:00–22:00", delivery:false, maps:"https://maps.google.com", thumb:"https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=500&q=70", formats:["Scoop","Sundae","Shake"] },
+  { name:"The Mall Ngamwongwan",address:"Ngam Wong Wan Rd, Nonthaburi",           hours:"10:00–21:00", delivery:false, maps:"https://maps.google.com", thumb:"https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=500&q=70", formats:["Scoop","Sundae"] },
+  { name:"Central Chidlom",     address:"1027 Phloen Chit Rd, Lumpini",          hours:"10:00–21:00", delivery:false, maps:"https://maps.google.com", thumb:"https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=500&q=70", formats:["Scoop","Cake"] },
+  { name:"Terminal 21 Asok",    address:"88 Sukhumvit Soi 19, Watthana",          hours:"10:00–22:00", delivery:true,  maps:"https://maps.google.com", thumb:"https://images.unsplash.com/photo-1519999482648-25049ddd37b1?w=500&q=70", formats:["Scoop","Sundae","Popsicle"] },
+  { name:"Mega Bangna",         address:"39 Bangna-Trad Rd, Bang Phli",           hours:"10:00–22:00", delivery:false, maps:"https://maps.google.com", thumb:"https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=500&q=70", formats:["Scoop","Sundae","Soft Serve"] },
+  { name:"Central Pinklao",     address:"7/222 Barommaratchachonnani Rd",          hours:"10:00–21:00", delivery:false, maps:"https://maps.google.com", thumb:"https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=500&q=70", formats:["Scoop"] },
+  { name:"ICONSIAM",            address:"299 Charoen Nakhon Rd, Khlong Ton Sai",  hours:"10:00–22:00", delivery:true,  maps:"https://maps.google.com", thumb:"https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=500&q=70", formats:["Scoop","Sundae","Shake","Cake"] },
 ];
-
-const fmtLabel = { scoop:"Scoop", sundae:"Sundae", milkshake:"Shake", soft_serve:"Soft Serve", cake:"Cake", popsicle:"Popsicle" };
 ---
 
 <BaseLayout title="Find Us — Guss Damn Good">
   <Nav/>
 
-  <header class="lh">
-    <div class="lh__left">
-      <p class="eyebrow" style="margin-bottom:1.25rem;">18 Branches · Bangkok</p>
+  <!-- HEADER -->
+  <header class="lh reveal">
+    <div>
+      <p class="eyebrow" style="margin-bottom:1rem;">18 Branches · Bangkok</p>
       <h1 class="lh__title">Find Us.</h1>
-      <p class="lh__sub">Walk in, scoop up, feel something.</p>
+      <p class="lh__sub">Walk in. Scoop up. Feel something.</p>
     </div>
-    <div class="lh__stats">
-      <div class="lh__stat"><span class="lh__stat-n">18</span><span class="eyebrow">Branches</span></div>
-      <div class="lh__stat"><span class="lh__stat-n">7</span><span class="eyebrow">Delivery zones</span></div>
+    <div class="lh__meta">
+      <div class="lh__stat"><span class="lh__n">18</span><span class="eyebrow">Branches</span></div>
+      <div class="lh__stat"><span class="lh__n">7</span><span class="eyebrow">Delivery zones</span></div>
     </div>
   </header>
 
-  <!-- DELIVERY BANNER -->
-  <div class="dbanner">
+  <!-- DELIVERY INFO BAR -->
+  <div class="dbar">
     <span class="eyebrow">Delivery available at selected branches</span>
-    <span class="dbanner__badge">Order via GrabFood · Foodpanda · LINE MAN</span>
+    <span class="dbar__apps">GrabFood · Foodpanda · LINE MAN</span>
   </div>
 
-  <!-- 3-COLUMN GRID with thumbnails -->
+  <!-- 3-COL GRID -->
   <div class="lgrid">
-    {branches.map(b=>(
-      <div class="lcard">
-        <!-- STORE THUMBNAIL -->
+    {branches.map((b, i) => (
+      <div class={`lcard hover-lift reveal reveal-delay-${(i % 3) + 1}`}>
+        <!-- THUMBNAIL -->
         <div class="lcard__thumb">
-          <img src={b.thumb} alt={b.name} loading="lazy"/>
-          {b.delivery && <span class="lcard__delivery">Delivery</span>}
+          <img src={b.thumb} alt={`${b.name} storefront`} loading="lazy"/>
+          {b.delivery && <span class="lcard__dlv">Delivery</span>}
         </div>
-
         <!-- INFO -->
         <div class="lcard__body">
           <h3 class="lcard__name">{b.name}</h3>
           <p class="lcard__addr">{b.address}</p>
-
-          <div class="lcard__meta">
-            <div class="lcard__row">
-              <span class="eyebrow" style="min-width:44px;">Hours</span>
-              <span class="lcard__val">{b.hours}</span>
-            </div>
-            <div class="lcard__row">
-              <span class="eyebrow" style="min-width:44px;">Tel</span>
-              <span class="lcard__val">{b.phone}</span>
-            </div>
+          <div class="lcard__rows">
+            <div class="lcard__row"><span class="eyebrow" style="min-width:40px;">Hours</span><span class="lcard__v">{b.hours}</span></div>
           </div>
-
-          <!-- FORMAT TAGS -->
-          <div class="lcard__formats">
-            {b.formats.map(f=><span class="lcard__fmt">{fmtLabel[f]||f}</span>)}
+          <div class="lcard__fmts">
+            {b.formats.map(f => <span class="lcard__fmt">{f}</span>)}
           </div>
-
-          <a href={b.maps} target="_blank" rel="noopener" class="lcard__map">
-            View on Maps ↗
-          </a>
+          <a href={b.maps} target="_blank" rel="noopener" class="lcard__map">View on Maps ↗</a>
         </div>
       </div>
     ))}
   </div>
 
-  <div class="lmore">
-    <p class="eyebrow">Showing {branches.length} of 18 branches · Manage all via CMS</p>
-    <a href="/admin" style="font-family:var(--f-ui);font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--white);text-decoration:none;font-weight:400;">Open CMS ↗</a>
+  <div class="lfoot reveal">
+    <p class="eyebrow">Showing {branches.length} of 18 branches</p>
+    <a href="/admin" class="lfoot__link">Manage all locations via CMS ↗</a>
   </div>
 
   <footer class="foot">
@@ -101,53 +86,53 @@ const fmtLabel = { scoop:"Scoop", sundae:"Sundae", milkshake:"Shake", soft_serve
 <style>
   /* HEADER */
   .lh { display:flex; align-items:flex-end; justify-content:space-between; padding:8rem var(--gutter) 3rem; border-bottom:1px solid var(--g2); gap:2rem; flex-wrap:wrap; }
-  .lh__title { font-size:clamp(3rem,9vw,7.5rem); font-weight:600; color:var(--white); letter-spacing:-0.02em; line-height:0.95; margin-bottom:1rem; }
-  .lh__sub { font-family:var(--f-body); font-size:0.85rem; color:var(--g5); font-weight:300; }
-  .lh__stats { display:flex; gap:2rem; align-items:flex-end; flex-shrink:0; }
-  .lh__stat { display:flex; flex-direction:column; gap:0.35rem; }
-  .lh__stat-n { font-family:var(--f-head); font-weight:500; font-size:clamp(2rem,5vw,4rem); color:var(--white); line-height:1; letter-spacing:-0.02em; }
+  .lh__title { font-size:clamp(3rem,8vw,7rem); font-weight:500; color:var(--white); letter-spacing:-0.02em; line-height:0.95; margin-top:0.75rem; margin-bottom:0.75rem; }
+  .lh__sub { font-family:var(--f); font-size:0.8rem; color:var(--g5); font-weight:300; }
+  .lh__meta { display:flex; gap:2.5rem; align-items:flex-end; flex-shrink:0; }
+  .lh__stat { display:flex; flex-direction:column; gap:0.3rem; }
+  .lh__n { font-family:var(--f); font-weight:400; font-size:clamp(2rem,4vw,3.2rem); color:var(--white); line-height:1; letter-spacing:-0.02em; }
 
-  /* DELIVERY BANNER */
-  .dbanner { display:flex; align-items:center; justify-content:space-between; padding:0.9rem var(--gutter); border-bottom:1px solid var(--g2); background:var(--g1); flex-wrap:wrap; gap:1rem; }
-  .dbanner__badge { font-family:var(--f-ui); font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--white); font-weight:400; }
+  /* DELIVERY BAR */
+  .dbar { display:flex; align-items:center; justify-content:space-between; padding:0.85rem var(--gutter); border-bottom:1px solid var(--g2); background:var(--g1); flex-wrap:wrap; gap:0.75rem; }
+  .dbar__apps { font-family:var(--f); font-size:0.55rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--white); font-weight:400; }
 
-  /* 3-COLUMN GRID */
+  /* 3-COL GRID */
   .lgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap); background:var(--g2); border-bottom:1px solid var(--g2); }
 
-  .lcard { background:var(--g1); display:flex; flex-direction:column; }
+  .lcard { background:var(--g1); display:flex; flex-direction:column; cursor:pointer; }
 
-  /* STORE THUMBNAIL */
-  .lcard__thumb { position:relative; aspect-ratio:16/9; overflow:hidden; background:#080808; }
-  .lcard__thumb img { width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(0.2); transition:transform 0.5s ease, filter 0.4s ease; }
-  .lcard:hover .lcard__thumb img { transform:scale(1.04); filter:grayscale(0); }
-  .lcard__delivery { position:absolute; top:0.6rem; right:0.6rem; font-family:var(--f-ui); font-size:0.5rem; letter-spacing:0.18em; text-transform:uppercase; background:var(--white); color:var(--black); padding:0.18rem 0.55rem; font-weight:500; }
+  /* THUMBNAIL */
+  .lcard__thumb { position:relative; aspect-ratio:16/10; overflow:hidden; background:#080808; }
+  .lcard__thumb img { width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(0.15); transition:transform 0.55s ease, filter 0.4s ease; }
+  .lcard:hover .lcard__thumb img { transform:scale(1.05); filter:grayscale(0); }
+  .lcard__dlv { position:absolute; top:0.6rem; right:0.6rem; font-family:var(--f); font-size:0.46rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--white); color:var(--black); padding:0.18rem 0.52rem; font-weight:500; }
 
   /* BODY */
-  .lcard__body { padding:1.25rem 1.25rem 1.5rem; display:flex; flex-direction:column; gap:0.75rem; flex:1; }
-  .lcard__name { font-family:var(--f-head); font-weight:600; font-size:clamp(1rem,1.8vw,1.35rem); color:var(--white); letter-spacing:-0.01em; line-height:1.15; }
-  .lcard__addr { font-family:var(--f-body); font-size:0.78rem; color:var(--g5); line-height:1.5; font-weight:300; }
+  .lcard__body { padding:1.1rem 1.15rem 1.4rem; display:flex; flex-direction:column; gap:0.65rem; flex:1; }
+  .lcard__name { font-family:var(--f); font-weight:500; font-size:clamp(0.9rem,1.5vw,1.2rem); color:var(--white); letter-spacing:-0.01em; line-height:1.2; }
+  .lcard__addr { font-family:var(--f); font-size:0.75rem; color:var(--g5); line-height:1.5; font-weight:300; }
+  .lcard__rows { display:flex; flex-direction:column; gap:0.3rem; padding-top:0.5rem; border-top:1px solid var(--g2); }
+  .lcard__row  { display:flex; align-items:baseline; gap:0.65rem; }
+  .lcard__v    { font-family:var(--f); font-size:0.75rem; color:var(--white); font-weight:300; }
+  .lcard__fmts { display:flex; gap:0.3rem; flex-wrap:wrap; }
+  .lcard__fmt  { font-family:var(--f); font-size:0.46rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--g4); border:1px solid var(--g2); padding:0.14rem 0.45rem; font-weight:300; }
+  .lcard__map  { font-family:var(--f); font-size:0.52rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--white); text-decoration:none; font-weight:400; margin-top:auto; padding-top:0.75rem; border-top:1px solid var(--g2); transition:opacity 0.22s; display:block; }
+  .lcard__map:hover { opacity:0.45; }
 
-  .lcard__meta { display:flex; flex-direction:column; gap:0.35rem; padding-top:0.5rem; border-top:1px solid var(--g2); }
-  .lcard__row { display:flex; align-items:baseline; gap:0.75rem; }
-  .lcard__val { font-family:var(--f-body); font-size:0.78rem; color:var(--white); font-weight:300; }
+  /* FOOTER STRIP */
+  .lfoot { display:flex; align-items:center; justify-content:space-between; padding:1.4rem var(--gutter); flex-wrap:wrap; gap:1rem; }
+  .lfoot__link { font-family:var(--f); font-size:0.52rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--white); text-decoration:none; font-weight:300; transition:opacity 0.22s; }
+  .lfoot__link:hover { opacity:0.5; }
 
-  .lcard__formats { display:flex; gap:0.35rem; flex-wrap:wrap; }
-  .lcard__fmt { font-family:var(--f-ui); font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--g4); border:1px solid var(--g2); padding:0.15rem 0.5rem; font-weight:400; }
-
-  .lcard__map { font-family:var(--f-ui); font-size:0.55rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--white); text-decoration:none; font-weight:400; margin-top:auto; padding-top:0.75rem; border-top:1px solid var(--g2); transition:opacity 0.2s; }
-  .lcard__map:hover { opacity:0.5; }
-
-  .lmore { display:flex; align-items:center; justify-content:space-between; padding:1.5rem var(--gutter); border-bottom:1px solid var(--g2); flex-wrap:wrap; gap:1rem; }
-
-  /* FOOTER */
-  .foot { padding:2.5rem var(--gutter); display:flex; flex-direction:column; gap:1.25rem; }
+  /* FOOT */
+  .foot { padding:2.5rem var(--gutter); display:flex; flex-direction:column; gap:1.25rem; border-top:1px solid var(--g2); }
   .foot__top { display:flex; align-items:flex-end; justify-content:space-between; gap:2rem; flex-wrap:wrap; padding-bottom:1.5rem; border-bottom:1px solid var(--g2); }
-  .foot__brand { font-family:var(--f-head); font-weight:600; font-size:clamp(1.2rem,2.5vw,2rem); color:var(--white); letter-spacing:0.02em; text-transform:uppercase; }
-  .foot__sub { font-family:var(--f-ui); font-size:0.52rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--g4); margin-top:0.3rem; font-weight:400; }
-  .foot__nav { display:flex; gap:2rem; flex-wrap:wrap; }
-  .foot__nav a { font-family:var(--f-ui); font-size:0.55rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--g4); text-decoration:none; font-weight:400; transition:color 0.2s; }
+  .foot__brand { font-family:var(--f); font-weight:600; font-size:clamp(1.1rem,2vw,1.7rem); color:var(--white); letter-spacing:0.06em; text-transform:uppercase; }
+  .foot__sub   { font-family:var(--f); font-size:0.48rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--g4); margin-top:0.25rem; font-weight:300; }
+  .foot__nav   { display:flex; gap:2rem; flex-wrap:wrap; }
+  .foot__nav a { font-family:var(--f); font-size:0.5rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--g4); text-decoration:none; font-weight:300; transition:color 0.22s; }
   .foot__nav a:hover { color:var(--white); }
-  .foot__copy { font-family:var(--f-ui); font-size:0.5rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--g2); }
+  .foot__copy  { font-family:var(--f); font-size:0.46rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--g2); }
 
   @media(max-width:900px){ .lgrid { grid-template-columns:repeat(2,1fr); } .lh { flex-direction:column; align-items:flex-start; } }
   @media(max-width:560px){ .lgrid { grid-template-columns:1fr; } }

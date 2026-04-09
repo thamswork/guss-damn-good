@@ -4,74 +4,137 @@ import Nav from '../components/Nav.astro';
 ---
 <BaseLayout title="Our Story — Guss Damn Good">
   <Nav/>
-  <header style="padding:8rem var(--gutter) 4rem;border-bottom:1px solid var(--g2);">
-    <p style="font-family:var(--f-ui);font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--g4);margin-bottom:1.5rem;">Since 2014</p>
-    <h1 style="font-family:var(--f-head);font-weight:800;font-size:clamp(4rem,12vw,10rem);color:var(--white);max-width:900px;line-height:0.92;">Ice cream is a <em style="font-family:var(--f-script);font-weight:400;font-style:normal;opacity:0.45;font-size:1.05em;">feeling.</em></h1>
+
+  <header class="sh reveal">
+    <p class="eyebrow" style="margin-bottom:1rem;">Boston 2014 · Bangkok Now</p>
+    <h1 class="sh__title">Ice cream<br/>is a craft.</h1>
+    <p class="sh__sub">A decade of stories, turned into flavors.</p>
   </header>
 
-  <section style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--g2);">
-    <div style="padding:clamp(3rem,7vw,6rem) var(--gutter);border-right:1px solid var(--g2);">
-      <p style="font-family:var(--f-ui);font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--g4);margin-bottom:1.5rem;">Origin</p>
-      <h2 style="font-family:var(--f-head);font-weight:800;font-size:clamp(1.5rem,3vw,2.5rem);color:var(--white);margin-bottom:1.5rem;">Started in Boston, 2014.</h2>
-      <p style="font-family:var(--f-body);font-size:0.95rem;color:var(--g5);line-height:1.85;font-weight:300;">Guss Damn Good was born in Boston in 2014, from witnessing Americans eat ice cream in winter — to remember warm summer moments. We saw ice cream as more than a dessert. A vessel for emotion. A carrier of good stories.</p>
+  <section class="s2col reveal">
+    <div class="s2col__l">
+      <p class="eyebrow" style="margin-bottom:1rem;">Origin</p>
+      <h2 class="s2col__h">Started in Boston,<br/>2014.</h2>
     </div>
-    <div style="padding:clamp(3rem,7vw,6rem) var(--gutter);">
-      <p style="font-family:var(--f-ui);font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--g4);margin-bottom:1.5rem;">Philosophy</p>
-      <h2 style="font-family:var(--f-head);font-weight:800;font-size:clamp(1.5rem,3vw,2.5rem);color:var(--white);margin-bottom:1.5rem;">Story-to-Flavor.</h2>
-      <p style="font-family:var(--f-body);font-size:0.95rem;color:var(--g5);line-height:1.85;font-weight:300;">Every Guss flavor begins as a story. We gather good moments from the world around us, blend them with farm-fresh Thai milk and French cream, and craft them into a Boston texture: smooth, dense, and never too heavy. Each scoop is a story you can taste.</p>
+    <div class="s2col__r">
+      <p class="sbody">Guss Damn Good was born in Boston in 2014 from a simple observation: Americans eat ice cream in winter to remember warm summer moments. Ice cream is not just dessert — it is a vessel for memory and emotion.</p>
+      <p class="sbody" style="margin-top:1rem;">We returned to Bangkok with that idea and a method: slow-churn farm-fresh Thai milk and French cream into a Boston texture — smooth, dense, never too heavy. Every scoop activates a damn good moment.</p>
     </div>
   </section>
 
-  <section style="padding:clamp(3rem,7vw,6rem) var(--gutter);border-bottom:1px solid var(--g2);">
-    <p style="font-family:var(--f-ui);font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--g4);margin-bottom:3rem;">Our Values</p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--g2);">
-      <div style="background:var(--black);padding:3rem var(--gutter);">
-        <span style="font-family:var(--f-script);font-size:4rem;color:var(--white);opacity:0.1;display:block;line-height:1;margin-bottom:1rem;">F</span>
-        <h3 style="font-family:var(--f-head);font-weight:800;font-size:2rem;color:var(--white);margin-bottom:0.75rem;">Fun</h3>
-        <p style="font-family:var(--f-body);font-size:0.85rem;color:var(--g5);line-height:1.7;font-weight:300;">Smiles are the starting point. Every interaction, every scoop, every moment should carry joy.</p>
+  <section class="s2col reveal" style="border-top:1px solid var(--g2);">
+    <div class="s2col__l">
+      <p class="eyebrow" style="margin-bottom:1rem;">Philosophy</p>
+      <h2 class="s2col__h">Story-to-Flavor.</h2>
+    </div>
+    <div class="s2col__r">
+      <p class="sbody">Every Guss flavor begins as a story — gathered from people, places, and moments in the world around us. We translate that story into an ingredient combination, then into a flavor, then into a feeling you can taste.</p>
+      <p class="sbody" style="margin-top:1rem;">The process is slow, deliberate, and never finished. Over 200 flavors and counting, each one a record of a good moment worth preserving.</p>
+    </div>
+  </section>
+
+  <section class="vals reveal" style="border-top:1px solid var(--g2);">
+    <div class="vals__head">
+      <p class="eyebrow" style="margin-bottom:0.5rem;">Our Values</p>
+      <h2 class="vals__title">F.A.B.</h2>
+    </div>
+    <div class="vals__grid">
+      <div class="val reveal reveal-delay-1">
+        <span class="val__letter">F</span>
+        <h3 class="val__word">Fun</h3>
+        <p class="val__body">Smiles are the starting point. Every interaction, every scoop, every moment should carry genuine joy — not performed, just felt.</p>
       </div>
-      <div style="background:var(--black);padding:3rem var(--gutter);">
-        <span style="font-family:var(--f-script);font-size:4rem;color:var(--white);opacity:0.1;display:block;line-height:1;margin-bottom:1rem;">A</span>
-        <h3 style="font-family:var(--f-head);font-weight:800;font-size:2rem;color:var(--white);margin-bottom:0.75rem;">Attention to Detail</h3>
-        <p style="font-family:var(--f-body);font-size:0.85rem;color:var(--g5);line-height:1.7;font-weight:300;">Every small thing matters deeply. From the texture of the cream to the story behind a flavor.</p>
+      <div class="val reveal reveal-delay-2">
+        <span class="val__letter">A</span>
+        <h3 class="val__word">Attention to Detail</h3>
+        <p class="val__body">Every small thing matters. The temperature of the cream, the balance of sweetness, the story written on the side of the cup.</p>
       </div>
-      <div style="background:var(--black);padding:3rem var(--gutter);">
-        <span style="font-family:var(--f-script);font-size:4rem;color:var(--white);opacity:0.1;display:block;line-height:1;margin-bottom:1rem;">B</span>
-        <h3 style="font-family:var(--f-head);font-weight:800;font-size:2rem;color:var(--white);margin-bottom:0.75rem;">Bold</h3>
-        <p style="font-family:var(--f-body);font-size:0.85rem;color:var(--g5);line-height:1.7;font-weight:300;">Stand firm in what you believe. Make choices that matter. Never settle for ordinary.</p>
+      <div class="val reveal reveal-delay-3">
+        <span class="val__letter">B</span>
+        <h3 class="val__word">Bold</h3>
+        <p class="val__body">Stand firm in what you believe. Make choices that matter. Never settle for ordinary when damn good is within reach.</p>
       </div>
     </div>
   </section>
 
-  <section style="padding:clamp(3rem,7vw,6rem) var(--gutter);border-bottom:1px solid var(--g2);">
-    <p style="font-family:var(--f-ui);font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--g4);margin-bottom:3rem;">Mission & Vision</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);">
+  <section class="smv reveal" style="border-top:1px solid var(--g2);">
+    <div class="smv__block">
+      <p class="eyebrow" style="margin-bottom:0.75rem;">Mission</p>
+      <p class="smv__q">Activate Damn Good Feeling. Elevate Good Moments.</p>
+      <p class="sbody" style="margin-top:1rem;">Make every person feel genuinely great through ice cream. Not just satisfied — genuinely, deeply, damn good.</p>
+    </div>
+    <div class="smv__block" style="border-left:1px solid var(--g2);padding-left:clamp(2rem,4vw,4rem);">
+      <p class="eyebrow" style="margin-bottom:0.75rem;">Vision</p>
+      <p class="smv__q">Build a community where people enjoy passing positive energy to each other.</p>
+      <p class="sbody" style="margin-top:1rem;">We want to create a world where kindness is contagious — and ice cream is the catalyst.</p>
+    </div>
+  </section>
+
+  <div class="scta reveal">
+    <a href="/flavors" class="scta__btn">Explore all flavors →</a>
+    <a href="/collabs" class="scta__link">View collaborations</a>
+  </div>
+
+  <footer class="foot">
+    <div class="foot__top">
       <div>
-        <h3 style="font-family:var(--f-head);font-weight:800;font-size:clamp(1.2rem,2.5vw,2rem);color:var(--white);margin-bottom:1rem;">Activate Damn Good Feeling. Elevate Good Moments.</h3>
-        <p style="font-family:var(--f-body);font-size:0.9rem;color:var(--g5);line-height:1.8;font-weight:300;">Our mission is to make every person feel genuinely great through ice cream. Not just satisfied — genuinely, deeply, damn good.</p>
+        <p class="foot__brand">Guss Damn Good</p>
+        <p class="foot__sub">Feeling-Crafted Ice Cream · Bangkok · Since 2014</p>
       </div>
-      <div>
-        <h3 style="font-family:var(--f-head);font-weight:800;font-size:clamp(1.2rem,2.5vw,2rem);color:var(--white);margin-bottom:1rem;">Build a community where people enjoy passing positive energy to each other.</h3>
-        <p style="font-family:var(--f-body);font-size:0.9rem;color:var(--g5);line-height:1.8;font-weight:300;">We want to create a world where kindness is contagious — and ice cream is the catalyst.</p>
-      </div>
+      <nav class="foot__nav">
+        <a href="/flavors">Flavors</a>
+        <a href="/locations">Find Us</a>
+        <a href="/collabs">Collabs</a>
+      </nav>
     </div>
-  </section>
-
-  <footer style="padding:3rem var(--gutter);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;border-top:1px solid var(--g2);">
-    <div>
-      <p style="font-family:var(--f-head);font-weight:800;font-size:clamp(1.5rem,3vw,2.5rem);color:var(--white);">Guss Damn Good</p>
-      <p style="font-family:var(--f-script);font-size:1.2rem;color:var(--g3);">Feeling-Crafted Ice Cream</p>
-    </div>
-    <nav style="display:flex;gap:2rem;">
-      <a href="/flavors" style="font-family:var(--f-ui);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--g4);text-decoration:none;">Flavors</a>
-      <a href="/locations" style="font-family:var(--f-ui);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--g4);text-decoration:none;">Locations</a>
-      <a href="/collabs" style="font-family:var(--f-ui);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--g4);text-decoration:none;">Collabs</a>
-    </nav>
+    <p class="foot__copy">© 2014–2025 Guss Damn Good</p>
   </footer>
 </BaseLayout>
+
 <style>
+  .sh { padding:8rem var(--gutter) 4rem; border-bottom:1px solid var(--g2); }
+  .sh__title { font-size:clamp(3rem,9vw,8rem); font-weight:500; color:var(--white); letter-spacing:-0.02em; line-height:0.95; margin-top:1rem; margin-bottom:1rem; }
+  .sh__sub { font-family:var(--f); font-size:0.82rem; color:var(--g5); font-weight:300; }
+
+  .s2col { display:grid; grid-template-columns:280px 1fr; gap:0; border-bottom:1px solid var(--g2); }
+  .s2col__l { padding:clamp(2.5rem,5vw,4rem) var(--gutter); border-right:1px solid var(--g2); display:flex; flex-direction:column; gap:0.75rem; }
+  .s2col__h { font-size:clamp(1.3rem,2.8vw,2.2rem); font-weight:500; color:var(--white); letter-spacing:-0.015em; line-height:1.1; }
+  .s2col__r { padding:clamp(2.5rem,5vw,4rem) var(--gutter); }
+  .sbody { font-family:var(--f); font-size:0.88rem; color:var(--g5); line-height:1.85; font-weight:300; max-width:520px; }
+
+  .vals { padding:clamp(2.5rem,5vw,4rem) var(--gutter); border-bottom:1px solid var(--g2); }
+  .vals__head { margin-bottom:2.5rem; }
+  .vals__title { font-size:clamp(1.5rem,3vw,2.5rem); font-weight:400; color:var(--white); letter-spacing:-0.01em; margin-top:0.4rem; }
+  .vals__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--g2); }
+  .val { background:var(--black); padding:2rem 1.5rem; display:flex; flex-direction:column; gap:0.6rem; }
+  .val__letter { font-family:var(--f); font-size:2rem; font-weight:300; color:var(--g2); line-height:1; }
+  .val__word   { font-family:var(--f); font-size:clamp(0.9rem,1.5vw,1.2rem); font-weight:500; color:var(--white); }
+  .val__body   { font-family:var(--f); font-size:0.8rem; color:var(--g5); line-height:1.7; font-weight:300; }
+
+  .smv { display:grid; grid-template-columns:1fr 1fr; gap:0; padding:clamp(2.5rem,5vw,4rem) var(--gutter); border-bottom:1px solid var(--g2); }
+  .smv__block { display:flex; flex-direction:column; }
+  .smv__q { font-family:var(--f); font-size:clamp(1rem,2vw,1.5rem); font-weight:400; color:var(--white); line-height:1.3; letter-spacing:-0.01em; }
+
+  .scta { padding:2.5rem var(--gutter); display:flex; align-items:center; gap:2rem; border-bottom:1px solid var(--g2); flex-wrap:wrap; }
+  .scta__btn  { font-family:var(--f); font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--black); background:var(--white); padding:0.7rem 1.6rem; text-decoration:none; font-weight:500; transition:opacity 0.22s; }
+  .scta__btn:hover { opacity:0.85; }
+  .scta__link { font-family:var(--f); font-size:0.58rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--g4); text-decoration:none; font-weight:300; transition:color 0.22s; }
+  .scta__link:hover { color:var(--white); }
+
+  .foot { padding:2.5rem var(--gutter); display:flex; flex-direction:column; gap:1.25rem; border-top:1px solid var(--g2); }
+  .foot__top { display:flex; align-items:flex-end; justify-content:space-between; gap:2rem; flex-wrap:wrap; padding-bottom:1.5rem; border-bottom:1px solid var(--g2); }
+  .foot__brand { font-family:var(--f); font-weight:600; font-size:clamp(1rem,1.8vw,1.6rem); color:var(--white); letter-spacing:0.06em; text-transform:uppercase; }
+  .foot__sub   { font-family:var(--f); font-size:0.48rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--g4); margin-top:0.25rem; font-weight:300; }
+  .foot__nav   { display:flex; gap:2rem; flex-wrap:wrap; }
+  .foot__nav a { font-family:var(--f); font-size:0.5rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--g4); text-decoration:none; font-weight:300; transition:color 0.22s; }
+  .foot__nav a:hover { color:var(--white); }
+  .foot__copy  { font-family:var(--f); font-size:0.46rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--g2); }
+
   @media(max-width:768px){
-    section { grid-template-columns:1fr !important; }
-    div[style*="grid-template-columns:repeat(3"] { grid-template-columns:1fr !important; }
+    .s2col { grid-template-columns:1fr; }
+    .s2col__l { border-right:none; border-bottom:1px solid var(--g2); }
+    .vals__grid { grid-template-columns:1fr; }
+    .smv { grid-template-columns:1fr; }
+    .smv__block:last-child { border-left:none !important; padding-left:0 !important; border-top:1px solid var(--g2); padding-top:2rem; }
   }
 </style>

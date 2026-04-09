@@ -17,8 +17,8 @@ const {
 <body>
 
   <div id="loader">
-    <svg id="loader-svg" width="56" height="84" viewBox="0 0 56 84">
-      <path d="M28 4C28 4,52 4,52 24C52 44,40 52,28 54C16 52,4 44,4 24C4 4,28 4,28 4 M17 54L8 80 M39 54L48 80 M8 80Q28 88 48 80 M11 68L45 68 M10 78L46 78"/>
+    <svg id="loader-svg" width="50" height="75" viewBox="0 0 50 75">
+      <path d="M25 4C25 4,46 4,46 22C46 40,35 48,25 50C15 48,4 40,4 22C4 4,25 4,25 4 M15 50L7 72 M35 50L43 72 M7 72Q25 79 43 72 M10 62L40 62 M9 70L41 70"/>
     </svg>
     <span id="loader-label">Crafting your moment</span>
   </div>
@@ -26,25 +26,41 @@ const {
   <div id="page"><slot/></div>
 
   <script>
-    (function(){
-      setTimeout(function(){
-        var l=document.getElementById('loader');
-        var p=document.getElementById('page');
-        if(l) l.classList.add('hidden');
-        if(p) p.classList.add('visible');
-      },2800);
+    (function () {
+      /* ── LOADER ── */
+      setTimeout(function () {
+        var l = document.getElementById('loader');
+        var p = document.getElementById('page');
+        if (l) l.classList.add('hidden');
+        if (p) p.classList.add('visible');
+      }, 2600);
 
-      var lastY=0, nav=document.getElementById('main-nav');
-      window.addEventListener('scroll',function(){
-        var y=window.scrollY;
-        if(nav){
-          if(y>80&&y>lastY) nav.classList.add('nav-hidden');
-          else nav.classList.remove('nav-hidden');
-          if(y>20) nav.classList.add('nav-scrolled');
-          else nav.classList.remove('nav-scrolled');
-        }
-        lastY=y;
-      },{passive:true});
+      /* ── NAV AUTO-HIDE ── */
+      var lastY = 0;
+      var nav   = document.getElementById('main-nav');
+      window.addEventListener('scroll', function () {
+        var y = window.scrollY;
+        if (!nav) return;
+        if (y > 20)  nav.classList.add('nav-bg');
+        else         nav.classList.remove('nav-bg');
+        if (y > 80 && y > lastY) nav.classList.add('nav-up');
+        else                     nav.classList.remove('nav-up');
+        lastY = y;
+      }, { passive: true });
+
+      /* ── SCROLL REVEAL ── */
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.08 });
+
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        io.observe(el);
+      });
     })();
   </script>
 </body>
