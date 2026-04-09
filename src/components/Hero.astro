@@ -2,179 +2,81 @@
 const {
   videoUrl = "",
   slides = [],
-  headline1 = "GUSS IS A",
-  headline2 = "DAMN GOOD",
+  headline1 = "FEELING",
+  headline2 = "Crafted",
   headline3 = "ICE CREAM",
+  subline = "200+ flavors · 18 branches · Boston 2014 · Bangkok Now",
+  ctaText = "Explore Flavors",
+  ctaUrl = "/flavors",
 } = Astro.props;
 const hasVideo = videoUrl?.length > 0;
 const hasSlides = slides?.length > 0;
 ---
-
 <section class="hero">
   <div class="hero__bg">
-    {hasVideo ? (
-      <video class="hero__video" src={videoUrl} autoplay muted loop playsinline />
-    ) : hasSlides ? (
-      <div class="hero__slides" id="hero-slides">
-        {slides.map((s, i) => (
-          <div class={`hero__slide ${i===0 ? 'active' : ''}`} style={`background-image:url('${s}')`} />
-        ))}
-      </div>
-    ) : (
-      <div class="hero__fallback" />
-    )}
-    <div class="hero__dim" />
+    {hasVideo
+      ? <video class="hero__fill" src={videoUrl} autoplay muted loop playsinline/>
+      : hasSlides
+        ? <div id="hslides" style="position:absolute;inset:0;">
+            {slides.map((s,i)=>(
+              s.match(/\.(mp4|webm|ogg)$/i)
+                ? <video class={`hs${i===0?' ha':''}`} src={s} autoplay muted loop playsinline/>
+                : <div class={`hs${i===0?' ha':''}`} style={`background-image:url('${s}')`}/>
+            ))}
+          </div>
+        : <div class="hero__fill" style="background:var(--g1);"/>
+    }
+    <div class="hero__dim"/>
   </div>
 
-  <div class="hero__type">
-    <p class="hero__line hero__line--1">{headline1}</p>
-    <p class="hero__line hero__line--2"><em>{headline2}</em></p>
-    <p class="hero__line hero__line--3">{headline3}</p>
+  <div class="hero__content">
+    <div class="hero__type">
+      <span class="hl hl1">{headline1}</span>
+      <span class="hl hl2">{headline2}</span>
+      <span class="hl hl3">{headline3}</span>
+    </div>
+    <div class="hero__foot">
+      <p class="hero__sub">{subline}</p>
+      <a href={ctaUrl} class="hero__cta">{ctaText} →</a>
+    </div>
   </div>
 
-  <div class="hero__bar">
-    <span class="hero__bar-item">Feeling-Crafted</span>
-    <span class="hero__bar-sep">·</span>
-    <span class="hero__bar-item">Boston 2014</span>
-    <span class="hero__bar-sep">·</span>
-    <span class="hero__bar-item">Bangkok Now</span>
-    <a href="/flavors" class="hero__bar-cta">See All Flavors →</a>
-  </div>
+  {hasSlides && slides.length > 1 && (
+    <div class="hdots">
+      {slides.map((_,i)=><button class={`hd${i===0?' hda':''}`} data-i={i}/>)}
+    </div>
+  )}
 </section>
 
 <style>
-  .hero {
-    position: relative;
-    height: 100svh;
-    min-height: 600px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-
-  .hero__bg {
-    position: absolute;
-    inset: 0;
-  }
-
-  .hero__video {
-    width: 100%; height: 100%;
-    object-fit: cover;
-  }
-
-  .hero__fallback {
-    width: 100%; height: 100%;
-    background: #0A0A0A;
-  }
-
-  .hero__slides {
-    position: absolute;
-    inset: 0;
-  }
-
-  .hero__slide {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 1s ease;
-  }
-
-  .hero__slide.active { opacity: 1; }
-
-  .hero__dim {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to top,
-      rgba(10,10,10,1) 0%,
-      rgba(10,10,10,0.45) 40%,
-      rgba(10,10,10,0.1) 100%
-    );
-  }
-
-  .hero__type {
-    position: relative;
-    z-index: 10;
-    padding: 0 var(--gutter) 0.5rem;
-    line-height: 0.88;
-  }
-
-  .hero__line {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(5rem, 17vw, 17rem);
-    letter-spacing: -0.01em;
-    color: #F0EDE8;
-    display: block;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards;
-  }
-
-  .hero__line--1 { animation-delay: 3s; }
-  .hero__line--2 { animation-delay: 3.15s; }
-  .hero__line--3 { animation-delay: 3.3s; }
-
-  .hero__line em {
-    font-style: italic;
-    font-family: 'DM Serif Display', serif;
-    color: #F0EDE8;
-    font-size: 0.82em;
-  }
-
-  .hero__bar {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 1.25rem var(--gutter);
-    border-top: 1px solid rgba(255,255,255,0.08);
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeIn 0.6s ease 3.5s forwards;
-  }
-
-  .hero__bar-item {
-    font-size: 0.6rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: #555;
-  }
-
-  .hero__bar-sep {
-    color: #333;
-  }
-
-  .hero__bar-cta {
-    margin-left: auto;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #F0EDE8;
-    text-decoration: none;
-    transition: opacity 0.2s;
-  }
-
-  .hero__bar-cta:hover { opacity: 0.5; }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeIn { to { opacity: 1; } }
+  .hero { position:relative; height:100svh; min-height:600px; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; }
+  .hero__bg { position:absolute; inset:0; }
+  .hero__fill { width:100%; height:100%; object-fit:cover; display:block; }
+  .hs { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; transition:opacity 1.2s ease; }
+  .hs video { width:100%; height:100%; object-fit:cover; }
+  .ha { opacity:1; }
+  .hero__dim { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.96) 0%,rgba(0,0,0,0.4) 42%,rgba(0,0,0,0.08) 100%); }
+  .hero__content { position:relative; z-index:10; padding:0 var(--gutter) 2.5rem; display:flex; flex-direction:column; gap:1.5rem; }
+  .hero__type { display:flex; flex-direction:column; line-height:0.92; }
+  .hl { display:block; color:var(--white); letter-spacing:-0.02em; opacity:0; animation:fadeUp 0.7s ease forwards; }
+  .hl1 { font-family:var(--f-head); font-weight:600; font-size:clamp(3.5rem,11vw,10rem); text-transform:uppercase; animation-delay:3s; }
+  .hl2 { font-family:var(--f-script); font-size:clamp(4rem,13vw,11.5rem); animation-delay:3.15s; opacity:0.5; line-height:1.05; }
+  .hl3 { font-family:var(--f-head); font-weight:600; font-size:clamp(3.5rem,11vw,10rem); text-transform:uppercase; animation-delay:3.3s; }
+  .hero__foot { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; opacity:0; animation:fadeUp 0.6s ease 3.5s forwards; padding-top:1.25rem; border-top:1px solid rgba(255,255,255,0.08); }
+  .hero__sub { font-family:var(--f-ui); font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; color:rgba(255,255,255,0.35); font-weight:400; }
+  .hero__cta { font-family:var(--f-ui); font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--white); text-decoration:none; border:1px solid rgba(255,255,255,0.2); padding:0.6rem 1.4rem; transition:all 0.25s; font-weight:400; }
+  .hero__cta:hover { background:var(--white); color:var(--black); }
+  .hdots { position:absolute; bottom:3rem; right:var(--gutter); display:flex; gap:5px; z-index:10; }
+  .hd { width:4px; height:4px; border-radius:50%; background:rgba(255,255,255,0.2); border:none; cursor:pointer; padding:0; transition:all 0.3s; }
+  .hda { background:var(--white); width:16px; border-radius:2px; }
 </style>
 
 <script>
-  const slides = document.querySelectorAll('.hero__slide');
-  if (slides.length > 1) {
-    let cur = 0;
-    setInterval(() => {
-      slides[cur].classList.remove('active');
-      cur = (cur + 1) % slides.length;
-      slides[cur].classList.add('active');
-    }, 5000);
+  var slides=document.querySelectorAll('.hs'),dots=document.querySelectorAll('.hd');
+  if(slides.length>1){
+    var cur=0;
+    function go(n){slides[cur].classList.remove('ha');dots[cur]&&dots[cur].classList.remove('hda');cur=(n+slides.length)%slides.length;slides[cur].classList.add('ha');dots[cur]&&dots[cur].classList.add('hda');}
+    var t=setInterval(function(){go(cur+1);},6000);
+    dots.forEach(function(d,i){d.addEventListener('click',function(){clearInterval(t);go(i);t=setInterval(function(){go(cur+1);},6000);});});
   }
 </script>

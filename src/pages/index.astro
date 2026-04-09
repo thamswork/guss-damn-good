@@ -11,22 +11,22 @@ const slides = [
 ];
 
 const pinned = [
-  { flavorName:"Breakfast Fresh Milk", moodNumber:"Mood #01", productImage:"https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800&q=80", category:"classic", inStock:true, pinned:true },
-  { flavorName:"Very Addicted Crispy Corn", moodNumber:"Mood #07", productImage:"https://images.unsplash.com/photo-1488900128323-21503983a07e?w=800&q=80", category:"classic", inStock:true, pinned:true },
+  { flavorName:"Breakfast Fresh Milk", moodNumber:"Mood #01", productImage:"https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&q=80", category:"classic", inStock:true, pinned:true },
+  { flavorName:"Very Addicted Crispy Corn", moodNumber:"Mood #07", productImage:"https://images.unsplash.com/photo-1488900128323-21503983a07e?w=600&q=80", category:"classic", inStock:true, pinned:true },
 ];
 
 const grid = [
-  { flavorName:"S'more Crunch", moodNumber:"Mood #14", productImage:"https://images.unsplash.com/photo-1534706936160-d5ee67737249?w=800&q=80", category:"classic", inStock:true, pinned:false },
-  { flavorName:"Papaya x RIMOWA", moodNumber:"Collab", productImage:"https://images.unsplash.com/photo-1560008581-09826d1de69e?w=800&q=80", category:"collab", inStock:false, pinned:false },
-  { flavorName:"Black Sesame", moodNumber:"Mood #33", productImage:"https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=800&q=80", category:"classic", inStock:true, pinned:false },
-  { flavorName:"Mango Sticky Rice", moodNumber:"Mood #42", productImage:"https://images.unsplash.com/photo-1505394033641-40b6ad5ef923?w=800&q=80", category:"seasonal", inStock:true, pinned:false },
+  { flavorName:"S'more Crunch", moodNumber:"Mood #14", productImage:"https://images.unsplash.com/photo-1534706936160-d5ee67737249?w=600&q=80", category:"classic", inStock:true },
+  { flavorName:"Papaya x RIMOWA", moodNumber:"Collab", productImage:"https://images.unsplash.com/photo-1560008581-09826d1de69e?w=600&q=80", category:"collab", inStock:false },
+  { flavorName:"Black Sesame", moodNumber:"Mood #33", productImage:"https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=600&q=80", category:"classic", inStock:true },
+  { flavorName:"Mango Sticky Rice", moodNumber:"Mood #42", productImage:"https://images.unsplash.com/photo-1505394033641-40b6ad5ef923?w=600&q=80", category:"seasonal", inStock:true },
 ];
 
 const collabs = [
-  { name:"RIMOWA", type:"Collab Flavor", img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80", slug:"rimowa" },
-  { name:"Valentino", type:"Collab Flavor", img:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80", slug:"valentino" },
-  { name:"Hermes", type:"Collab Flavor", img:"https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80", slug:"rimowa" },
-  { name:"La Mer", type:"Campaign", img:"https://images.unsplash.com/photo-1570194065650-d99fb4b8ccb4?w=800&q=80", slug:"rimowa" },
+  { name:"RIMOWA", type:"Collab Flavor", img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80", slug:"rimowa" },
+  { name:"Valentino", type:"Collab Flavor", img:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80", slug:"valentino" },
+  { name:"Hermes", type:"Collab Flavor", img:"https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80", slug:"rimowa" },
+  { name:"La Mer", type:"Campaign", img:"https://images.unsplash.com/photo-1570194065650-d99fb4b8ccb4?w=600&q=80", slug:"rimowa" },
 ];
 ---
 <BaseLayout title="Guss Damn Good — Feeling-Crafted Ice Cream">
@@ -34,21 +34,23 @@ const collabs = [
   <Hero slides={slides}/>
 
   <!-- TICKER -->
-  <div class="ticker"><div class="ticker__t">
-    {[...Array(4)].map(()=><>
-      <span>Feeling-Crafted</span><span class="sep">·</span>
-      <span>Story-to-Flavor</span><span class="sep">·</span>
-      <span>200+ Flavors</span><span class="sep">·</span>
-      <span>18 Branches</span><span class="sep">·</span>
-      <span>Boston 2014</span><span class="sep">·</span>
-    </>)}
-  </div></div>
+  <div class="ticker">
+    <div class="ticker__t">
+      {[...Array(4)].map(()=><>
+        <span>Feeling-Crafted</span><span class="sep">·</span>
+        <span>Story-to-Flavor</span><span class="sep">·</span>
+        <span>200+ Flavors</span><span class="sep">·</span>
+        <span>18 Branches</span><span class="sep">·</span>
+        <span>Boston 2014</span><span class="sep">·</span>
+      </>)}
+    </div>
+  </div>
 
-  <!-- ABOUT -->
+  <!-- ABOUT — tighter, more refined -->
   <section class="about">
     <div class="about__left">
-      <p class="about__tag">About</p>
-      <h2 class="about__h">We believe ice cream carries <em class="about__script">feeling.</em></h2>
+      <p class="eyebrow" style="margin-bottom:1.25rem;">About</p>
+      <h2 class="about__h">We believe ice cream carries <span class="script-accent" style="font-size:1.2em;">feeling.</span></h2>
     </div>
     <div class="about__right">
       <p class="about__p">Every Guss flavor is crafted with our Story-to-Flavor philosophy — gathering good stories, blending them with farm-fresh Thai milk and French cream into a signature Boston texture: smooth, dense, never too heavy.</p>
@@ -58,33 +60,35 @@ const collabs = [
     </div>
   </section>
 
-  <!-- FLAVORS -->
-  <section class="home-fl">
-    <div class="home-fl__head">
-      <h2 class="home-fl__title">The Flavors</h2>
-      <a href="/flavors" class="home-fl__link">View all 200+ →</a>
+  <!-- FLAVORS — smaller images -->
+  <section class="hfl">
+    <div class="hfl__head">
+      <h2 class="hfl__title">The Flavors</h2>
+      <a href="/flavors" class="hfl__link">View all 200+ →</a>
     </div>
-    <div class="pinned-row">
-      {pinned.map(f=><div class="pinned-cell"><FlavorCard {...f}/></div>)}
+    <!-- PINNED: 2 col, shorter aspect -->
+    <div class="pinrow">
+      {pinned.map(f=><div class="pinrow__cell"><FlavorCard {...f}/></div>)}
     </div>
+    <!-- GRID: 4 col, compact cards -->
     <div class="grid4">
       {grid.map(f=><FlavorCard {...f}/>)}
     </div>
   </section>
 
   <!-- COLLABS -->
-  <section class="home-cl">
-    <div class="home-cl__head">
+  <section class="hcl">
+    <div class="hcl__head">
       <div>
-        <p class="home-cl__eye">100+ Brand Partners</p>
-        <h2 class="home-cl__title">Collabs</h2>
+        <p class="eyebrow" style="margin-bottom:0.4rem;">100+ Brand Partners</p>
+        <h2 class="hcl__title">Collabs</h2>
       </div>
-      <a href="/collabs" class="home-cl__link">See all →</a>
+      <a href="/collabs" class="hfl__link">See all →</a>
     </div>
     <div class="cgrid">
       {collabs.map((c,i)=>(
         <a href={`/collabs/${c.slug}`} class={`cg cg-${i}`}>
-          <img src={c.img} alt={c.name} class="cg__img" loading="lazy"/>
+          <img src={c.img} alt={c.name} class="cg__img" loading={i<2?'eager':'lazy'}/>
           <div class="cg__dim"/>
           <div class="cg__info">
             <span class="cg__type">{c.type}</span>
@@ -97,10 +101,10 @@ const collabs = [
 
   <!-- NUMBERS -->
   <section class="nums">
-    <div class="num"><span class="num__n">200<em>+</em></span><span class="num__l">Flavors</span></div>
-    <div class="num"><span class="num__n">18</span><span class="num__l">Branches</span></div>
-    <div class="num"><span class="num__n">100<em>+</em></span><span class="num__l">Brand Partners</span></div>
-    <div class="num"><span class="num__n">10<em>+</em></span><span class="num__l">Years</span></div>
+    <div class="num"><span class="num__n">200<em>+</em></span><span class="eyebrow">Flavors</span></div>
+    <div class="num"><span class="num__n">18</span><span class="eyebrow">Branches</span></div>
+    <div class="num"><span class="num__n">100<em>+</em></span><span class="eyebrow">Brand Partners</span></div>
+    <div class="num"><span class="num__n">10<em>+</em></span><span class="eyebrow">Years</span></div>
   </section>
 
   <!-- FOOTER -->
@@ -108,12 +112,12 @@ const collabs = [
     <div class="foot__top">
       <div>
         <p class="foot__brand">Guss Damn Good</p>
-        <p class="foot__script">Feeling-Crafted Ice Cream</p>
+        <p class="foot__sub">Feeling-Crafted Ice Cream · Bangkok · Since 2014</p>
       </div>
       <nav class="foot__nav">
         <a href="/flavors">Flavors</a>
         <a href="/story">Story</a>
-        <a href="/locations">Locations</a>
+        <a href="/locations">Find Us</a>
         <a href="/collabs">Collabs</a>
         <a href="/admin">CMS ↗</a>
       </nav>
@@ -123,68 +127,70 @@ const collabs = [
 </BaseLayout>
 
 <style>
-  .ticker { overflow:hidden; border-top:1px solid var(--g2); border-bottom:1px solid var(--g2); padding:0.85rem 0; }
-  .ticker__t { display:inline-flex; gap:2rem; white-space:nowrap; animation:ticker 28s linear infinite; font-family:var(--f-ui); font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--g4); }
+  /* TICKER */
+  .ticker { overflow:hidden; border-top:1px solid var(--g2); border-bottom:1px solid var(--g2); padding:0.75rem 0; }
+  .ticker__t { display:inline-flex; gap:2rem; white-space:nowrap; animation:ticker 28s linear infinite; font-family:var(--f-ui); font-size:0.55rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--g4); font-weight:400; }
   .sep { color:var(--g2); }
 
+  /* ABOUT */
   .about { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--g2); }
-  .about__left { padding:clamp(3rem,7vw,6rem) var(--gutter); border-right:1px solid var(--g2); display:flex; flex-direction:column; gap:1.5rem; }
-  .about__tag { font-family:var(--f-ui); font-size:0.58rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--g4); }
-  .about__h { font-family:var(--f-head); font-weight:800; font-size:clamp(2rem,4.5vw,3.8rem); color:var(--white); line-height:1.05; }
-  .about__script { font-family:var(--f-script); font-weight:400; font-style:normal; font-size:1.15em; color:var(--white); opacity:0.4; }
-  .about__right { padding:clamp(3rem,7vw,6rem) var(--gutter); display:flex; flex-direction:column; justify-content:flex-end; gap:2rem; }
-  .about__p { font-family:var(--f-body); font-size:0.95rem; color:var(--g6); line-height:1.8; font-weight:300; }
-  .about__vals { display:flex; gap:2rem; flex-wrap:wrap; padding-top:1.5rem; border-top:1px solid var(--g2); }
-  .about__vals span { font-family:var(--f-ui); font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--white); }
+  .about__left { padding:clamp(2.5rem,6vw,5rem) var(--gutter); border-right:1px solid var(--g2); display:flex; flex-direction:column; justify-content:flex-end; gap:1.25rem; }
+  .about__h { font-size:clamp(1.6rem,3.5vw,3rem); font-weight:500; color:var(--white); line-height:1.1; }
+  .about__right { padding:clamp(2.5rem,6vw,5rem) var(--gutter); display:flex; flex-direction:column; justify-content:flex-end; gap:1.5rem; }
+  .about__p { font-size:0.88rem; color:var(--g6); line-height:1.85; font-weight:300; }
+  .about__vals { display:flex; gap:2rem; flex-wrap:wrap; padding-top:1.25rem; border-top:1px solid var(--g2); }
+  .about__vals span { font-family:var(--f-ui); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--white); font-weight:500; }
 
-  .home-fl { border-bottom:1px solid var(--g2); }
-  .home-fl__head { display:flex; align-items:baseline; justify-content:space-between; padding:2.5rem var(--gutter) 0; border-bottom:1px solid var(--g2); padding-bottom:1.5rem; }
-  .home-fl__title { font-family:var(--f-head); font-weight:800; font-size:clamp(1.8rem,4vw,3.2rem); color:var(--white); }
-  .home-fl__link { font-family:var(--f-ui); font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--g4); text-decoration:none; transition:color 0.2s; }
-  .home-fl__link:hover { color:var(--white); }
+  /* FLAVORS — key change: compact image sizing */
+  .hfl { border-bottom:1px solid var(--g2); }
+  .hfl__head { display:flex; align-items:baseline; justify-content:space-between; padding:2rem var(--gutter); border-bottom:1px solid var(--g2); }
+  .hfl__title { font-size:clamp(1.4rem,3vw,2.2rem); font-weight:500; color:var(--white); letter-spacing:-0.01em; }
+  .hfl__link { font-family:var(--f-ui); font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--g4); text-decoration:none; font-weight:400; transition:color 0.2s; }
+  .hfl__link:hover { color:var(--white); }
 
-  .pinned-row { display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); background:var(--g2); border-bottom:var(--gap) solid var(--g2); }
-  .pinned-cell .fc .fc__media { aspect-ratio:16/9; }
+  /* PINNED: wide but SHORT aspect ratio — prevents oversized images */
+  .pinrow { display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); background:var(--g2); border-bottom:var(--gap) solid var(--g2); }
+  .pinrow__cell .fc__media { aspect-ratio:16/7 !important; }
+
+  /* REGULAR GRID: square-ish, not tall */
   .grid4 { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--gap); background:var(--g2); }
-  .fc .fc__media { aspect-ratio:3/4; }
+  .grid4 .fc__media { aspect-ratio:1/1 !important; }
 
-  .home-cl { border-bottom:1px solid var(--g2); }
-  .home-cl__head { display:flex; align-items:flex-end; justify-content:space-between; padding:2.5rem var(--gutter) 1.5rem; border-bottom:1px solid var(--g2); }
-  .home-cl__eye { font-family:var(--f-ui); font-size:0.58rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--g4); margin-bottom:0.4rem; }
-  .home-cl__title { font-family:var(--f-head); font-weight:800; font-size:clamp(1.8rem,4vw,3.2rem); color:var(--white); }
-  .home-cl__link { font-family:var(--f-ui); font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--g4); text-decoration:none; transition:color 0.2s; }
-  .home-cl__link:hover { color:var(--white); }
-
-  .cgrid { display:grid; grid-template-columns:2fr 1fr 1fr; grid-template-rows:380px 240px; gap:var(--gap); background:var(--g2); }
+  /* COLLABS */
+  .hcl { border-bottom:1px solid var(--g2); }
+  .hcl__head { display:flex; align-items:flex-end; justify-content:space-between; padding:2rem var(--gutter); border-bottom:1px solid var(--g2); }
+  .hcl__title { font-size:clamp(1.4rem,3vw,2.2rem); font-weight:500; color:var(--white); letter-spacing:-0.01em; }
+  .cgrid { display:grid; grid-template-columns:2fr 1fr 1fr; grid-template-rows:260px 180px; gap:var(--gap); background:var(--g2); }
   .cg { position:relative; overflow:hidden; display:block; text-decoration:none; background:var(--g1); }
   .cg-0 { grid-row:span 2; }
   .cg-3 { grid-column:2/span 2; }
-  .cg__img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.6s ease; filter:grayscale(0.35); }
-  .cg:hover .cg__img { transform:scale(1.05); filter:grayscale(0); }
+  .cg__img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.6s ease; filter:grayscale(0.3); }
+  .cg:hover .cg__img { transform:scale(1.04); filter:grayscale(0); }
   .cg__dim { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.88) 0%,transparent 55%); }
-  .cg__info { position:absolute; bottom:1.25rem; left:1.25rem; }
-  .cg__type { display:block; font-family:var(--f-ui); font-size:0.52rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:0.3rem; }
-  .cg__name { font-family:var(--f-head); font-weight:800; font-size:clamp(1.2rem,3vw,2rem); color:var(--white); letter-spacing:-0.02em; }
+  .cg__info { position:absolute; bottom:1rem; left:1.25rem; }
+  .cg__type { display:block; font-family:var(--f-ui); font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:0.25rem; font-weight:400; }
+  .cg__name { font-family:var(--f-head); font-weight:600; font-size:clamp(1rem,2.5vw,1.7rem); color:var(--white); letter-spacing:-0.01em; }
 
+  /* NUMBERS */
   .nums { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--gap); background:var(--g2); border-bottom:1px solid var(--g2); }
-  .num { background:var(--black); padding:3rem var(--gutter); display:flex; flex-direction:column; gap:0.5rem; }
-  .num__n { font-family:var(--f-head); font-weight:800; font-size:clamp(2.5rem,5vw,4rem); color:var(--white); line-height:1; }
+  .num { background:var(--black); padding:2.5rem var(--gutter); display:flex; flex-direction:column; gap:0.5rem; }
+  .num__n { font-family:var(--f-head); font-weight:500; font-size:clamp(2rem,4vw,3.2rem); color:var(--white); line-height:1; letter-spacing:-0.02em; }
   .num__n em { color:var(--g3); font-style:normal; }
-  .num__l { font-family:var(--f-ui); font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--g3); }
 
-  .foot { padding:3rem var(--gutter); display:flex; flex-direction:column; gap:1.5rem; }
-  .foot__top { display:flex; align-items:flex-end; justify-content:space-between; gap:2rem; flex-wrap:wrap; padding-bottom:2rem; border-bottom:1px solid var(--g2); }
-  .foot__brand { font-family:var(--f-head); font-weight:800; font-size:clamp(1.8rem,4vw,3.5rem); color:var(--white); letter-spacing:-0.03em; }
-  .foot__script { font-family:var(--f-script); font-size:1.4rem; color:var(--g3); margin-top:0.25rem; }
+  /* FOOTER */
+  .foot { padding:2.5rem var(--gutter); display:flex; flex-direction:column; gap:1.5rem; }
+  .foot__top { display:flex; align-items:flex-end; justify-content:space-between; gap:2rem; flex-wrap:wrap; padding-bottom:1.5rem; border-bottom:1px solid var(--g2); }
+  .foot__brand { font-family:var(--f-head); font-weight:600; font-size:clamp(1.4rem,3vw,2.5rem); color:var(--white); letter-spacing:0.02em; text-transform:uppercase; }
+  .foot__sub { font-family:var(--f-ui); font-size:0.55rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--g4); margin-top:0.35rem; font-weight:400; }
   .foot__nav { display:flex; gap:2rem; flex-wrap:wrap; }
-  .foot__nav a { font-family:var(--f-ui); font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--g4); text-decoration:none; transition:color 0.2s; }
+  .foot__nav a { font-family:var(--f-ui); font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--g4); text-decoration:none; font-weight:400; transition:color 0.2s; }
   .foot__nav a:hover { color:var(--white); }
-  .foot__copy { font-family:var(--f-ui); font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--g2); }
+  .foot__copy { font-family:var(--f-ui); font-size:0.52rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--g2); }
 
   @media(max-width:768px){
     .about { grid-template-columns:1fr; }
     .about__left { border-right:none; border-bottom:1px solid var(--g2); }
-    .pinned-row,.grid4 { grid-template-columns:1fr 1fr; }
+    .pinrow,.grid4 { grid-template-columns:1fr 1fr; }
     .cgrid { grid-template-columns:1fr 1fr; grid-template-rows:auto; }
     .cg-0 { grid-row:auto; grid-column:span 2; }
     .cg-3 { grid-column:span 2; }
