@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+
+const branches = [
+  { name:"Siam Paragon", address:"991 Rama I Rd, Pathum Wan", hours:"10:00–22:00", delivery:true, formats:["scoop","sundae","milkshake","cake"] },
+  { name:"Central World", address:"4,4/1-4/2 Rama I Rd, Pathum Wan", hours:"10:00–22:00", delivery:true, formats:["scoop","sundae","soft_serve"] },
+  { name:"EmQuartier", address:"689 Sukhumvit Rd, Khlong Toei", hours:"10:00–22:00", delivery:false, formats:["scoop","sundae","milkshake"] },
+  { name:"The Mall Ngamwongwan", address:"Ngam Wong Wan Rd, Nonthaburi", hours:"10:00–21:00", delivery:false, formats:["scoop","sundae"] },
+  { name:"Central Chidlom", address:"1027 Phloen Chit Rd, Pathum Wan", hours:"10:00–21:00", delivery:false, formats:["scoop","cake"] },
+  { name:"Terminal 21 Asok", address:"88 Sukhumvit Soi 19, Watthana", hours:"10:00–22:00", delivery:true, formats:["scoop","sundae","popsicle"] },
+  { name:"Mega Bangna", address:"39 Bangna-Trad Rd, Bang Phli", hours:"10:00–22:00", delivery:false, formats:["scoop","sundae","soft_serve"] },
+  { name:"Central Pinklao", address:"7/222 Barommaratchachonnani Rd", hours:"10:00–21:00", delivery:false, formats:["scoop"] },
+];
+
+const formatIcons = { scoop:"🍦", sundae:"🍨", milkshake:"🥤", soft_serve:"🌀", cake:"🎂", popsicle:"🧊", woof:"🐾" };
+---
+<BaseLayout title="Locations — Guss Damn Good">
+  <Nav/>
+  <header style="padding:8rem var(--gutter) 4rem;border-bottom:1px solid var(--g2);">
+    <p style="font-family:var(--f-ui);font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--g4);margin-bottom:1.5rem;">18 Branches · Bangkok</p>
+    <h1 style="font-family:var(--f-head);font-weight:800;font-size:clamp(4rem,12vw,10rem);color:var(--white);line-height:0.92;">Find Us.</h1>
+  </header>
+
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--g2);border-bottom:1px solid var(--g2);" class="loc-grid">
+    {branches.map(b=>(
+      <div style="background:var(--g1);padding:2.5rem var(--gutter);display:flex;flex-direction:column;gap:1rem;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;">
+          <h2 style="font-family:var(--f-head);font-weight:800;font-size:clamp(1.2rem,2.5vw,1.8rem);color:var(--white);letter-spacing:-0.02em;">{b.name}</h2>
+          {b.delivery && <span style="font-family:var(--f-ui);font-size:0.52rem;letter-spacing:0.15em;text-transform:uppercase;background:var(--white);color:var(--black);padding:0.2rem 0.6rem;flex-shrink:0;margin-top:0.2rem;">Delivery</span>}
+        </div>
+        <p style="font-family:var(--f-body);font-size:0.85rem;color:var(--g5);line-height:1.5;">{b.address}</p>
+        <p style="font-family:var(--f-ui);font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--g4);">{b.hours}</p>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;padding-top:0.5rem;border-top:1px solid var(--g2);">
+          {b.formats.map(f=><span title={f} style="font-size:1.1rem;">{formatIcons[f]}</span>)}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div style="padding:3rem var(--gutter);border-bottom:1px solid var(--g2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+    <p style="font-family:var(--f-body);font-size:0.85rem;color:var(--g5);">Showing 8 of 18 branches. Visit our CMS to manage all locations.</p>
+    <a href="/admin" style="font-family:var(--f-ui);font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--white);text-decoration:none;">Manage via CMS ↗</a>
+  </div>
+
+  <footer style="padding:3rem var(--gutter);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;">
+    <p style="font-family:var(--f-head);font-weight:800;font-size:2rem;color:var(--white);">Guss Damn Good</p>
+    <nav style="display:flex;gap:2rem;">
+      <a href="/flavors" style="font-family:var(--f-ui);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--g4);text-decoration:none;">Flavors</a>
+      <a href="/story" style="font-family:var(--f-ui);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--g4);text-decoration:none;">Story</a>
+      <a href="/collabs" style="font-family:var(--f-ui);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--g4);text-decoration:none;">Collabs</a>
+    </nav>
+  </footer>
+</BaseLayout>
+<style>
+  @media(max-width:600px){ .loc-grid { grid-template-columns:1fr !important; } }
+</style>

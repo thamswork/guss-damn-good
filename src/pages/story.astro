@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+---
+<BaseLayout title="Our Story — Guss Damn Good">
+  <Nav/>
+  <header style="padding:8rem var(--gutter) 4rem;border-bottom:1px solid var(--g2);">
+    <p style="font-family:var(--f-ui);font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--g4);margin-bottom:1.5rem;">Since 2014</p>
+    <h1 style="font-family:var(--f-head);font-weight:800;font-size:clamp(4rem,12vw,10rem);color:var(--white);max-width:900px;line-height:0.92;">Ice cream is a <em style="font-family:var(--f-script);font-weight:400;font-style:normal;opacity:0.45;font-size:1.05em;">feeling.</em></h1>
+  </header>
+
+  <section style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--g2);">
+    <div style="padding:clamp(3rem,7vw,6rem) var(--gutter);border-right:1px solid var(--g2);">
+      <p style="font-family:var(--f-ui);font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--g4);margin-bottom:1.5rem;">Origin</p>
+      <h2 style="font-family:var(--f-head);font-weight:800;font-size:clamp(1.5rem,3vw,2.5rem);color:var(--white);margin-bottom:1.5rem;">Started in Boston, 2014.</h2>
+      <p style="font-family:var(--f-body);font-size:0.95rem;color:var(--g5);line-height:1.85;font-weight:300;">Guss Damn Good was born in Boston in 2014, from witnessing Americans eat ice cream in winter — to remember warm summer moments. We saw ice cream as more than a dessert. A vessel for emotion. A carrier of good stories.</p>
+    </div>
+    <div style="padding:clamp(3rem,7vw,6rem) var(--gutter);">
+      <p style="font-family:var(--f-ui);font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--g4);margin-bottom:1.5rem;">Philosophy</p>
+      <h2 style="font-family:var(--f-head);font-weight:800;font-size:clamp(1.5rem,3vw,2.5rem);color:var(--white);margin-bottom:1.5rem;">Story-to-Flavor.</h2>
+      <p style="font-family:var(--f-body);font-size:0.95rem;color:var(--g5);line-height:1.85;font-weight:300;">Every Guss flavor begins as a story. We gather good moments from the world around us, blend them with farm-fresh Thai milk and French cream, and craft them into a Boston texture: smooth, dense, and never too heavy. Each scoop is a story you can taste.</p>
+    </div>
+  </section>
+
+  <section style="padding:clamp(3rem,7vw,6rem) var(--gutter);border-bottom:1px solid var(--g2);">
+    <p style="font-family:var(--f-ui);font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--g4);margin-bottom:3rem;">Our Values</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--g2);">
+      <div style="background:var(--black);padding:3rem var(--gutter);">
+        <span style="font-family:var(--f-script);font-size:4rem;color:var(--white);opacity:0.1;display:block;line-height:1;margin-bottom:1rem;">F</span>
+        <h3 style="font-family:var(--f-head);font-weight:800;font-size:2rem;color:var(--white);margin-bottom:0.75rem;">Fun</h3>
+        <p style="font-family:var(--f-body);font-size:0.85rem;color:var(--g5);line-height:1.7;font-weight:300;">Smiles are the starting point. Every interaction, every scoop, every moment should carry joy.</p>
+      </div>
+      <div style="background:var(--black);padding:3rem var(--gutter);">
+        <span style="font-family:var(--f-script);font-size:4rem;color:var(--white);opacity:0.1;display:block;line-height:1;margin-bottom:1rem;">A</span>
+        <h3 style="font-family:var(--f-head);font-weight:800;font-size:2rem;color:var(--white);margin-bottom:0.75rem;">Attention to Detail</h3>
+        <p style="font-family:var(--f-body);font-size:0.85rem;color:var(--g5);line-height:1.7;font-weight:300;">Every small thing matters deeply. From the texture of the cream to the story behind a flavor.</p>
+      </div>
+      <div style="background:var(--black);padding:3rem var(--gutter);">
+        <span style="font-family:var(--f-script);font-size:4rem;color:var(--white);opacity:0.1;display:block;line-height:1;margin-bottom:1rem;">B</span>
+        <h3 style="font-family:var(--f-head);font-weight:800;font-size:2rem;color:var(--white);margin-bottom:0.75rem;">Bold</h3>
+        <p style="font-family:var(--f-body);font-size:0.85rem;color:var(--g5);line-height:1.7;font-weight:300;">Stand firm in what you believe. Make choices that matter. Never settle for ordinary.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:clamp(3rem,7vw,6rem) var(--gutter);border-bottom:1px solid var(--g2);">
+    <p style="font-family:var(--f-ui);font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--g4);margin-bottom:3rem;">Mission & Vision</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);">
+      <div>
+        <h3 style="font-family:var(--f-head);font-weight:800;font-size:clamp(1.2rem,2.5vw,2rem);color:var(--white);margin-bottom:1rem;">Activate Damn Good Feeling. Elevate Good Moments.</h3>
+        <p style="font-family:var(--f-body);font-size:0.9rem;color:var(--g5);line-height:1.8;font-weight:300;">Our mission is to make every person feel genuinely great through ice cream. Not just satisfied — genuinely, deeply, damn good.</p>
+      </div>
+      <div>
+        <h3 style="font-family:var(--f-head);font-weight:800;font-size:clamp(1.2rem,2.5vw,2rem);color:var(--white);margin-bottom:1rem;">Build a community where people enjoy passing positive energy to each other.</h3>
+        <p style="font-family:var(--f-body);font-size:0.9rem;color:var(--g5);line-height:1.8;font-weight:300;">We want to create a world where kindness is contagious — and ice cream is the catalyst.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding:3rem var(--gutter);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;border-top:1px solid var(--g2);">
+    <div>
+      <p style="font-family:var(--f-head);font-weight:800;font-size:clamp(1.5rem,3vw,2.5rem);color:var(--white);">Guss Damn Good</p>
+      <p style="font-family:var(--f-script);font-size:1.2rem;color:var(--g3);">Feeling-Crafted Ice Cream</p>
+    </div>
+    <nav style="display:flex;gap:2rem;">
+      <a href="/flavors" style="font-family:var(--f-ui);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--g4);text-decoration:none;">Flavors</a>
+      <a href="/locations" style="font-family:var(--f-ui);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--g4);text-decoration:none;">Locations</a>
+      <a href="/collabs" style="font-family:var(--f-ui);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--g4);text-decoration:none;">Collabs</a>
+    </nav>
+  </footer>
+</BaseLayout>
+<style>
+  @media(max-width:768px){
+    section { grid-template-columns:1fr !important; }
+    div[style*="grid-template-columns:repeat(3"] { grid-template-columns:1fr !important; }
+  }
+</style>

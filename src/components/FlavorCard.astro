@@ -1,0 +1,51 @@
+---
+const {
+  flavorName = "Mystery",
+  moodNumber = "",
+  productImage = "",
+  productVideo = "",
+  description = "",
+  category = "classic",
+  inStock = true,
+  pinned = false,
+} = Astro.props;
+const hasVideo = productVideo?.length > 0;
+---
+<article class={`fc${!inStock?' fc-out':''}${pinned?' fc-pin':''}`}>
+  <div class="fc__media">
+    {hasVideo
+      ? <video src={productVideo} autoplay muted loop playsinline class="fc__fill"/>
+      : productImage
+        ? <img src={productImage} alt={flavorName} class="fc__fill" loading="lazy"/>
+        : <div class="fc__fill fc__placeholder">🍦</div>
+    }
+    {pinned && <span class="fc__tag fc__tag--pin">Pinned</span>}
+    {!inStock && <span class="fc__tag fc__tag--out">Archive</span>}
+    <div class="fc__hover-bar"/>
+  </div>
+  <div class="fc__body">
+    {moodNumber && <span class="fc__mood">{moodNumber}</span>}
+    <h3 class="fc__name">{flavorName}</h3>
+    <span class="fc__cat">{category}</span>
+  </div>
+</article>
+
+<style>
+  .fc { background:var(--g1); cursor:pointer; transition:background 0.2s; position:relative; display:flex; flex-direction:column; }
+  .fc:hover { background:#0F0F0F; }
+  .fc-out { filter:grayscale(0.7); opacity:0.55; }
+  .fc-pin { outline:1px solid rgba(255,255,255,0.12); }
+  .fc__media { position:relative; overflow:hidden; background:#080808; }
+  .fc__fill { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.6s ease; }
+  .fc:hover .fc__fill { transform:scale(1.04); }
+  .fc__placeholder { display:flex; align-items:center; justify-content:center; font-size:3rem; }
+  .fc__tag { position:absolute; font-family:var(--f-ui); font-size:0.52rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.2rem 0.6rem; }
+  .fc__tag--pin { top:0.75rem; left:0.75rem; background:var(--white); color:var(--black); }
+  .fc__tag--out { top:0.75rem; right:0.75rem; background:rgba(0,0,0,0.8); color:var(--g4); border:1px solid var(--g3); }
+  .fc__hover-bar { position:absolute; bottom:0; left:0; height:2px; width:0; background:var(--white); transition:width 0.4s ease; }
+  .fc:hover .fc__hover-bar { width:100%; }
+  .fc__body { padding:0.85rem 1rem 1.1rem; display:flex; flex-direction:column; gap:0.2rem; }
+  .fc__mood { font-family:var(--f-ui); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--g3); }
+  .fc__name { font-family:var(--f-head); font-weight:700; font-size:clamp(0.95rem,1.6vw,1.25rem); color:var(--white); letter-spacing:-0.01em; line-height:1.1; }
+  .fc__cat { font-family:var(--f-ui); font-size:0.52rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--g3); }
+</style>

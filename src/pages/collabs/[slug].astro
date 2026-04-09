@@ -1,0 +1,157 @@
+---
+import B2BLayout from '../../layouts/B2BLayout.astro';
+
+export async function getStaticPaths() {
+  const sampleCollabs = [
+    {
+      slug: "rimowa",
+      partnerName: "RIMOWA",
+      partnerLogo: "",
+      heroImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80",
+      projectType: "collab_flavor",
+      year: 2023,
+      flavorName: "Papaya Sorbet & Mint Cookie Chip",
+      published: true,
+      body: `
+# RIMOWA × Guss Damn Good
+
+When RIMOWA approached us to craft an exclusive flavor for their Bangkok flagship launch, we knew this wasn't just about ice cream — it was about crafting a feeling that matched the precision and elegance of their legendary aluminum cases.
+
+## The Brief
+
+RIMOWA wanted something that felt global yet tropical. Something that spoke to the traveler — always moving, always arriving somewhere new, carrying a little piece of everywhere they've been.
+
+## Story-to-Flavor
+
+We spent three weeks in the kitchen. The answer came from a simple moment: biting into a papaya at a Bangkok street market at 7am, the cool morning air mixing with the fruit's warmth.
+
+Papaya Sorbet & Mint Cookie Chip was born — bright, clean, surprising. Just like opening a RIMOWA case for the first time.
+
+## The Result
+
+Served exclusively at the RIMOWA Bangkok flagship opening event. 400 scoops in 2 hours. Zero left over.
+      `
+    },
+    {
+      slug: "valentino",
+      partnerName: "Valentino",
+      partnerLogo: "",
+      heroImage: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&q=80",
+      projectType: "collab_flavor",
+      year: 2023,
+      flavorName: "Greek Yogurt Lemon & Black Sesame",
+      published: true,
+      body: `
+# Valentino × Guss Damn Good
+
+A study in contrast. The softness of Greek yogurt against the depth of black sesame. The brightness of lemon against the darkness of the night.
+
+## The Brief
+
+Valentino's creative direction for this collaboration was simple: tension. Light and dark. Past and future. East and West.
+
+## Story-to-Flavor
+
+Greek Yogurt Lemon carries the lightness of Mediterranean afternoons. Black Sesame carries the quiet weight of Asian heritage. Together they are something neither could be alone.
+
+## The Result
+
+Launched at Valentino's exclusive SS23 preview in Bangkok. Featured in Vogue Thailand.
+      `
+    }
+  ];
+
+  return sampleCollabs.map((collab) => ({
+    params: { slug: collab.slug },
+    props: { collab }
+  }));
+}
+
+const { collab } = Astro.props;
+---
+
+<B2BLayout
+  title={`${collab.partnerName} × Guss Damn Good`}
+  description={`${collab.partnerName} collaboration — ${collab.flavorName}`}
+  partnerName={collab.partnerName}
+  partnerLogo={collab.partnerLogo}
+  heroImage={collab.heroImage}
+  projectType={collab.projectType}
+>
+  <div class="collab-content">
+    <div class="collab-content__meta">
+      <span class="collab-meta-tag">{collab.year}</span>
+      {collab.flavorName && (
+        <span class="collab-meta-tag collab-meta-tag--flavor">
+          {collab.flavorName}
+        </span>
+      )}
+    </div>
+
+    <div class="collab-body" set:html={collab.body
+      .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+      .replace(/\n\n/g, '</p><p>')
+    } />
+  </div>
+
+  <div class="collab-back">
+    <a href="/collabs" class="collab-back__link">
+      Back to all collaborations
+    </a>
+  </div>
+
+</B2BLayout>
+
+<style>
+  .collab-content {
+    padding-top: 1rem;
+  }
+
+  .collab-content__meta {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+
+  .collab-meta-tag {
+    padding: 0.3rem 0.9rem;
+    border: 1px solid #2a2a2a;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #555;
+  }
+
+  .collab-meta-tag--flavor {
+    border-color: rgba(245,230,66,0.2);
+    color: #F5E642;
+    font-size: 0.75rem;
+  }
+
+  .collab-body {
+    color: #888;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .collab-back {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  .collab-back__link {
+    color: #444;
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+
+  .collab-back__link:hover {
+    color: #F5E642;
+  }
+</style>

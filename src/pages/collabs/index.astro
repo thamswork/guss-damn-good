@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+
+const collabs = [
+  { slug:"rimowa", name:"RIMOWA", type:"Collab Flavor", year:2023, img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80", flavor:"Papaya Sorbet & Mint Cookie Chip" },
+  { slug:"valentino", name:"Valentino", type:"Collab Flavor", year:2023, img:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80", flavor:"Greek Yogurt Lemon & Black Sesame" },
+  { slug:"rimowa", name:"Hermes", type:"Collab Flavor", year:2022, img:"https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80", flavor:"Exclusive Edition" },
+  { slug:"rimowa", name:"La Mer", type:"Campaign", year:2022, img:"https://images.unsplash.com/photo-1570194065650-d99fb4b8ccb4?w=800&q=80", flavor:"Limited Drop" },
+  { slug:"rimowa", name:"SCRUBB", type:"Campaign", year:2024, img:"https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=800&q=80", flavor:"National Ice Cream Month" },
+  { slug:"rimowa", name:"Wedding", type:"Catering", year:2024, img:"https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80", flavor:"Custom Menu" },
+];
+---
+<BaseLayout title="Collaborations — Guss Damn Good">
+  <Nav/>
+  <header style="display:grid;grid-template-columns:1fr 1fr;min-height:60vh;border-bottom:1px solid var(--g2);" class="cl-hdr">
+    <div style="padding:8rem var(--gutter) 4rem;border-right:1px solid var(--g2);display:flex;flex-direction:column;justify-content:flex-end;gap:1.5rem;">
+      <p style="font-family:var(--f-ui);font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--g4);">100+ Brand Partners</p>
+      <h1 style="font-family:var(--f-head);font-weight:800;font-size:clamp(4rem,10vw,8rem);color:var(--white);line-height:0.92;">Every collab tells a story.</h1>
+    </div>
+    <div style="padding:8rem var(--gutter) 4rem;display:flex;flex-direction:column;justify-content:flex-end;gap:2rem;">
+      <p style="font-family:var(--f-body);font-size:0.95rem;color:var(--g5);line-height:1.8;font-weight:300;max-width:400px;">From luxury fashion houses to local super brands — we craft feelings through ice cream for brands across every world.</p>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        {["Collab Flavors","OEM / ODM","Event Catering","Campaigns","Weddings"].map(t=><span style="font-family:var(--f-ui);font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.3rem 0.75rem;border:1px solid var(--g2);color:var(--g4);">{t}</span>)}
+      </div>
+      <a href="mailto:collab@gussdamngood.com" style="font-family:var(--f-ui);font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--white);text-decoration:none;border-bottom:1px solid var(--g3);padding-bottom:2px;align-self:flex-start;transition:border-color 0.2s;">Start a collaboration ↗</a>
+    </div>
+  </header>
+
+  <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:1px;background:var(--g2);border-bottom:1px solid var(--g2);" class="cl-grid">
+    {collabs.map((c,i)=>(
+      <a href={`/collabs/${c.slug}`} style={`position:relative;overflow:hidden;display:block;text-decoration:none;background:var(--g1);${i===0?'grid-row:span 2;':''}${i===3?'grid-column:2/span 2;':''}`}>
+        <img src={c.img} alt={c.name} style="width:100%;height:100%;min-height:280px;object-fit:cover;display:block;transition:transform 0.6s ease;filter:grayscale(0.3);" loading={i<2?'eager':'lazy'}/>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,transparent 55%);"/>
+        <div style="position:absolute;bottom:1.5rem;left:1.5rem;">
+          <span style="font-family:var(--f-ui);font-size:0.52rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.45);display:block;margin-bottom:0.3rem;">{c.type} · {c.year}</span>
+          <h2 style="font-family:var(--f-head);font-weight:800;font-size:clamp(1.2rem,3vw,2.2rem);color:var(--white);letter-spacing:-0.02em;">{c.name}</h2>
+          {c.flavor && <p style="font-family:var(--f-body);font-size:0.75rem;color:rgba(255,255,255,0.45);margin-top:0.25rem;">{c.flavor}</p>}
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <section style="padding:clamp(4rem,8vw,7rem) var(--gutter);border-bottom:1px solid var(--g2);">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:3rem;">
+      <div style="max-width:520px;">
+        <h2 style="font-family:var(--f-head);font-weight:800;font-size:clamp(2rem,5vw,4rem);color:var(--white);margin-bottom:1.25rem;letter-spacing:-0.03em;">Let's craft something damn good together.</h2>
+        <p style="font-family:var(--f-body);font-size:0.9rem;color:var(--g5);line-height:1.8;font-weight:300;">Whether you need a custom flavor, a fully branded product line, or ice cream for 500 wedding guests — we've done it all.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0.75rem;">
+        <a href="mailto:collab@gussdamngood.com" style="font-family:var(--f-ui);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--black);background:var(--white);padding:0.85rem 2rem;text-decoration:none;transition:opacity 0.2s;">Email us to collaborate</a>
+        <a href="/story" style="font-family:var(--f-ui);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--g4);border:1px solid var(--g2);padding:0.85rem 2rem;text-decoration:none;text-align:center;transition:all 0.2s;">Read our story</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding:3rem var(--gutter);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;">
+    <p style="font-family:var(--f-head);font-weight:800;font-size:2rem;color:var(--white);">Guss Damn Good</p>
+    <nav style="display:flex;gap:2rem;">
+      <a href="/flavors" style="font-family:var(--f-ui);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--g4);text-decoration:none;">Flavors</a>
+      <a href="/story" style="font-family:var(--f-ui);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--g4);text-decoration:none;">Story</a>
+      <a href="/locations" style="font-family:var(--f-ui);font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--g4);text-decoration:none;">Locations</a>
+    </nav>
+  </footer>
+</BaseLayout>
+<style>
+  .cl-hdr { min-height:60vh; }
+  .cl-grid a:hover img { transform:scale(1.05); filter:grayscale(0) !important; }
+  @media(max-width:768px){
+    .cl-hdr { grid-template-columns:1fr !important; }
+    .cl-grid { grid-template-columns:1fr 1fr !important; }
+    .cl-grid a:first-child { grid-row:auto !important; grid-column:span 2; }
+    .cl-grid a:nth-child(4) { grid-column:span 2 !important; }
+  }
+</style>

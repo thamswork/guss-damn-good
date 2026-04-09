@@ -5,83 +5,68 @@ backend:
 
 media_folder: public/images
 public_folder: /images
-
 publish_mode: editorial_workflow
 
 collections:
-
-  - name: settings
-    label: "Site Settings"
-    files:
-      - name: brand
-        label: "Brand Colors & Typography"
-        file: src/content/settings/brand.json
-        fields:
-          - { label: "Primary Accent Color", name: accent_color, widget: color, default: "#F5E642" }
-          - { label: "Secondary Accent Color", name: accent_secondary, widget: color, default: "#FF6B6B" }
-          - { label: "Background Color", name: bg_color, widget: color, default: "#1A1A1A" }
-          - { label: "Tagline", name: tagline, widget: string, default: "Activate Damn Good Moments" }
-          - { label: "SEO Meta Description", name: meta_description, widget: text }
-
-  - name: locations
-    label: "Locations"
-    folder: src/content/locations
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Branch Name", name: title, widget: string }
-      - { label: "Published", name: published, widget: boolean, default: true }
-      - { label: "Google Maps URL", name: maps_url, widget: string }
-      - { label: "Full Address", name: address, widget: text }
-      - { label: "Delivery Available?", name: delivery, widget: boolean, default: false }
-      - label: "Format Availability"
-        name: formats
-        widget: object
-        fields:
-          - { label: "Scoop", name: scoop, widget: boolean, default: true }
-          - { label: "Sundae", name: sundae, widget: boolean, default: false }
-          - { label: "Milkshake", name: milkshake, widget: boolean, default: false }
-          - { label: "Soft Serve", name: soft_serve, widget: boolean, default: false }
-          - { label: "Ice Cream Cake", name: cake, widget: boolean, default: false }
-          - { label: "Popsicle", name: popsicle, widget: boolean, default: false }
-          - { label: "Dog Friendly", name: woof, widget: boolean, default: false }
-      - { label: "Opening Hours", name: hours, widget: text }
-      - { label: "Phone", name: phone, widget: string, required: false }
-      - { label: "Branch Hero Image URL", name: hero_image, widget: string, hint: "Paste your Cloudinary image URL here" }
 
   - name: flavors
     label: "Flavors"
     folder: src/content/flavors
     create: true
     slug: "{{slug}}"
-    summary: "{{fields.flavor_name}}"
+    summary: "{{fields.flavor_name}} — {{fields.status}}"
     fields:
       - { label: "Flavor Name", name: flavor_name, widget: string }
-      - { label: "Mood / Flavor Number", name: mood_number, widget: string, required: false }
-      - { label: "Product Image URL", name: product_image, widget: string, hint: "Paste your Cloudinary image URL here" }
-      - { label: "Short Description", name: description, widget: text }
-      - label: "Flavor Category"
+      - { label: "Mood / Number", name: mood_number, widget: string, required: false }
+      - { label: "Product Image URL", name: product_image, widget: string, hint: "Paste Cloudinary URL" }
+      - { label: "Product Video URL", name: product_video, widget: string, required: false, hint: "Optional: paste video URL (mp4/webm)" }
+      - { label: "Description", name: description, widget: text }
+      - label: "Category"
         name: category
         widget: select
         options:
-          - { label: "Classic Cream", value: "classic" }
-          - { label: "Sorbet / Fruit", value: "sorbet" }
-          - { label: "Collab Edition", value: "collab" }
+          - { label: "Classic", value: "classic" }
+          - { label: "Sorbet", value: "sorbet" }
+          - { label: "Collab", value: "collab" }
           - { label: "Seasonal", value: "seasonal" }
-          - { label: "Sub-Brand", value: "subbrand" }
-          - { label: "OEM/Custom", value: "oem" }
-      - { label: "In Stock?", name: in_stock, widget: boolean, default: true }
-      - { label: "Featured in Hero?", name: featured, widget: boolean, default: false }
-      - label: "Sub-Brand"
-        name: sub_brand
+          - { label: "OEM", value: "oem" }
+      - label: "Status"
+        name: status
         widget: select
-        required: false
         options:
-          - { label: "None", value: "none" }
-          - { label: "Adam n Eve", value: "adam_n_eve" }
-          - { label: "Charuss", value: "charuss" }
-          - { label: "Balcony Cream Tea", value: "balcony_cream_tea" }
+          - { label: "Current", value: "current" }
+          - { label: "Emerging (New)", value: "emerging" }
+          - { label: "Archive (Past)", value: "archive" }
+      - { label: "In Stock / Available", name: in_stock, widget: boolean, default: true }
+      - { label: "Pinned to top (max 2)", name: pinned, widget: boolean, default: false }
+      - label: "Availability / Locations"
+        name: locations
+        widget: list
+        field: { label: "Location", name: location, widget: string }
       - { label: "Story Behind the Flavor", name: body, widget: markdown, required: false }
+
+  - name: collections
+    label: "Collections"
+    folder: src/content/collections
+    create: true
+    slug: "{{slug}}"
+    summary: "{{fields.title}}"
+    fields:
+      - { label: "Collection Title", name: title, widget: string }
+      - { label: "Slug (URL)", name: slug, widget: string, hint: "e.g. summer-2025 — no spaces" }
+      - { label: "Hero Image URL", name: hero_image, widget: string }
+      - { label: "Hero Video URL", name: hero_video, widget: string, required: false }
+      - { label: "Description", name: description, widget: text }
+      - { label: "Published?", name: published, widget: boolean, default: true }
+      - { label: "Featured on Homepage?", name: featured, widget: boolean, default: false }
+      - label: "Flavors in this Collection (slugs)"
+        name: flavor_slugs
+        widget: list
+        field: { label: "Flavor Slug", name: slug, widget: string }
+      - label: "Landing Page Content"
+        name: body
+        widget: markdown
+        hint: "Full content for the collection landing page"
 
   - name: collabs
     label: "Collaborations"
@@ -91,8 +76,9 @@ collections:
     summary: "{{fields.partner_name}}"
     fields:
       - { label: "Partner Name", name: partner_name, widget: string }
-      - { label: "Partner Logo URL", name: partner_logo, widget: string, hint: "Paste your Cloudinary image URL here" }
-      - { label: "Hero Image URL", name: hero_image, widget: string, hint: "Paste your Cloudinary image URL here" }
+      - { label: "Partner Logo URL", name: partner_logo, widget: string, hint: "Paste Cloudinary URL" }
+      - { label: "Hero Image URL", name: hero_image, widget: string }
+      - { label: "Hero Video URL", name: hero_video, widget: string, required: false }
       - label: "Project Type"
         name: project_type
         widget: select
@@ -108,55 +94,51 @@ collections:
       - { label: "Featured on Homepage?", name: featured, widget: boolean, default: false }
       - { label: "Case Study Body", name: body, widget: markdown }
 
-  - name: team
-    label: "Team & Story"
-    files:
-      - name: story
-        label: "Our Story"
-        file: src/content/settings/story.json
+  - name: locations
+    label: "Locations"
+    folder: src/content/locations
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Branch Name", name: title, widget: string }
+      - { label: "Published", name: published, widget: boolean, default: true }
+      - { label: "Google Maps URL", name: maps_url, widget: string }
+      - { label: "Full Address", name: address, widget: text }
+      - { label: "Opening Hours", name: hours, widget: string }
+      - { label: "Delivery Available?", name: delivery, widget: boolean, default: false }
+      - { label: "Hero Image URL", name: hero_image, widget: string, required: false }
+      - label: "Formats Available"
+        name: formats
+        widget: object
         fields:
-          - { label: "Story-to-Flavor Philosophy", name: philosophy, widget: markdown }
-          - { label: "Founded Year", name: founded, widget: number, default: 2014 }
-          - { label: "Mission Statement", name: mission, widget: text }
-          - { label: "Vision Statement", name: vision, widget: text }
-      - name: team_members
-        label: "Team Members"
-        file: src/content/settings/team.json
-        fields:
-          - label: "Team Members"
-            name: members
-            widget: list
-            fields:
-              - { label: "Name", name: name, widget: string }
-              - { label: "Role", name: role, widget: string }
-              - { label: "Headshot URL", name: headshot, widget: string, hint: "Paste your Cloudinary image URL here" }
-              - { label: "Bio", name: bio, widget: text, required: false }
+          - { label: "Scoop", name: scoop, widget: boolean, default: true }
+          - { label: "Sundae", name: sundae, widget: boolean, default: false }
+          - { label: "Milkshake", name: milkshake, widget: boolean, default: false }
+          - { label: "Soft Serve", name: soft_serve, widget: boolean, default: false }
+          - { label: "Ice Cream Cake", name: cake, widget: boolean, default: false }
+          - { label: "Popsicle", name: popsicle, widget: boolean, default: false }
+          - { label: "Dog Friendly", name: woof, widget: boolean, default: false }
 
-  - name: sub_brands
-    label: "Sub-Brand Themes"
+  - name: settings
+    label: "Site Settings"
     files:
-      - name: sub_brand_config
-        label: "Sub-Brand Settings"
-        file: src/content/settings/sub_brands.json
+      - name: brand
+        label: "Brand & Global"
+        file: src/content/settings/brand.json
         fields:
-          - label: "Adam n Eve"
-            name: adam_n_eve
-            widget: object
-            fields:
-              - { label: "Enable Theme", name: enabled, widget: boolean, default: false }
-              - { label: "Tagline", name: tagline, widget: string, required: false }
-              - { label: "Accent Color", name: accent, widget: color, default: "#C8A96E" }
-          - label: "Charuss"
-            name: charuss
-            widget: object
-            fields:
-              - { label: "Enable Theme", name: enabled, widget: boolean, default: false }
-              - { label: "Tagline", name: tagline, widget: string, required: false }
-              - { label: "Accent Color", name: accent, widget: color, default: "#E8C4D4" }
-          - label: "Balcony Cream Tea"
-            name: balcony_cream_tea
-            widget: object
-            fields:
-              - { label: "Enable Theme", name: enabled, widget: boolean, default: false }
-              - { label: "Tagline", name: tagline, widget: string, required: false }
-              - { label: "Accent Color", name: accent, widget: color, default: "#7EC8A4" }
+          - { label: "Tagline", name: tagline, widget: string, default: "Feeling-Crafted Ice Cream" }
+          - { label: "SEO Description", name: meta_description, widget: text }
+          - { label: "Mission Statement", name: mission, widget: text }
+          - { label: "Contact Email", name: contact_email, widget: string }
+          - { label: "Instagram URL", name: instagram, widget: string, required: false }
+
+  - name: team
+    label: "Team"
+    folder: src/content/team
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: name, widget: string }
+      - { label: "Role", name: role, widget: string }
+      - { label: "Headshot URL", name: headshot, widget: string, hint: "Paste Cloudinary URL" }
+      - { label: "Bio", name: bio, widget: text, required: false }
