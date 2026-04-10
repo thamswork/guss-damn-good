@@ -7,7 +7,6 @@ backend:
 
 media_folder: public/images
 public_folder: /images
-publish_mode: editorial_workflow
 
 collections:
 
@@ -16,12 +15,11 @@ collections:
     folder: src/content/flavors
     create: true
     slug: "{{slug}}"
-    summary: "{{fields.flavor_name}} — {{fields.status}}"
     fields:
       - { label: "Flavor Name", name: flavor_name, widget: string }
       - { label: "Mood / Number", name: mood_number, widget: string, required: false }
-      - { label: "Product Image URL", name: product_image, widget: string, hint: "Upload to Cloudinary, paste URL here" }
-      - { label: "Product Video URL", name: product_video, widget: string, required: false, hint: "Optional mp4/webm URL" }
+      - { label: "Product Image URL", name: product_image, widget: string }
+      - { label: "Product Video URL", name: product_video, widget: string, required: false }
       - { label: "Description", name: description, widget: text }
       - label: "Category"
         name: category
@@ -37,15 +35,15 @@ collections:
         widget: select
         options:
           - { label: "Current", value: "current" }
-          - { label: "Emerging (New)", value: "emerging" }
-          - { label: "Archive (Past)", value: "archive" }
+          - { label: "Emerging", value: "emerging" }
+          - { label: "Archive", value: "archive" }
       - { label: "In Stock", name: in_stock, widget: boolean, default: true }
-      - { label: "Pinned to top (max 2)", name: pinned, widget: boolean, default: false }
+      - { label: "Pinned to top", name: pinned, widget: boolean, default: false }
       - label: "Where to Get It"
         name: locations
         widget: list
         field: { label: "Location", name: location, widget: string }
-      - { label: "Story Behind the Flavor", name: body, widget: markdown, required: false }
+      - { label: "Story", name: body, widget: markdown, required: false }
 
   - name: collections_cms
     label: "Collections"
@@ -53,15 +51,15 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Collection Title", name: title, widget: string }
-      - { label: "Slug (URL, no spaces)", name: slug, widget: string }
+      - { label: "Title", name: title, widget: string }
+      - { label: "Slug", name: slug, widget: string }
       - { label: "Hero Image URL", name: hero_image, widget: string }
       - { label: "Hero Video URL", name: hero_video, widget: string, required: false }
-      - { label: "Short Description", name: description, widget: text }
+      - { label: "Description", name: description, widget: text }
       - { label: "Published", name: published, widget: boolean, default: true }
       - { label: "Featured on Homepage", name: featured, widget: boolean, default: false }
       - { label: "Enable Landing Page", name: landing_page, widget: boolean, default: true }
-      - label: "Flavors in this Collection"
+      - label: "Flavors in Collection"
         name: flavor_slugs
         widget: list
         field: { label: "Flavor Slug", name: slug, widget: string }
@@ -72,7 +70,6 @@ collections:
     folder: src/content/collabs
     create: true
     slug: "{{slug}}"
-    summary: "{{fields.partner_name}}"
     fields:
       - { label: "Partner Name", name: partner_name, widget: string }
       - { label: "Partner Logo URL", name: partner_logo, widget: string }
@@ -90,57 +87,40 @@ collections:
       - { label: "Year", name: year, widget: number }
       - { label: "Flavor Name", name: flavor_name, widget: string, required: false }
       - { label: "Published", name: published, widget: boolean, default: true }
-      - { label: "Featured on Homepage", name: featured, widget: boolean, default: false }
-      - { label: "Intro Paragraph", name: intro, widget: text }
+      - { label: "Intro", name: intro, widget: text }
       - { label: "The Brief", name: challenge, widget: text }
-      - { label: "Story-to-Flavor Process", name: process, widget: text }
+      - { label: "Process", name: process, widget: text }
       - { label: "The Result", name: result, widget: text }
-      - label: "Work Station Photo URLs"
+      - label: "Work Station Photos"
         name: work_station_images
         widget: list
         field: { label: "Image URL", name: url, widget: string }
       - { label: "Work Station Video URL", name: work_station_video, widget: string, required: false }
 
   - name: locations
-    label: "Find Us — Locations"
+    label: "Find Us"
     folder: src/content/locations
     create: true
     slug: "{{slug}}"
-    summary: "{{fields.name}}"
     fields:
       - { label: "Branch Name", name: name, widget: string }
-      - { label: "Published", name: published, widget: boolean, default: true }
-      - { label: "Full Address", name: address, widget: text }
-      - { label: "Opening Hours", name: hours, widget: string }
-      - { label: "Phone Number", name: phone, widget: string, required: false }
+      - { label: "Address", name: address, widget: text }
+      - { label: "Hours", name: hours, widget: string }
       - { label: "Google Maps URL", name: maps, widget: string }
-      - { label: "Storefront Thumbnail URL", name: thumb, widget: string, hint: "Upload storefront photo to Cloudinary — shown in 3-col grid" }
-      - { label: "Storefront Video URL", name: thumb_video, widget: string, required: false }
+      - { label: "Storefront Thumbnail URL", name: thumb, widget: string }
       - { label: "Delivery Available", name: delivery, widget: boolean, default: false }
-      - label: "Formats Available"
+      - label: "Formats"
         name: formats
         widget: list
         field: { label: "Format", name: format, widget: string }
 
   - name: settings
-    label: "Site Settings"
+    label: "Settings"
     files:
       - name: brand
-        label: "Brand & Global"
+        label: "Brand"
         file: src/content/settings/brand.json
         fields:
-          - { label: "Site Tagline", name: tagline, widget: string }
+          - { label: "Tagline", name: tagline, widget: string }
           - { label: "SEO Description", name: meta_description, widget: text }
           - { label: "Contact Email", name: contact_email, widget: string }
-          - { label: "Instagram URL", name: instagram, widget: string, required: false }
-
-  - name: team
-    label: "Team"
-    folder: src/content/team
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Name", name: name, widget: string }
-      - { label: "Role", name: role, widget: string }
-      - { label: "Headshot URL", name: headshot, widget: string }
-      - { label: "Bio", name: bio, widget: text, required: false }
