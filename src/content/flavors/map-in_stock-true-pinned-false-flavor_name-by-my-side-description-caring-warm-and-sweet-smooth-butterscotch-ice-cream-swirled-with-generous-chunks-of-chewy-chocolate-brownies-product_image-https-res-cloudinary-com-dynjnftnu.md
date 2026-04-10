@@ -1,10 +1,10 @@
 ---
-flavor_name: By My Side
-product_image: https://res.cloudinary.com/dynjnftnu/image/upload/v1775794656/BY_MY_SIDE_Large_qsx0z9.jpg
-description: Caring, warm, and sweet. Smooth Butterscotch ice cream swirled with
-  generous chunks of chewy chocolate brownies.
+flavor_name: Celebrate Living
+product_image: https://res.cloudinary.com/dynjnftnu/image/upload/v1775794655/CELEBRATE_LIVING_Large_nbykld.jpg
+description: Fresh, dynamic, and inspiring. Fragrant Yuzu ice cream paired with
+  candied orange and a freshly squeezed Mandarin orange sauce.
 category: classic
 status: current
 in_stock: true
-pinned: false
+pinned: true
 ---
