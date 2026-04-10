@@ -1,10 +1,10 @@
 ---
 partner_name: Wedding Collab
-partner_logo: https://res.cloudinary.com/dynjnftnu/image/upload/v1775802822/15MarchCatering-24_Large_uvnkgh.jpg
+partner_logo: https://res.cloudinary.com/dynjnftnu/image/upload/v1775802540/15MarchCatering-19_Large_vvj7pk.jpg
 hero_image: https://res.cloudinary.com/dynjnftnu/image/upload/v1775802540/15MarchCatering-28_Large_kachfe.jpg
 project_type: catering
 year: 2025
-flavor_name: Papaya Sorbet & Mint Cookie Chip
+flavor_name: Chocolate & Mint Cookie Chip
 published: true
 intro: When K. Mapprang and K. Ton approached us to design a signature flavor
   for their wedding celebration, we wanted to capture the essence of a timeless
@@ -24,5 +24,6 @@ work_station_images:
   - https://res.cloudinary.com/dynjnftnu/image/upload/v1775802543/15MarchCatering-16_Large_ea7yx2.jpg
   - https://res.cloudinary.com/dynjnftnu/image/upload/v1775802541/15MarchCatering-13_Large_tkkbj3.jpg
   - https://res.cloudinary.com/dynjnftnu/image/upload/v1775802541/15MarchCatering-12_Large_piatld.jpg
+  - https://res.cloudinary.com/dynjnftnu/image/upload/v1775802822/15MarchCatering-24_Large_uvnkgh.jpg
 work_station_video: https://res.cloudinary.com/dynjnftnu/image/upload/v1775802540/15MarchCatering-19_Large_vvj7pk.jpg
 ---
