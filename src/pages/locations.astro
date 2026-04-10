@@ -6,30 +6,30 @@ import { getCollection } from 'astro:content';
 const cmsLocs = await getCollection('locations').catch(() => []);
 
 const fallback = [
-  { name:"Siam Paragon", address:"991 Rama I Rd, Pathum Wan, Bangkok", hours:"10:00–22:00", phone:"+66 2 123 4567", delivery:true, maps:"https://maps.google.com/?q=Siam+Paragon+Bangkok", thumb:"https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=70", formats:["Scoop","Sundae","Shake","Cake"], emoji_tags:[{emoji:"🍦",label:"Scoop"},{emoji:"🎂",label:"Cake"}], menu_items:[{item:"Signature Scoop",desc:"Any single flavor",price:"129"},{item:"Double Scoop",desc:"Two flavors",price:"199"},{item:"Sundae",desc:"Scoop + toppings",price:"229"}], notes:"", lat:13.7462, lng:100.5347 },
-  { name:"Central World", address:"4/1 Rama I Rd, Pathum Wan, Bangkok", hours:"10:00–22:00", phone:"+66 2 234 5678", delivery:true, maps:"https://maps.google.com/?q=CentralWorld+Bangkok", thumb:"https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=600&q=70", formats:["Scoop","Sundae","Soft Serve"], emoji_tags:[{emoji:"🥤",label:"Shake"}], menu_items:[{item:"Signature Scoop",desc:"Any single flavor",price:"129"}], notes:"", lat:13.7470, lng:100.5394 },
-  { name:"EmQuartier", address:"689 Sukhumvit Rd, Khlong Toei, Bangkok", hours:"10:00–22:00", phone:"+66 2 345 6789", delivery:false, maps:"https://maps.google.com/?q=EmQuartier+Bangkok", thumb:"https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=600&q=70", formats:["Scoop","Sundae","Shake"], emoji_tags:[], menu_items:[], notes:"", lat:13.7302, lng:100.5696 },
-  { name:"Central Chidlom", address:"1027 Phloen Chit Rd, Lumpini, Bangkok", hours:"10:00–21:00", phone:"+66 2 456 7890", delivery:false, maps:"https://maps.google.com/?q=Central+Chidlom+Bangkok", thumb:"https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=600&q=70", formats:["Scoop","Cake"], emoji_tags:[], menu_items:[], notes:"", lat:13.7433, lng:100.5402 },
-  { name:"Terminal 21 Asok", address:"88 Sukhumvit Soi 19, Watthana, Bangkok", hours:"10:00–22:00", phone:"+66 2 567 8901", delivery:true, maps:"https://maps.google.com/?q=Terminal+21+Bangkok", thumb:"https://images.unsplash.com/photo-1519999482648-25049ddd37b1?w=600&q=70", formats:["Scoop","Sundae","Popsicle"], emoji_tags:[{emoji:"🍭",label:"Popsicle"}], menu_items:[], notes:"", lat:13.7374, lng:100.5604 },
-  { name:"ICONSIAM", address:"299 Charoen Nakhon Rd, Khlong Ton Sai, Bangkok", hours:"10:00–22:00", phone:"+66 2 678 9012", delivery:true, maps:"https://maps.google.com/?q=ICONSIAM+Bangkok", thumb:"https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=600&q=70", formats:["Scoop","Sundae","Shake","Cake"], emoji_tags:[{emoji:"🍦",label:"Scoop"},{emoji:"🥤",label:"Shake"}], menu_items:[], notes:"River view location", lat:13.7271, lng:100.5105 },
+  { name:"Siam Paragon",        address:"991 Rama I Rd, Pathum Wan, Bangkok",             hours:"10:00–22:00", phone:"+66 2 610 8000", delivery:true,  maps:"https://maps.google.com/?q=Siam+Paragon+Bangkok",         thumb:"https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80", formats:["Scoop","Sundae","Shake","Cake"], emoji_tags:[{emoji:"🍦",label:"Scoop"},{emoji:"🎂",label:"Cake"}], menu_items:[{item:"Signature Scoop",desc:"Choose any flavor",price:"129"},{item:"Double Scoop",desc:"Two flavors",price:"199"},{item:"Sunday Sundae",desc:"Scoop + seasonal toppings",price:"249"}], notes:"Flagship location · Full menu available" },
+  { name:"Central World",       address:"4/1 Rama I Rd, Pathum Wan, Bangkok",             hours:"10:00–22:00", phone:"+66 2 635 0999", delivery:true,  maps:"https://maps.google.com/?q=CentralWorld+Bangkok",         thumb:"https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=800&q=80", formats:["Scoop","Sundae","Soft Serve"], emoji_tags:[{emoji:"🥤",label:"Shake"}], menu_items:[{item:"Signature Scoop",desc:"Any flavor",price:"129"}], notes:"" },
+  { name:"EmQuartier",          address:"689 Sukhumvit Rd, Khlong Toei, Bangkok",         hours:"10:00–22:00", phone:"+66 2 003 6000", delivery:false, maps:"https://maps.google.com/?q=EmQuartier+Bangkok",           thumb:"https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=800&q=80", formats:["Scoop","Sundae","Shake"], emoji_tags:[], menu_items:[], notes:"" },
+  { name:"Terminal 21 Asok",    address:"88 Sukhumvit Soi 19, Watthana, Bangkok",         hours:"10:00–22:00", phone:"+66 2 108 0888", delivery:true,  maps:"https://maps.google.com/?q=Terminal+21+Asok+Bangkok",     thumb:"https://images.unsplash.com/photo-1519999482648-25049ddd37b1?w=800&q=80", formats:["Scoop","Sundae","Popsicle"], emoji_tags:[{emoji:"🍭",label:"Popsicle"}], menu_items:[], notes:"" },
+  { name:"Central Chidlom",     address:"1027 Phloen Chit Rd, Lumpini, Bangkok",          hours:"10:00–21:00", phone:"+66 2 793 7000", delivery:false, maps:"https://maps.google.com/?q=Central+Chidlom+Bangkok",      thumb:"https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=800&q=80", formats:["Scoop","Cake"], emoji_tags:[], menu_items:[], notes:"" },
+  { name:"The Mall Ngamwongwan",address:"Ngam Wong Wan Rd, Nonthaburi",                   hours:"10:00–21:00", phone:"+66 2 550 5000", delivery:false, maps:"https://maps.google.com/?q=The+Mall+Ngamwongwan",         thumb:"https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80", formats:["Scoop","Sundae"], emoji_tags:[], menu_items:[], notes:"" },
+  { name:"Mega Bangna",         address:"39 Bangna-Trad Rd, Bang Phli, Samut Prakan",     hours:"10:00–22:00", phone:"+66 2 105 1000", delivery:false, maps:"https://maps.google.com/?q=Mega+Bangna",                  thumb:"https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=800&q=80", formats:["Scoop","Sundae","Soft Serve"], emoji_tags:[], menu_items:[], notes:"" },
+  { name:"ICONSIAM",            address:"299 Charoen Nakhon Rd, Khlong Ton Sai, Bangkok", hours:"10:00–22:00", phone:"+66 2 495 7000", delivery:true,  maps:"https://maps.google.com/?q=ICONSIAM+Bangkok",             thumb:"https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800&q=80", formats:["Scoop","Sundae","Shake","Cake"], emoji_tags:[{emoji:"🌅",label:"River View"}], menu_items:[], notes:"Riverside · Full menu" },
+  { name:"Central Pinklao",     address:"7/222 Barommaratchachonnani Rd, Bangkok",         hours:"10:00–21:00", phone:"+66 2 884 8888", delivery:false, maps:"https://maps.google.com/?q=Central+Pinklao+Bangkok",      thumb:"https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80", formats:["Scoop"], emoji_tags:[], menu_items:[], notes:"" },
 ];
 
 const locations = cmsLocs.length > 0
   ? cmsLocs.map((l, i) => ({
-      name:        l.data.name || '',
-      address:     l.data.address || '',
-      hours:       l.data.hours || '',
-      phone:       l.data.phone || '',
-      delivery:    l.data.delivery || false,
-      maps:        l.data.maps || '#',
-      thumb:       l.data.thumb || '',
-      thumb_mobile:l.data.thumb_mobile || l.data.thumb || '',
-      formats:     l.data.formats || [],
-      emoji_tags:  l.data.emoji_tags || [],
-      menu_items:  l.data.menu_items || [],
-      notes:       l.data.notes || '',
-      lat:         fallback[i % fallback.length]?.lat || 13.75,
-      lng:         fallback[i % fallback.length]?.lng || 100.52,
+      name:       l.data.name || '',
+      address:    l.data.address || '',
+      hours:      l.data.hours || '',
+      phone:      l.data.phone || '',
+      delivery:   l.data.delivery || false,
+      maps:       l.data.maps || '#',
+      thumb:      l.data.thumb || '',
+      formats:    l.data.formats || [],
+      emoji_tags: l.data.emoji_tags || [],
+      menu_items: l.data.menu_items || [],
+      notes:      l.data.notes || '',
     }))
   : fallback;
 
@@ -39,9 +39,8 @@ const locJson = JSON.stringify(locations);
 <BaseLayout title="Find Us — Guss Damn Good">
   <Nav/>
 
-  <!-- HEADER -->
   <header class="lh reveal">
-    <div>
+    <div class="lh__left">
       <p class="eyebrow" style="margin-bottom:0.6rem;">18 Branches · Bangkok</p>
       <h1 class="lh__title">Find Us.</h1>
       <p class="lh__sub">Walk in. Scoop up. Feel something.</p>
@@ -57,39 +56,55 @@ const locJson = JSON.stringify(locations);
     <span class="dbar__apps">GrabFood · Foodpanda · LINE MAN</span>
   </div>
 
-  <!-- LOCATION GRID — desktop 4-col, mobile 2-col stacked -->
+  <!-- 2-COLUMN GRID -->
   <div class="lgrid">
     {locations.map((b, i) => (
-      <article class="lcard" data-i={i} tabindex="0" role="button" aria-label={`View ${b.name}`}>
-        <!-- SKELETON loader -->
-        <div class="lcard__skel"/>
-        <!-- THUMB -->
-        <div class="lcard__thumb">
+      <article
+        class="lcard reveal reveal-delay-1"
+        data-i={i}
+        tabindex="0"
+        role="button"
+        aria-label={`View ${b.name} details`}
+      >
+        <!-- LEFT: horizontal photo -->
+        <div class="lcard__img">
           {b.thumb
-            ? <img src={b.thumb} alt={b.name} loading="lazy" onload="this.parentElement.previousElementSibling.style.display='none'"/>
+            ? <img src={b.thumb} alt={b.name} loading="lazy"/>
             : <div class="lcard__noimg"/>
           }
           {b.delivery && (
-            <span class="lcard__dlv" title="Delivery available">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3"/><rect x="9" y="11" width="14" height="10" rx="1"/><circle cx="12" cy="21" r="1"/><circle cx="20" cy="21" r="1"/></svg>
+            <span class="lcard__dlv">
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;vertical-align:middle;margin-right:3px;"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3"/><rect x="9" y="11" width="14" height="10" rx="1"/><circle cx="12" cy="21" r="1"/><circle cx="20" cy="21" r="1"/></svg>
               Delivery
             </span>
           )}
-          {b.emoji_tags?.slice(0,2).map(t => (
+          {b.emoji_tags?.slice(0,1).map(t => (
             <span class="lcard__etag">{t.emoji} {t.label}</span>
           ))}
         </div>
-        <!-- INFO -->
+
+        <!-- RIGHT: info -->
         <div class="lcard__body">
-          <h3 class="lcard__name">{b.name}</h3>
-          <p class="lcard__addr">{b.address}</p>
+          <div class="lcard__top">
+            <h3 class="lcard__name">{b.name}</h3>
+            <p class="lcard__addr">{b.address}</p>
+          </div>
           <div class="lcard__meta">
-            <span class="eyebrow">Hours</span>
-            <span class="lcard__v">{b.hours}</span>
+            <div class="lcard__row">
+              <span class="eyebrow" style="min-width:46px;">Hours</span>
+              <span class="lcard__v">{b.hours}</span>
+            </div>
+            {b.phone && (
+              <div class="lcard__row">
+                <span class="eyebrow" style="min-width:46px;">Tel</span>
+                <span class="lcard__v">{b.phone}</span>
+              </div>
+            )}
           </div>
           <div class="lcard__fmts">
-            {b.formats.slice(0,3).map(f => <span class="lcard__fmt">{f}</span>)}
+            {b.formats.slice(0,4).map(f => <span class="lcard__fmt">{f}</span>)}
           </div>
+          <span class="lcard__cta">View details →</span>
         </div>
       </article>
     ))}
@@ -99,11 +114,11 @@ const locJson = JSON.stringify(locations);
   <div class="lmod" id="lmod" role="dialog" aria-modal="true">
     <div class="lmod__back" id="lmodBack"/>
     <div class="lmod__box">
-      <button class="lmod__close" id="lmodClose">✕</button>
-      <div class="lmod__img" id="lmodImg"/>
-      <div class="lmod__info" id="lmodInfo">
+      <button class="lmod__close" id="lmodClose" aria-label="Close">✕</button>
+      <div class="lmod__img" id="lmodImg"></div>
+      <div class="lmod__info">
         <div class="lmod__top">
-          <p class="lmod__num" id="lmodNum"></p>
+          <p class="lmod__idx" id="lmodIdx"></p>
           <h2 class="lmod__name" id="lmodName"></h2>
           <div class="lmod__etags" id="lmodEtags"></div>
         </div>
@@ -114,62 +129,10 @@ const locJson = JSON.stringify(locations);
     </div>
   </div>
 
-  <!-- DARK MAP -->
-  <section class="mapbox">
-    <div class="map__head">
-      <div>
-        <p class="eyebrow" style="margin-bottom:0.4rem;">All {locations.length} Locations</p>
-        <h2 class="map__title">Bangkok, mapped.</h2>
-      </div>
-      <p class="map__sub">Click any pin or card to view details.</p>
-    </div>
-    <div class="map__canvas" id="mapCanvas">
-      <!-- Dark stylized Bangkok SVG map -->
-      <svg id="mapSvg" viewBox="0 0 800 560" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
-        <!-- Dark bg already from body -->
-        <!-- Grid -->
-        <g opacity="0.04" stroke="#FFFFFF" stroke-width="0.5" fill="none">
-          {Array.from({length:12},(_,i) => <line x1={i*70} y1="0" x2={i*70} y2="560"/>)}
-          {Array.from({length:9},(_,i) => <line x1="0" y1={i*65} x2="800" y2={i*65}/>)}
-        </g>
-        <!-- Chao Phraya river -->
-        <path d="M175 560 C190 490,178 450,188 390 C205 310,185 270,195 210 C210 140,200 80,215 20"
-          fill="none" stroke="rgba(40,80,160,0.18)" stroke-width="28" stroke-linecap="round"/>
-        <path d="M175 560 C190 490,178 450,188 390 C205 310,185 270,195 210 C210 140,200 80,215 20"
-          fill="none" stroke="rgba(30,60,140,0.1)" stroke-width="16" stroke-linecap="round"/>
-        <!-- BTS lines -->
-        <path d="M80 340 L680 280" fill="none" stroke="rgba(0,180,80,0.18)" stroke-width="3"/>
-        <path d="M380 560 L400 0" fill="none" stroke="rgba(180,120,0,0.12)" stroke-width="3"/>
-        <!-- Roads -->
-        <g stroke="rgba(255,255,255,0.05)" stroke-width="1" fill="none">
-          <path d="M0 270 Q400 250 800 290"/>
-          <path d="M0 360 Q400 340 800 380"/>
-          <line x1="500" y1="0" x2="500" y2="560"/>
-          <line x1="300" y1="0" x2="300" y2="560"/>
-        </g>
-        <!-- Location pins -->
-        {locations.map((loc, i) => {
-          const x = Math.round(((loc.lng - 100.45) / 0.25) * 680 + 60);
-          const y = Math.round(((13.90 - loc.lat) / 0.32) * 500 + 30);
-          return (
-            <g class="mpin" id={`mpin-${i}`} data-i={i} style="cursor:pointer;" transform={`translate(${x},${y})`}>
-              <circle r="22" fill="#FFFFFF" opacity="0.04" class="mpin-glow"/>
-              <circle r="8" fill="#FFFFFF" opacity="0.9" class="mpin-dot"/>
-              <circle r="4" fill="#000" class="mpin-hole"/>
-              <line x1="0" y1="8" x2="0" y2="20" stroke="#FFFFFF" stroke-width="1.5" opacity="0.5"/>
-              <text x="0" y="-16" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="7.5" fill="#FFFFFF" opacity="0.65" font-weight="500">{loc.name.replace(/\s+.*/,'')}</text>
-            </g>
-          );
-        })}
-        <!-- Compass -->
-        <g transform="translate(762,30)" opacity="0.2">
-          <circle r="14" fill="none" stroke="#FFFFFF" stroke-width="0.5"/>
-          <text x="0" y="-16" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="7" fill="#FFFFFF">N</text>
-          <line x1="0" y1="-8" x2="0" y2="8" stroke="#FFFFFF" stroke-width="1"/>
-        </g>
-      </svg>
-    </div>
-  </section>
+  <div class="lfooter-strip reveal">
+    <p class="eyebrow">Showing {locations.length} of 18 branches · Manage via CMS</p>
+    <a href="/admin" class="lfooter-link">Open CMS ↗</a>
+  </div>
 
   <footer class="foot">
     <div class="foot__top">
@@ -191,7 +154,7 @@ const locJson = JSON.stringify(locations);
   /* HEADER */
   .lh { display:flex; align-items:flex-end; justify-content:space-between; padding:7rem var(--gutter) 2rem; border-bottom:1px solid var(--g2); gap:2rem; flex-wrap:wrap; }
   .lh__title { font-size:clamp(3rem,8vw,7rem); font-weight:600; color:#FFFFFF; letter-spacing:-0.025em; line-height:0.92; margin:0.5rem 0; }
-  .lh__sub { font-family:var(--f); font-size:0.85rem; color:rgba(255,255,255,0.5); font-weight:300; }
+  .lh__sub { font-family:var(--f); font-size:0.85rem; color:rgba(255,255,255,0.55); font-weight:300; }
   .lh__stats { display:flex; gap:2.5rem; align-items:flex-end; flex-shrink:0; }
   .lh__stat { display:flex; flex-direction:column; gap:0.2rem; }
   .lh__n { font-family:var(--f); font-weight:400; font-size:clamp(1.8rem,4vw,3rem); color:#FFFFFF; line-height:1; letter-spacing:-0.02em; }
@@ -199,73 +162,73 @@ const locJson = JSON.stringify(locations);
   .dbar { display:flex; align-items:center; justify-content:space-between; padding:0.8rem var(--gutter); border-bottom:1px solid var(--g2); background:var(--g1); flex-wrap:wrap; gap:0.75rem; }
   .dbar__apps { font-family:var(--f); font-size:0.55rem; letter-spacing:0.18em; text-transform:uppercase; color:#FFFFFF; font-weight:400; }
 
-  /* GRID — 4-col desktop */
-  .lgrid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--gap); background:var(--g2); border-bottom:1px solid var(--g2); }
+  /* 2-COLUMN GRID */
+  .lgrid { display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); background:var(--g2); border-bottom:1px solid var(--g2); }
 
-  .lcard { background:var(--g1); display:flex; flex-direction:column; cursor:pointer; position:relative; transition:background 0.22s; }
-  .lcard:hover,.lcard.active { background:#111; }
-  .lcard__skel { position:absolute; inset:0; background:linear-gradient(90deg,var(--g2) 25%,var(--g3) 50%,var(--g2) 75%); background-size:200% 100%; animation:shimmer 1.5s infinite; z-index:0; display:none; }
+  /* CARD — horizontal layout on desktop */
+  .lcard { background:var(--g1); display:grid; grid-template-columns:1fr 1fr; cursor:pointer; transition:background 0.22s ease; }
+  .lcard:hover { background:#111; }
+  .lcard:focus { outline:1px solid var(--g3); }
 
-  /* 4:5 thumb */
-  .lcard__thumb { position:relative; aspect-ratio:4/5; overflow:hidden; background:#080808; z-index:1; }
-  .lcard__thumb img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.5s ease; filter:grayscale(0.1); }
-  .lcard:hover .lcard__thumb img { transform:scale(1.05); filter:grayscale(0); }
+  /* Horizontal image (16:10) */
+  .lcard__img { position:relative; aspect-ratio:16/10; overflow:hidden; background:#080808; }
+  .lcard__img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.5s ease; filter:grayscale(0.08); }
+  .lcard:hover .lcard__img img { transform:scale(1.05); filter:grayscale(0); }
   .lcard__noimg { width:100%; height:100%; background:var(--g2); }
-  .lcard__dlv { position:absolute; top:0.55rem; left:0.55rem; font-family:var(--f); font-size:0.45rem; letter-spacing:0.15em; text-transform:uppercase; background:#FFFFFF; color:#000; padding:0.2rem 0.55rem 0.2rem 0.4rem; font-weight:500; display:flex; align-items:center; gap:4px; }
-  .lcard__etag { position:absolute; bottom:0.55rem; left:0.55rem; font-family:var(--f); font-size:0.5rem; background:rgba(0,0,0,0.75); color:#FFFFFF; padding:0.18rem 0.5rem; border:1px solid rgba(255,255,255,0.15); font-weight:300; }
-  .lcard__etag:nth-of-type(3) { left:auto; right:0.55rem; }
+  .lcard__dlv { position:absolute; top:0.55rem; left:0.55rem; font-family:var(--f); font-size:0.45rem; letter-spacing:0.15em; text-transform:uppercase; background:#FFFFFF; color:#000; padding:0.18rem 0.52rem; font-weight:500; display:flex; align-items:center; gap:3px; }
+  .lcard__etag { position:absolute; bottom:0.55rem; left:0.55rem; font-family:var(--f); font-size:0.48rem; background:rgba(0,0,0,0.78); color:#FFFFFF; padding:0.18rem 0.52rem; border:1px solid rgba(255,255,255,0.12); font-weight:300; }
 
-  .lcard__body { padding:0.9rem 0.9rem 1.1rem; display:flex; flex-direction:column; gap:0.45rem; z-index:1; }
-  .lcard__name { font-family:var(--f); font-weight:600; font-size:clamp(0.82rem,1.3vw,1rem); color:#FFFFFF; line-height:1.2; }
-  .lcard__addr { font-family:var(--f); font-size:0.72rem; color:rgba(255,255,255,0.42); line-height:1.45; font-weight:300; }
-  .lcard__meta { display:flex; align-items:baseline; gap:0.55rem; padding-top:0.4rem; border-top:1px solid var(--g2); }
-  .lcard__v { font-family:var(--f); font-size:0.75rem; color:#FFFFFF; font-weight:300; }
-  .lcard__fmts { display:flex; gap:0.28rem; flex-wrap:wrap; }
-  .lcard__fmt { font-family:var(--f); font-size:0.44rem; letter-spacing:0.13em; text-transform:uppercase; color:var(--g4); border:1px solid var(--g2); padding:0.12rem 0.4rem; font-weight:300; }
+  /* Info panel */
+  .lcard__body { padding:1.25rem 1.25rem 1.5rem; display:flex; flex-direction:column; gap:0.7rem; }
+  .lcard__top { display:flex; flex-direction:column; gap:0.3rem; }
+  .lcard__name { font-family:var(--f); font-weight:600; font-size:clamp(0.9rem,1.5vw,1.15rem); color:#FFFFFF; letter-spacing:-0.01em; line-height:1.2; }
+  .lcard__addr { font-family:var(--f); font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1.5; font-weight:300; }
+  .lcard__meta { display:flex; flex-direction:column; gap:0.3rem; padding-top:0.6rem; border-top:1px solid var(--g2); }
+  .lcard__row { display:flex; align-items:baseline; gap:0.6rem; }
+  .lcard__v { font-family:var(--f); font-size:0.8rem; color:#FFFFFF; font-weight:300; }
+  .lcard__fmts { display:flex; gap:0.3rem; flex-wrap:wrap; }
+  .lcard__fmt { font-family:var(--f); font-size:0.46rem; letter-spacing:0.13em; text-transform:uppercase; color:var(--g4); border:1px solid var(--g2); padding:0.13rem 0.42rem; font-weight:300; }
+  .lcard__cta { font-family:var(--f); font-size:0.52rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.35); font-weight:300; margin-top:auto; transition:color 0.22s; }
+  .lcard:hover .lcard__cta { color:#FFFFFF; }
 
   /* MODAL */
   .lmod { position:fixed; inset:0; z-index:8000; display:flex; align-items:center; justify-content:center; padding:1.5rem; opacity:0; visibility:hidden; pointer-events:none; transition:opacity 0.28s ease,visibility 0.28s ease; }
   .lmod.open { opacity:1; visibility:visible; pointer-events:all; }
   .lmod__back { position:absolute; inset:0; background:rgba(0,0,0,0.92); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); cursor:pointer; }
-  .lmod__box { position:relative; z-index:1; background:var(--g1); display:grid; grid-template-columns:1fr 1fr; width:100%; max-width:860px; max-height:88vh; overflow:hidden; border:1px solid var(--g2); }
+  .lmod__box { position:relative; z-index:1; background:var(--g1); display:grid; grid-template-columns:1fr 1fr; width:100%; max-width:880px; max-height:88vh; overflow:hidden; border:1px solid var(--g2); }
   .lmod__close { position:absolute; top:1rem; right:1rem; z-index:2; background:rgba(0,0,0,0.7); border:1px solid var(--g3); color:#FFFFFF; width:32px; height:32px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.7rem; font-family:var(--f); transition:all 0.2s; }
-  .lmod__close:hover { background:#FFFFFF; color:#000; }
+  .lmod__close:hover { background:#FFFFFF; color:#000; border-color:#FFFFFF; }
   .lmod__img { overflow:hidden; background:#080808; aspect-ratio:4/5; }
-  .lmod__img img,.lmod__img video { width:100%; height:100%; object-fit:cover; display:block; }
-  .lmod__info { padding:2rem 1.75rem; overflow-y:auto; display:flex; flex-direction:column; gap:1.25rem; }
-  .lmod__top { display:flex; flex-direction:column; gap:0.4rem; }
-  .lmod__num { font-family:var(--f); font-size:0.52rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--g4); font-weight:400; }
+  .lmod__img img { width:100%; height:100%; object-fit:cover; display:block; }
+  .lmod__info { padding:2.25rem 2rem; overflow-y:auto; display:flex; flex-direction:column; gap:1.25rem; }
+  .lmod__top { display:flex; flex-direction:column; gap:0.35rem; }
+  .lmod__idx { font-family:var(--f); font-size:0.52rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--g4); font-weight:400; }
   .lmod__name { font-family:var(--f); font-weight:600; font-size:clamp(1.4rem,3vw,2.2rem); color:#FFFFFF; letter-spacing:-0.02em; line-height:1.05; }
-  .lmod__etags { display:flex; gap:0.4rem; flex-wrap:wrap; margin-top:0.3rem; }
+  .lmod__etags { display:flex; gap:0.4rem; flex-wrap:wrap; margin-top:0.25rem; }
   .lmod__etag { font-family:var(--f); font-size:0.55rem; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); color:#FFFFFF; padding:0.22rem 0.65rem; font-weight:300; }
   .lmod__details { display:flex; flex-direction:column; gap:0.5rem; padding-top:1rem; border-top:1px solid var(--g2); }
   .lmod__row { display:flex; gap:0.75rem; align-items:baseline; }
-  .lmod__lbl { font-family:var(--f); font-size:0.52rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--g4); font-weight:400; min-width:52px; }
-  .lmod__val { font-family:var(--f); font-size:0.88rem; color:#FFFFFF; font-weight:300; }
-  .lmod__menu { display:flex; flex-direction:column; gap:0.5rem; padding-top:1rem; border-top:1px solid var(--g2); }
-  .lmod__menu-h { font-family:var(--f); font-weight:500; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:#FFFFFF; margin-bottom:0.25rem; }
-  .lmod__item { display:flex; justify-content:space-between; align-items:baseline; padding:0.4rem 0; border-bottom:1px solid rgba(255,255,255,0.05); }
-  .lmod__item-name { font-family:var(--f); font-size:0.82rem; color:#FFFFFF; font-weight:300; }
-  .lmod__item-price { font-family:var(--f); font-size:0.75rem; color:rgba(255,255,255,0.5); font-weight:300; }
-  .lmod__notes { font-family:var(--f); font-size:0.75rem; color:rgba(255,255,255,0.45); font-style:italic; font-weight:300; padding-top:0.5rem; }
-  .lmod__actions { display:flex; flex-direction:column; gap:0.6rem; margin-top:auto; padding-top:1rem; border-top:1px solid var(--g2); }
-  .lmod__btn { font-family:var(--f); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.72rem 1.4rem; text-decoration:none; text-align:center; font-weight:500; transition:opacity 0.22s; display:block; }
+  .lmod__lbl { font-family:var(--f); font-size:0.5rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--g4); font-weight:400; min-width:52px; flex-shrink:0; }
+  .lmod__val { font-family:var(--f); font-size:0.88rem; color:#FFFFFF; font-weight:300; line-height:1.5; }
+  .lmod__menu { display:flex; flex-direction:column; gap:0; padding-top:1rem; border-top:1px solid var(--g2); }
+  .lmod__menu-h { font-family:var(--f); font-weight:500; font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; color:#FFFFFF; margin-bottom:0.65rem; }
+  .lmod__item { display:flex; justify-content:space-between; align-items:flex-start; padding:0.5rem 0; border-bottom:1px solid rgba(255,255,255,0.05); gap:1rem; }
+  .lmod__item-l { display:flex; flex-direction:column; gap:0.15rem; }
+  .lmod__item-name { font-family:var(--f); font-size:0.85rem; color:#FFFFFF; font-weight:300; }
+  .lmod__item-desc { font-family:var(--f); font-size:0.68rem; color:rgba(255,255,255,0.4); font-weight:300; }
+  .lmod__item-price { font-family:var(--f); font-size:0.78rem; color:rgba(255,255,255,0.6); font-weight:400; flex-shrink:0; }
+  .lmod__notes { font-family:var(--f); font-size:0.75rem; color:rgba(255,255,255,0.4); font-style:italic; font-weight:300; padding-top:0.75rem; }
+  .lmod__actions { display:flex; flex-direction:column; gap:0.6rem; margin-top:auto; padding-top:1.25rem; border-top:1px solid var(--g2); }
+  .lmod__btn { font-family:var(--f); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.75rem 1.4rem; text-decoration:none; text-align:center; font-weight:500; transition:opacity 0.22s; display:block; cursor:pointer; border:none; }
   .lmod__btn--dir { background:#FFFFFF; color:#000; }
   .lmod__btn--dir:hover { opacity:0.85; }
-  .lmod__btn--close { background:none; border:1px solid var(--g3); color:var(--g4); cursor:pointer; font-size:0.52rem; letter-spacing:0.18em; transition:all 0.22s; }
-  .lmod__btn--close:hover { border-color:#FFFFFF; color:#FFFFFF; }
+  .lmod__btn--cl { background:none; border:1px solid var(--g3); color:var(--g4); font-size:0.52rem; letter-spacing:0.18em; transition:all 0.22s; }
+  .lmod__btn--cl:hover { border-color:#FFFFFF; color:#FFFFFF; }
 
-  /* MAP */
-  .mapbox { border-bottom:1px solid var(--g2); }
-  .map__head { display:flex; align-items:flex-end; justify-content:space-between; padding:2rem var(--gutter); border-bottom:1px solid var(--g2); flex-wrap:wrap; gap:1rem; }
-  .map__title { font-size:clamp(1.6rem,3.5vw,3rem); font-weight:600; color:#FFFFFF; letter-spacing:-0.02em; margin-top:0.4rem; }
-  .map__sub { font-family:var(--f); font-size:0.8rem; color:rgba(255,255,255,0.4); font-weight:300; }
-  .map__canvas { width:100%; aspect-ratio:16/9; background:#020202; overflow:hidden; }
-  .mpin { transition:transform 0.3s ease; }
-  .mpin:hover { transform:scale(1.35); }
-  .mpin.active .mpin-dot { fill:#FFD700 !important; }
-  .mpin.active .mpin-glow { opacity:0.15 !important; }
-  .mpin-dot { transition:fill 0.3s ease; }
+  /* FOOTER STRIP */
+  .lfooter-strip { display:flex; align-items:center; justify-content:space-between; padding:1.25rem var(--gutter); border-bottom:1px solid var(--g2); flex-wrap:wrap; gap:1rem; }
+  .lfooter-link { font-family:var(--f); font-size:0.52rem; letter-spacing:0.18em; text-transform:uppercase; color:#FFFFFF; text-decoration:none; font-weight:300; transition:opacity 0.22s; }
+  .lfooter-link:hover { opacity:0.5; }
 
   /* FOOTER */
   .foot { padding:2rem var(--gutter); display:flex; flex-direction:column; gap:1.25rem; border-top:1px solid var(--g2); }
@@ -277,110 +240,100 @@ const locJson = JSON.stringify(locations);
   .foot__nav a:hover { color:#FFFFFF; }
   .foot__copy { font-family:var(--f); font-size:0.46rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--g2); }
 
-  @keyframes shimmer { to { background-position:-200% 0; } }
-
-  /* MOBILE */
+  /* RESPONSIVE */
   @media(max-width:900px){
-    .lgrid { grid-template-columns:repeat(2,1fr); }
+    /* Mobile: 2-col grid, each card stacks vertically */
+    .lgrid { grid-template-columns:1fr 1fr; }
+    .lcard { grid-template-columns:1fr; }
+    .lcard__img { aspect-ratio:4/3; }
     .lmod__box { grid-template-columns:1fr; overflow-y:auto; }
     .lmod__img { aspect-ratio:4/3; }
-    .map__canvas { aspect-ratio:4/3; }
-  }
-  @media(max-width:560px){
-    .lcard__addr { display:none; }
     .lh { flex-direction:column; align-items:flex-start; }
+  }
+  @media(max-width:480px){
+    /* Tighter on small phones */
+    .lcard__addr { display:none; }
+    .lcard__body { padding:0.8rem 0.75rem 1rem; gap:0.5rem; }
+    .lcard__name { font-size:0.85rem; }
   }
 </style>
 
 <script define:vars={{ locJson }}>
   var locs = JSON.parse(locJson);
-
-  /* ── MODAL ── */
   var modal = document.getElementById('lmod');
   var back  = document.getElementById('lmodBack');
   var cls   = document.getElementById('lmodClose');
 
-  function openModal(i) {
+  function openMod(i) {
     var loc = locs[i];
     if (!loc) return;
 
     // Image
-    var imgEl = document.getElementById('lmodImg');
-    imgEl.innerHTML = loc.thumb
+    document.getElementById('lmodImg').innerHTML = loc.thumb
       ? '<img src="'+loc.thumb+'" alt="'+loc.name+'"/>'
-      : '<div style="width:100%;height:100%;background:var(--g2);"></div>';
+      : '<div style="width:100%;height:100%;background:var(--g2);display:flex;align-items:center;justify-content:center;font-size:3rem;">📍</div>';
 
     // Header
-    document.getElementById('lmodNum').textContent  = 'Branch ' + (i+1) + ' of ' + locs.length;
+    document.getElementById('lmodIdx').textContent  = 'Branch ' + (i+1) + ' of ' + locs.length;
     document.getElementById('lmodName').textContent = loc.name;
 
     // Emoji tags
-    var etEl = document.getElementById('lmodEtags');
-    etEl.innerHTML = (loc.emoji_tags||[]).map(function(t){
+    document.getElementById('lmodEtags').innerHTML = (loc.emoji_tags||[]).map(function(t){
       return '<span class="lmod__etag">'+t.emoji+' '+t.label+'</span>';
     }).join('');
 
     // Details
-    var dEl = document.getElementById('lmodDetails');
     var rows = [
-      { l:'Address', v:loc.address },
-      { l:'Hours',   v:loc.hours },
-      { l:'Phone',   v:loc.phone },
-      { l:'Delivery',v:loc.delivery?'Available — GrabFood · Foodpanda · LINE MAN':'Not available' },
+      { l:'Address',  v:loc.address },
+      { l:'Hours',    v:loc.hours },
+      { l:'Phone',    v:loc.phone },
+      { l:'Delivery', v:loc.delivery ? 'Available — GrabFood · Foodpanda · LINE MAN' : 'Not available at this branch' },
     ].filter(function(r){ return r.v; });
-    dEl.innerHTML = rows.map(function(r){
+    document.getElementById('lmodDetails').innerHTML = rows.map(function(r){
       return '<div class="lmod__row"><span class="lmod__lbl">'+r.l+'</span><span class="lmod__val">'+r.v+'</span></div>';
     }).join('');
 
     // Menu
-    var mEl = document.getElementById('lmodMenu');
     var items = loc.menu_items || [];
-    mEl.innerHTML = items.length > 0
+    document.getElementById('lmodMenu').innerHTML = items.length > 0
       ? '<p class="lmod__menu-h">Menu</p>' + items.map(function(m){
-          return '<div class="lmod__item"><span class="lmod__item-name">'+(m.item||m)+
-                 (m.desc?'<br><small style="color:rgba(255,255,255,0.4);font-size:0.7rem;">'+m.desc+'</small>':'')+
-                 '</span>'+(m.price?'<span class="lmod__item-price">฿'+m.price+'</span>':'')+
-                 '</div>';
+          var name  = m.item || m;
+          var desc  = m.desc  || '';
+          var price = m.price || '';
+          return '<div class="lmod__item">'+
+            '<div class="lmod__item-l">'+
+              '<span class="lmod__item-name">'+name+'</span>'+
+              (desc?'<span class="lmod__item-desc">'+desc+'</span>':'')+
+            '</div>'+
+            (price?'<span class="lmod__item-price">฿'+price+'</span>':'')+
+            '</div>';
         }).join('') + (loc.notes?'<p class="lmod__notes">'+loc.notes+'</p>':'')
-      : (loc.notes?'<p class="lmod__notes">'+loc.notes+'</p>':'');
+      : (loc.notes?'<p class="lmod__notes" style="padding-top:1rem;border-top:1px solid var(--g2);">'+loc.notes+'</p>':'');
 
     // Actions
     document.getElementById('lmodActions').innerHTML =
       '<a href="'+loc.maps+'" target="_blank" rel="noopener" class="lmod__btn lmod__btn--dir">Get Directions ↗</a>'+
-      '<button class="lmod__btn lmod__btn--close" onclick="closeModal()">Close</button>';
+      '<button class="lmod__btn lmod__btn--cl" onclick="closeMod()">Close</button>';
 
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
-
-    // Highlight map pin
-    document.querySelectorAll('.mpin').forEach(function(p){ p.classList.remove('active'); });
-    var pin = document.getElementById('mpin-'+i);
-    if (pin) pin.classList.add('active');
   }
 
-  function closeModal() {
+  function closeMod() {
     modal.classList.remove('open');
     document.body.style.overflow = '';
-    document.querySelectorAll('.mpin').forEach(function(p){ p.classList.remove('active'); });
   }
-  window.closeModal = closeModal;
+  window.closeMod = closeMod;
 
-  back && back.addEventListener('click', closeModal);
-  cls  && cls.addEventListener('click',  closeModal);
-  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+  back && back.addEventListener('click', closeMod);
+  cls  && cls.addEventListener('click',  closeMod);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMod(); });
 
-  /* ── CARD CLICKS ── */
   document.querySelectorAll('.lcard').forEach(function(card) {
     var i = parseInt(card.dataset.i);
-    card.addEventListener('click', function(){ openModal(i); });
+    card.addEventListener('click', function(){ openMod(i); });
     card.addEventListener('keydown', function(e){
-      if (e.key==='Enter'||e.key===' ') openModal(i);
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openMod(i); }
     });
-  });
-
-  /* ── PIN CLICKS ── */
-  document.querySelectorAll('.mpin').forEach(function(pin) {
-    var i = parseInt(pin.dataset.i);
-    pin.addEventListener('click', function(){ openModal(i); });
   });
 </script>
