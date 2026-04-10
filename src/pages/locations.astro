@@ -97,12 +97,12 @@ const branches = [
   .dbar__apps { font-family:var(--f); font-size:0.55rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--white); font-weight:400; }
 
   /* 3-COL GRID */
-  .lgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap); background:var(--g2); border-bottom:1px solid var(--g2); }
+  .lgrid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--gap); background:var(--g2); border-bottom:1px solid var(--g2); }
 
   .lcard { background:var(--g1); display:flex; flex-direction:column; cursor:pointer; }
 
   /* THUMBNAIL */
-  .lcard__thumb { position:relative; aspect-ratio:16/10; overflow:hidden; background:#080808; }
+  .lcard__thumb { position:relative; aspect-ratio:4/5; overflow:hidden; background:#080808; }
   .lcard__thumb img { width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(0.15); transition:transform 0.55s ease, filter 0.4s ease; }
   .lcard:hover .lcard__thumb img { transform:scale(1.05); filter:grayscale(0); }
   .lcard__dlv { position:absolute; top:0.6rem; right:0.6rem; font-family:var(--f); font-size:0.46rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--white); color:var(--black); padding:0.18rem 0.52rem; font-weight:500; }

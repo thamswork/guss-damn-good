@@ -1,47 +1,70 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
+import { getCollection } from 'astro:content';
 
-const collabs = [
-  { slug:"rimowa",    name:"RIMOWA",    type:"Collab Flavor", year:2023, img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",  flavor:"Papaya Sorbet & Mint Cookie Chip" },
-  { slug:"valentino", name:"Valentino", type:"Collab Flavor", year:2023, img:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80", flavor:"Greek Yogurt Lemon & Black Sesame" },
-  { slug:"rimowa",    name:"Hermes",    type:"Collab Flavor", year:2022, img:"https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80",  flavor:"Exclusive Edition" },
-  { slug:"rimowa",    name:"La Mer",    type:"Campaign",      year:2022, img:"https://images.unsplash.com/photo-1570194065650-d99fb4b8ccb4?w=800&q=80", flavor:"Limited Drop" },
-  { slug:"rimowa",    name:"SCRUBB",    type:"Campaign",      year:2024, img:"https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=800&q=80", flavor:"National Ice Cream Month" },
-  { slug:"rimowa",    name:"Wedding",   type:"Catering",      year:2024, img:"https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80", flavor:"Custom Catering" },
+const cmsCollabs = await getCollection('collabs').catch(() => []);
+
+const fallback = [
+  { slug:"rimowa",    partnerName:"RIMOWA",    projectType:"Collab Flavor", year:2023, flavorName:"Papaya Sorbet & Mint Cookie Chip", heroImage:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" },
+  { slug:"valentino", partnerName:"Valentino", projectType:"Collab Flavor", year:2023, flavorName:"Greek Yogurt Lemon & Black Sesame", heroImage:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80" },
+  { slug:"rimowa",    partnerName:"Hermes",    projectType:"Collab Flavor", year:2022, flavorName:"Exclusive Edition", heroImage:"https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80" },
+  { slug:"rimowa",    partnerName:"La Mer",    projectType:"Campaign",      year:2022, flavorName:"Limited Drop", heroImage:"https://images.unsplash.com/photo-1570194065650-d99fb4b8ccb4?w=800&q=80" },
+  { slug:"rimowa",    partnerName:"SCRUBB",    projectType:"Campaign",      year:2024, flavorName:"National Ice Cream Month", heroImage:"https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=800&q=80" },
+  { slug:"rimowa",    partnerName:"Wedding",   projectType:"Catering",      year:2024, flavorName:"Custom Catering", heroImage:"https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80" },
 ];
+
+const collabs = cmsCollabs.length > 0
+  ? cmsCollabs.map(c => ({
+      slug: c.id,
+      partnerName: c.data.partner_name,
+      projectType: c.data.project_type?.replace('_',' ') || 'Collab',
+      year: c.data.year,
+      flavorName: c.data.flavor_name,
+      heroImage: c.data.hero_image || '',
+      heroVideo: c.data.hero_video || '',
+    }))
+  : fallback;
 ---
+
 <BaseLayout title="Collaborations — Guss Damn Good">
   <Nav/>
 
-  <header class="clh reveal">
-    <div class="clh__left">
+  <header class="clh">
+    <div class="clh__left reveal">
       <p class="eyebrow" style="margin-bottom:1rem;">100+ Brand Partners</p>
       <h1 class="clh__title">Every collab<br/>tells a story.</h1>
     </div>
-    <div class="clh__right">
+    <div class="clh__right reveal">
       <p class="clh__body">From luxury fashion houses to local super brands — we craft feelings through ice cream for brands across every world.</p>
       <div class="clh__types">
-        {["Collab Flavors","OEM / ODM","Event Catering","Campaigns","Weddings"].map(t=><span class="clh__type">{t}</span>)}
+        {["Collab Flavors","OEM / ODM","Event Catering","Campaigns","Weddings"].map(t=>(
+          <span class="clh__type">{t}</span>
+        ))}
       </div>
       <a href="mailto:collab@gussdamngood.com" class="clh__cta">Start a collaboration ↗</a>
     </div>
   </header>
 
+  <!-- COLLABS GRID — 4 col -->
   <div class="clgrid">
-    {collabs.map((c,i)=>(
-      <a href={`/collabs/${c.slug}`} class={`clc clc-${i} reveal reveal-delay-${(i%3)+1}`}>
-        <img src={c.img} alt={c.name} class="clc__img" loading={i<2?'eager':'lazy'}/>
+    {collabs.map((c,i) => (
+      <a href={`/collabs/${c.slug}`} class={`clc clc-${i} reveal reveal-delay-${(i%4)+1}`}>
+        {c.heroVideo
+          ? <video src={c.heroVideo} autoplay muted loop playsinline class="clc__media"/>
+          : <img src={c.heroImage} alt={c.partnerName} class="clc__media" loading={i<4?'eager':'lazy'}/>
+        }
         <div class="clc__dim"/>
         <div class="clc__info">
-          <span class="clc__type">{c.type} · {c.year}</span>
-          <h2 class="clc__name">{c.name}</h2>
-          {c.flavor && <p class="clc__flavor">{c.flavor}</p>}
+          <span class="clc__type">{c.projectType} · {c.year}</span>
+          <h2 class="clc__name">{c.partnerName}</h2>
+          {c.flavorName && <p class="clc__flavor">{c.flavorName}</p>}
         </div>
       </a>
     ))}
   </div>
 
+  <!-- B2B BAND -->
   <section class="clband reveal">
     <div class="clband__text">
       <h2 class="clband__title">Let's craft something damn good together.</h2>
@@ -67,54 +90,53 @@ const collabs = [
 </BaseLayout>
 
 <style>
-  .clh { display:grid; grid-template-columns:1fr 1fr; min-height:55vh; border-bottom:1px solid var(--g2); }
+  /* HEADER */
+  .clh { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--g2); }
   .clh__left { padding:8rem var(--gutter) 4rem; border-right:1px solid var(--g2); display:flex; flex-direction:column; justify-content:flex-end; gap:1rem; }
-  .clh__title { font-size:clamp(2.5rem,7vw,6rem); font-weight:500; color:var(--white); letter-spacing:-0.02em; line-height:0.95; }
+  .clh__title { font-size:clamp(2.2rem,6vw,5.5rem); font-weight:500; color:#FFFFFF; letter-spacing:-0.02em; line-height:0.95; }
   .clh__right { padding:8rem var(--gutter) 4rem; display:flex; flex-direction:column; justify-content:flex-end; gap:1.5rem; }
-  .clh__body { font-family:var(--f); font-size:0.85rem; color:var(--g5); line-height:1.8; font-weight:300; max-width:380px; }
+  .clh__body { font-family:var(--f); font-size:0.9rem; color:#FFFFFF; line-height:1.85; font-weight:300; opacity:0.6; max-width:380px; }
   .clh__types { display:flex; gap:0.4rem; flex-wrap:wrap; }
   .clh__type { font-family:var(--f); font-size:0.5rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.25rem 0.65rem; border:1px solid var(--g2); color:var(--g4); font-weight:300; }
-  .clh__cta { font-family:var(--f); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--white); text-decoration:none; font-weight:400; border-bottom:1px solid var(--g3); padding-bottom:2px; align-self:flex-start; transition:border-color 0.22s; }
-  .clh__cta:hover { border-color:var(--white); }
+  .clh__cta { font-family:var(--f); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:#FFFFFF; text-decoration:none; font-weight:400; border-bottom:1px solid var(--g3); padding-bottom:2px; align-self:flex-start; transition:border-color 0.22s; }
+  .clh__cta:hover { border-color:#FFFFFF; }
 
-  .clgrid { display:grid; grid-template-columns:2fr 1fr 1fr; grid-template-rows:320px 200px; gap:var(--gap); background:var(--g2); border-bottom:1px solid var(--g2); }
-  .clc { position:relative; overflow:hidden; display:block; text-decoration:none; background:var(--g1); }
-  .clc-0 { grid-row:span 2; }
-  .clc-3 { grid-column:2/span 2; }
-  .clc__img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.55s ease; filter:grayscale(0.2); }
-  .clc:hover .clc__img { transform:scale(1.04); filter:grayscale(0); }
-  .clc__dim { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,transparent 55%); }
-  .clc__info { position:absolute; bottom:1.25rem; left:1.25rem; }
-  .clc__type { display:block; font-family:var(--f); font-size:0.48rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.38); margin-bottom:0.3rem; font-weight:300; }
-  .clc__name { font-family:var(--f); font-weight:500; font-size:clamp(1rem,2.5vw,1.9rem); color:var(--white); letter-spacing:-0.01em; }
-  .clc__flavor { font-family:var(--f); font-size:0.7rem; color:rgba(255,255,255,0.4); margin-top:0.2rem; font-weight:300; }
+  /* 4-COL GRID */
+  .clgrid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--gap); background:var(--g2); border-bottom:1px solid var(--g2); }
+  .clc { position:relative; overflow:hidden; display:block; text-decoration:none; background:var(--g1); aspect-ratio:3/4; }
+  .clc__media { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.55s ease; filter:grayscale(0.15); }
+  .clc:hover .clc__media { transform:scale(1.04); filter:grayscale(0); }
+  .clc__dim { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.1) 55%); }
+  .clc__info { position:absolute; bottom:1.25rem; left:1.25rem; right:1rem; }
+  .clc__type { display:block; font-family:var(--f); font-size:0.48rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:0.3rem; font-weight:300; }
+  .clc__name { font-family:var(--f); font-weight:500; font-size:clamp(1rem,2vw,1.6rem); color:#FFFFFF; letter-spacing:-0.01em; line-height:1.1; }
+  .clc__flavor { font-family:var(--f); font-size:0.7rem; color:rgba(255,255,255,0.45); margin-top:0.25rem; font-weight:300; }
 
+  /* B2B BAND */
   .clband { display:flex; align-items:center; justify-content:space-between; gap:3rem; padding:clamp(3rem,6vw,5rem) var(--gutter); border-bottom:1px solid var(--g2); flex-wrap:wrap; }
   .clband__text { max-width:480px; display:flex; flex-direction:column; gap:1rem; }
-  .clband__title { font-size:clamp(1.4rem,3vw,2.5rem); font-weight:400; color:var(--white); letter-spacing:-0.015em; line-height:1.15; }
-  .clband__body { font-family:var(--f); font-size:0.82rem; color:var(--g5); line-height:1.8; font-weight:300; }
+  .clband__title { font-size:clamp(1.4rem,3vw,2.5rem); font-weight:400; color:#FFFFFF; letter-spacing:-0.015em; line-height:1.15; }
+  .clband__body { font-family:var(--f); font-size:0.85rem; color:#FFFFFF; line-height:1.85; font-weight:300; opacity:0.55; }
   .clband__actions { display:flex; flex-direction:column; gap:0.75rem; flex-shrink:0; }
-  .clband__btn  { font-family:var(--f); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--black); background:var(--white); padding:0.7rem 1.6rem; text-decoration:none; font-weight:500; text-align:center; transition:opacity 0.22s; }
+  .clband__btn { font-family:var(--f); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:#000000; background:#FFFFFF; padding:0.75rem 1.75rem; text-decoration:none; font-weight:500; text-align:center; transition:opacity 0.22s; }
   .clband__btn:hover { opacity:0.85; }
-  .clband__link { font-family:var(--f); font-size:0.52rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--g4); border:1px solid var(--g2); padding:0.7rem 1.6rem; text-decoration:none; text-align:center; font-weight:300; transition:all 0.22s; }
-  .clband__link:hover { border-color:var(--white); color:var(--white); }
+  .clband__link { font-family:var(--f); font-size:0.52rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--g4); border:1px solid var(--g2); padding:0.75rem 1.75rem; text-decoration:none; text-align:center; font-weight:300; transition:all 0.22s; }
+  .clband__link:hover { border-color:#FFFFFF; color:#FFFFFF; }
 
-  .foot { padding:2.5rem var(--gutter); display:flex; flex-direction:column; gap:1.25rem; border-top:1px solid var(--g2); }
+  /* FOOTER */
+  .foot { padding:2rem var(--gutter); display:flex; flex-direction:column; gap:1rem; border-top:1px solid var(--g2); }
   .foot__top { display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap; padding-bottom:1.25rem; border-bottom:1px solid var(--g2); }
-  .foot__brand { font-family:var(--f); font-weight:600; font-size:clamp(1rem,1.8vw,1.6rem); color:var(--white); letter-spacing:0.06em; text-transform:uppercase; }
-  .foot__nav   { display:flex; gap:2rem; }
-  .foot__nav a { font-family:var(--f); font-size:0.5rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--g4); text-decoration:none; font-weight:300; transition:color 0.22s; }
-  .foot__nav a:hover { color:var(--white); }
-  .foot__copy  { font-family:var(--f); font-size:0.46rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--g2); }
+  .foot__brand { font-family:var(--f); font-weight:600; font-size:1.1rem; color:#FFFFFF; letter-spacing:0.06em; text-transform:uppercase; }
+  .foot__nav { display:flex; gap:2rem; }
+  .foot__nav a { font-family:var(--f); font-size:0.5rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--g4); text-decoration:none; transition:color 0.22s; }
+  .foot__nav a:hover { color:#FFFFFF; }
+  .foot__copy { font-family:var(--f); font-size:0.46rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--g2); }
 
-  @media(max-width:768px){
-    .clh { grid-template-columns:1fr; min-height:auto; }
-    .clh__left { border-right:none; border-bottom:1px solid var(--g2); }
-    .clgrid { grid-template-columns:1fr 1fr; grid-template-rows:auto; }
-    .clc-0 { grid-row:auto; grid-column:span 2; aspect-ratio:16/9; }
-    .clc-3 { grid-column:span 2; }
+  @media(max-width:900px){
+    .clh { grid-template-columns:1fr; }
+    .clh__left { border-right:none; border-bottom:1px solid var(--g2); padding-top:6rem; }
+    .clgrid { grid-template-columns:repeat(2,1fr); }
     .clband { flex-direction:column; align-items:flex-start; }
-    .clband__actions { width:100%; }
-    .clband__btn,.clband__link { text-align:center; }
   }
+  @media(max-width:480px){ .clgrid { grid-template-columns:repeat(2,1fr); } }
 </style>
