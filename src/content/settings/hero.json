@@ -1,15 +1,16 @@
 {
-  "media_type": "photos",
-  "video_url": "",
+  "cta_url": "/flavors",
   "photos": [
-    "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=1600&q=80",
-    "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=1600&q=80",
-    "https://images.unsplash.com/photo-1505394033641-40b6ad5ef923?w=1600&q=80"
+    "https://res.cloudinary.com/dynjnftnu/image/upload/v1775796585/20251121-IMG_2148_Large_hx1oov.jpg",
+    "https://res.cloudinary.com/dynjnftnu/image/upload/v1775796559/CSF_OVM-55_Large_hize2y.jpg",
+    "https://res.cloudinary.com/dynjnftnu/image/upload/v1775796557/CSF_OVM-3_Large_hcnpke.jpg",
+    "https://res.cloudinary.com/dynjnftnu/image/upload/v1775796584/gro2025-3_Large_dcug2d.jpg"
   ],
-  "active_photo": 0,
-  "headline1": "DAMN GOOD",
-  "headline2": "ICE CREAM",
+  "video_url": "",
   "subline": "200+ flavors · 18 branches · Boston 2014 · Bangkok Now",
+  "media_type": "photos",
+  "active_photo": 0,
   "cta_text": "Explore Flavors",
-  "cta_url": "/flavors"
+  "headline1": "DAMN GOOD",
+  "headline2": "ICE CREAM"
 }
