@@ -3,17 +3,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
 import FlavorCard from '../components/FlavorCard.astro';
-
+import { getCollection } from 'astro:content';
 import heroData from '../content/settings/hero.json';
 
-const flavors = [
-  { flavorName:"Breakfast Fresh Milk", moodNumber:"Mood #01", productImage:"https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&q=80", category:"classic", inStock:true, pinned:true },
-  { flavorName:"Very Addicted Crispy Corn", moodNumber:"Mood #07", productImage:"https://images.unsplash.com/photo-1488900128323-21503983a07e?w=600&q=80", category:"classic", inStock:true, pinned:true },
-  { flavorName:"S'more Crunch", moodNumber:"Mood #14", productImage:"https://images.unsplash.com/photo-1534706936160-d5ee67737249?w=600&q=80", category:"classic", inStock:true, pinned:false },
-  { flavorName:"Papaya × RIMOWA", moodNumber:"Collab", productImage:"https://images.unsplash.com/photo-1560008581-09826d1de69e?w=600&q=80", category:"collab", inStock:false, pinned:false },
-  { flavorName:"Black Sesame", moodNumber:"Mood #33", productImage:"https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=600&q=80", category:"classic", inStock:true, pinned:false },
-  { flavorName:"Mango Sticky Rice", moodNumber:"Mood #42", productImage:"https://images.unsplash.com/photo-1505394033641-40b6ad5ef923?w=600&q=80", category:"seasonal", inStock:true, pinned:false },
-];
+const allFlavors = await getCollection('flavors').catch(() => []);
+
+const pinnedFlavors = allFlavors
+  .filter(f => f.data.pinned && f.data.status !== 'archive')
+  .slice(0, 2);
+
+const regularFlavors = allFlavors
+  .filter(f => !f.data.pinned && f.data.status === 'current')
+  .slice(0, 6);
+
+const displayFlavors = [...pinnedFlavors, ...regularFlavors].slice(0, 6);
 
 const collabs = [
   { name:"RIMOWA", type:"Collab Flavor", img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80", slug:"rimowa" },
@@ -54,18 +57,29 @@ const collabs = [
     </div>
   </section>
 
-  <!-- FLAVORS 3-COL -->
+  <!-- FLAVORS — dynamic from CMS -->
   <section class="flavors">
     <div class="flavors__head reveal">
       <h2 class="flavors__title">The Flavors</h2>
-      <a href="/flavors" class="flavors__link">View all 200+ →</a>
+      <a href="/flavors" class="flavors__link">View all →</a>
     </div>
     <div class="fg3">
-      {flavors.map((f, i) => (
-        <div class={`reveal reveal-delay-${(i % 3) + 1}`}>
-          <FlavorCard {...f}/>
-        </div>
-      ))}
+      {displayFlavors.length > 0
+        ? displayFlavors.map((f, i) => (
+            <div class={`reveal reveal-delay-${(i % 3) + 1}`}>
+              <FlavorCard
+                flavorName={f.data.flavor_name}
+                moodNumber={f.data.mood_number}
+                productImage={f.data.product_image}
+                productVideo={f.data.product_video}
+                category={f.data.category}
+                inStock={f.data.in_stock}
+                pinned={f.data.pinned}
+              />
+            </div>
+          ))
+        : <p style="color:var(--g5);padding:2rem;font-size:0.8rem;">No flavors yet — add some in the CMS.</p>
+      }
     </div>
   </section>
 
@@ -94,7 +108,7 @@ const collabs = [
 
   <!-- STATS -->
   <section class="stats reveal">
-    <div class="stat"><span class="stat__n">200<em>+</em></span><span class="eyebrow">Flavors</span></div>
+    <div class="stat"><span class="stat__n">{allFlavors.length > 0 ? `${allFlavors.length}+` : '200+'}</span><span class="eyebrow">Flavors</span></div>
     <div class="stat"><span class="stat__n">18</span><span class="eyebrow">Branches</span></div>
     <div class="stat"><span class="stat__n">100<em>+</em></span><span class="eyebrow">Brand Partners</span></div>
     <div class="stat"><span class="stat__n">10<em>+</em></span><span class="eyebrow">Years</span></div>
@@ -122,7 +136,7 @@ const collabs = [
 <style>
   .about { display:grid; grid-template-columns:1fr 1.4fr; border-bottom:1px solid var(--g2); }
   .about__left { padding:clamp(2.5rem,5vw,4.5rem) var(--gutter); border-right:1px solid var(--g2); display:flex; flex-direction:column; justify-content:space-between; gap:1.5rem; }
-  .about__h { font-size:clamp(1.5rem,3vw,2.6rem); font-weight:400; color:#FFFFFF; line-height:1.1; letter-spacing:-0.01em; }
+  .about__h { font-size:clamp(1.5rem,3vw,2.6rem); font-weight:400; color:#FFFFFF; line-height:1.1; }
   .about__tagline { font-family:var(--f); font-size:0.55rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--g4); font-weight:300; }
   .about__right { padding:clamp(2.5rem,5vw,4.5rem) var(--gutter); display:flex; flex-direction:column; justify-content:space-between; gap:2rem; }
   .about__p { font-family:var(--f); font-size:0.85rem; color:var(--g5); line-height:1.9; font-weight:300; max-width:480px; }
@@ -136,7 +150,6 @@ const collabs = [
   .flavors__title { font-size:clamp(1.2rem,2.5vw,1.9rem); font-weight:500; color:#FFFFFF; letter-spacing:-0.01em; }
   .flavors__link { font-family:var(--f); font-size:0.55rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--g4); text-decoration:none; font-weight:300; transition:color 0.22s; }
   .flavors__link:hover { color:#FFFFFF; }
-
   .fg3 { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap); background:var(--g2); }
   .fg3 .fc__img { aspect-ratio:1/1; }
 
@@ -155,7 +168,7 @@ const collabs = [
   .cg__name { font-family:var(--f); font-weight:500; font-size:clamp(0.9rem,2.2vw,1.5rem); color:#FFFFFF; letter-spacing:-0.01em; }
 
   .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--gap); background:var(--g2); border-bottom:1px solid var(--g2); }
-  .stat { background:#000000; padding:2.5rem var(--gutter); display:flex; flex-direction:column; gap:0.5rem; }
+  .stat { background:#000; padding:2.5rem var(--gutter); display:flex; flex-direction:column; gap:0.5rem; }
   .stat__n { font-family:var(--f); font-weight:400; font-size:clamp(1.8rem,3.5vw,2.8rem); color:#FFFFFF; line-height:1; letter-spacing:-0.02em; }
   .stat__n em { color:var(--g3); font-style:normal; }
 

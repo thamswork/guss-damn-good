@@ -6,7 +6,6 @@ backend:
   auth_endpoint: api/auth
 
 media_folder: public/images
-publish_mode: editorial_workflow
 public_folder: /images
 
 collections:
@@ -19,8 +18,8 @@ collections:
     fields:
       - { label: "Flavor Name", name: flavor_name, widget: string }
       - { label: "Mood / Number", name: mood_number, widget: string, required: false }
-      - { label: "Product Image URL", name: product_image, widget: string }
-      - { label: "Product Video URL", name: product_video, widget: string, required: false }
+      - { label: "Product Image URL", name: product_image, widget: string, hint: "Paste image URL from Cloudinary or any host" }
+      - { label: "Product Video URL", name: product_video, widget: string, required: false, hint: "Optional mp4/webm URL" }
       - { label: "Description", name: description, widget: text }
       - label: "Category"
         name: category
@@ -108,7 +107,7 @@ collections:
       - { label: "Address", name: address, widget: text }
       - { label: "Hours", name: hours, widget: string }
       - { label: "Google Maps URL", name: maps, widget: string }
-      - { label: "Storefront Thumbnail URL", name: thumb, widget: string }
+      - { label: "Storefront Thumbnail URL", name: thumb, widget: string, hint: "Paste storefront photo URL" }
       - { label: "Delivery Available", name: delivery, widget: boolean, default: false }
       - label: "Formats"
         name: formats
@@ -144,21 +143,15 @@ collections:
             name: video_url
             widget: string
             required: false
-            hint: "Paste an mp4 video URL (from Cloudinary or direct link). Only used when Media Type is set to Video."
+            hint: "Paste mp4 video URL. Used when Media Type is Video."
           - label: "Hero Photos"
             name: photos
             widget: list
-            hint: "Add multiple photo URLs. Each will be a slide. Drag to reorder."
+            hint: "Paste photo URLs. Each becomes a slide. Add as many as you want."
             field:
               label: "Photo URL"
               name: url
               widget: string
-              hint: "Upload to Cloudinary and paste URL here"
-          - label: "Active Photo Index"
-            name: active_photo
-            widget: number
-            default: 0
-            hint: "Which photo to show first (0 = first photo, 1 = second, etc.)"
           - label: "Hero Headline Line 1"
             name: headline1
             widget: string
