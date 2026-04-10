@@ -6,6 +6,7 @@ backend:
   auth_endpoint: api/auth
 
 media_folder: public/images
+publish_mode: editorial_workflow
 public_folder: /images
 
 collections:
