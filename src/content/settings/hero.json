@@ -1,0 +1,15 @@
+{
+  "media_type": "photos",
+  "video_url": "",
+  "photos": [
+    "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=1600&q=80",
+    "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=1600&q=80",
+    "https://images.unsplash.com/photo-1505394033641-40b6ad5ef923?w=1600&q=80"
+  ],
+  "active_photo": 0,
+  "headline1": "DAMN GOOD",
+  "headline2": "ICE CREAM",
+  "subline": "200+ flavors · 18 branches · Boston 2014 · Bangkok Now",
+  "cta_text": "Explore Flavors",
+  "cta_url": "/flavors"
+}

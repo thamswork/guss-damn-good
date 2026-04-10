@@ -1,31 +1,46 @@
 ---
 const {
-  videoUrl = "",
-  slides   = [],
-  line1    = "DAMN GOOD",
-  line2    = "ICE CREAM",
-  subline  = "200+ flavors · 18 branches · Boston 2014 · Bangkok Now",
-  ctaText  = "Explore Flavors",
-  ctaUrl   = "/flavors",
+  mediaType  = "photos",
+  videoUrl   = "",
+  photos     = [],
+  activePhoto = 0,
+  line1      = "DAMN GOOD",
+  line2      = "ICE CREAM",
+  subline    = "200+ flavors · 18 branches · Boston 2014 · Bangkok Now",
+  ctaText    = "Explore Flavors",
+  ctaUrl     = "/flavors",
 } = Astro.props;
-const hasVideo  = videoUrl?.length > 0;
-const hasSlides = slides?.length > 0;
+
+const hasVideo  = mediaType === "video" && videoUrl?.length > 0;
+const hasPhotos = photos?.length > 0;
+const slides    = hasPhotos ? photos : [];
 ---
 
 <section class="hero">
   <div class="hero__bg">
-    {hasVideo
-      ? <video class="hero__fill" src={videoUrl} autoplay muted loop playsinline/>
-      : hasSlides
-        ? <div id="hslides" style="position:absolute;inset:0;">
-            {slides.map((s, i) => (
-              s.match(/\.(mp4|webm|ogg)$/i)
-                ? <video class={`hs${i === 0 ? ' ha' : ''}`} src={s} autoplay muted loop playsinline/>
-                : <div class={`hs${i === 0 ? ' ha' : ''}`} style={`background-image:url('${s}')`}/>
-            ))}
-          </div>
-        : <div class="hero__fill" style="background:var(--g1);"/>
-    }
+
+    {hasVideo ? (
+      <video
+        class="hero__fill"
+        src={videoUrl}
+        autoplay
+        muted
+        loop
+        playsinline
+      />
+    ) : slides.length > 0 ? (
+      <div id="hslides" style="position:absolute;inset:0;">
+        {slides.map((s, i) => (
+          <div
+            class={`hs${i === activePhoto ? ' ha' : ''}`}
+            style={`background-image:url('${s}')`}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="hero__fill" style="background:var(--g1);"/>
+    )}
+
     <div class="hero__vignette"/>
   </div>
 
@@ -40,9 +55,11 @@ const hasSlides = slides?.length > 0;
     </div>
   </div>
 
-  {hasSlides && slides.length > 1 && (
-    <div class="hdots" id="hdots">
-      {slides.map((_, i) => <button class={`hd${i === 0 ? ' hda' : ''}`} data-i={i}/>)}
+  {slides.length > 1 && (
+    <div class="hdots">
+      {slides.map((_, i) => (
+        <button class={`hd${i === activePhoto ? ' hda' : ''}`} data-i={i}/>
+      ))}
     </div>
   )}
 </section>
@@ -51,37 +68,52 @@ const hasSlides = slides?.length > 0;
   .hero { position:relative; height:100svh; min-height:600px; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; }
   .hero__bg { position:absolute; inset:0; }
   .hero__fill { width:100%; height:100%; object-fit:cover; display:block; }
+
   .hs { position:absolute; inset:0; background-size:cover; background-position:center; opacity:0; transition:opacity 1.2s ease; }
   .ha { opacity:1; }
-  .hero__vignette { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.97) 0%,rgba(0,0,0,0.38) 40%,rgba(0,0,0,0.05) 100%); }
+
+  .hero__vignette { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.38) 42%, rgba(0,0,0,0.08) 100%); }
 
   .hero__content { position:relative; z-index:10; padding:0 var(--gutter) 2.5rem; display:flex; flex-direction:column; gap:1.5rem; }
-  .hero__type { display:flex; flex-direction:column; line-height:0.94; }
-  .hl { display:block; font-family:var(--f); font-weight:300; font-size:clamp(4rem,13vw,11.5rem); color:var(--white); letter-spacing:0.06em; text-transform:uppercase; opacity:0; animation:fadeUp 0.75s ease forwards; }
-  .hl1 { animation-delay:3s; }
-  .hl2 { animation-delay:3.15s; font-weight:600; }
 
-  .hero__bottom { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; opacity:0; animation:fadeUp 0.6s ease 3.35s forwards; padding-top:1.25rem; border-top:1px solid rgba(255,255,255,0.07); }
-  .hero__sub { font-family:var(--f); font-size:0.58rem; letter-spacing:0.24em; text-transform:uppercase; color:rgba(255,255,255,0.3); font-weight:300; }
-  .hero__cta { font-family:var(--f); font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--white); text-decoration:none; border:1px solid rgba(255,255,255,0.18); padding:0.58rem 1.35rem; transition:background 0.22s ease, color 0.22s ease; font-weight:400; }
-  .hero__cta:hover { background:var(--white); color:var(--black); }
+  .hero__type { display:flex; flex-direction:column; line-height:0.92; }
+
+  .hl { display:block; color:#FFFFFF; letter-spacing:-0.02em; opacity:0; animation:fadeUp 0.7s ease forwards; }
+  .hl1 { font-family:var(--f); font-weight:300; font-size:clamp(3.5rem,11vw,10rem); text-transform:uppercase; animation-delay:3s; letter-spacing:0.05em; }
+  .hl2 { font-family:var(--f); font-weight:600; font-size:clamp(3.5rem,11vw,10rem); text-transform:uppercase; animation-delay:3.15s; letter-spacing:0.05em; }
+
+  .hero__bottom { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; opacity:0; animation:fadeUp 0.6s ease 3.35s forwards; padding-top:1.25rem; border-top:1px solid rgba(255,255,255,0.08); }
+
+  .hero__sub { font-family:var(--f); font-size:0.58rem; letter-spacing:0.24em; text-transform:uppercase; color:rgba(255,255,255,0.4); font-weight:300; }
+
+  .hero__cta { font-family:var(--f); font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:#FFFFFF; text-decoration:none; border:1px solid rgba(255,255,255,0.2); padding:0.6rem 1.4rem; transition:background 0.22s ease, color 0.22s ease; font-weight:400; }
+  .hero__cta:hover { background:#FFFFFF; color:#000000; }
 
   .hdots { position:absolute; bottom:2.5rem; right:var(--gutter); display:flex; gap:5px; z-index:10; }
-  .hd { width:4px; height:4px; border-radius:50%; background:rgba(255,255,255,0.18); border:none; cursor:pointer; padding:0; transition:all 0.3s ease; }
-  .hda { background:var(--white); width:16px; border-radius:2px; }
+  .hd { width:4px; height:4px; border-radius:50%; background:rgba(255,255,255,0.2); border:none; cursor:pointer; padding:0; transition:all 0.3s ease; }
+  .hda { background:#FFFFFF; width:16px; border-radius:2px; }
 </style>
 
 <script>
   var slides = document.querySelectorAll('.hs');
   var dots   = document.querySelectorAll('.hd');
   if (slides.length > 1) {
-    var cur = 0;
+    var cur = parseInt(document.querySelector('.ha')?.dataset?.i || '0');
     function go(n) {
-      slides[cur].classList.remove('ha'); dots[cur] && dots[cur].classList.remove('hda');
+      slides[cur].classList.remove('ha');
+      dots[cur] && dots[cur].classList.remove('hda');
       cur = (n + slides.length) % slides.length;
-      slides[cur].classList.add('ha'); dots[cur] && dots[cur].classList.add('hda');
+      slides[cur].classList.add('ha');
+      dots[cur] && dots[cur].classList.add('hda');
     }
     var t = setInterval(function(){ go(cur + 1); }, 6000);
-    dots.forEach(function(d, i){ d.addEventListener('click', function(){ clearInterval(t); go(i); t = setInterval(function(){ go(cur+1); }, 6000); }); });
+    dots.forEach(function(d, i){
+      d.dataset.i = i;
+      d.addEventListener('click', function(){
+        clearInterval(t);
+        go(i);
+        t = setInterval(function(){ go(cur + 1); }, 6000);
+      });
+    });
   }
 </script>

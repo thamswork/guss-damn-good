@@ -125,3 +125,57 @@ collections:
           - { label: "Tagline", name: tagline, widget: string }
           - { label: "SEO Description", name: meta_description, widget: text }
           - { label: "Contact Email", name: contact_email, widget: string }
+
+  - name: homepage
+    label: "Homepage Settings"
+    files:
+      - name: hero
+        label: "Hero Section"
+        file: src/content/settings/hero.json
+        fields:
+          - label: "Hero Media Type"
+            name: media_type
+            widget: select
+            options:
+              - { label: "Photo Slideshow", value: "photos" }
+              - { label: "Video Background", value: "video" }
+            default: "photos"
+          - label: "Hero Video URL"
+            name: video_url
+            widget: string
+            required: false
+            hint: "Paste an mp4 video URL (from Cloudinary or direct link). Only used when Media Type is set to Video."
+          - label: "Hero Photos"
+            name: photos
+            widget: list
+            hint: "Add multiple photo URLs. Each will be a slide. Drag to reorder."
+            field:
+              label: "Photo URL"
+              name: url
+              widget: string
+              hint: "Upload to Cloudinary and paste URL here"
+          - label: "Active Photo Index"
+            name: active_photo
+            widget: number
+            default: 0
+            hint: "Which photo to show first (0 = first photo, 1 = second, etc.)"
+          - label: "Hero Headline Line 1"
+            name: headline1
+            widget: string
+            default: "DAMN GOOD"
+          - label: "Hero Headline Line 2"
+            name: headline2
+            widget: string
+            default: "ICE CREAM"
+          - label: "Hero Subline"
+            name: subline
+            widget: string
+            default: "200+ flavors · 18 branches · Boston 2014 · Bangkok Now"
+          - label: "CTA Button Text"
+            name: cta_text
+            widget: string
+            default: "Explore Flavors"
+          - label: "CTA Button URL"
+            name: cta_url
+            widget: string
+            default: "/flavors"
