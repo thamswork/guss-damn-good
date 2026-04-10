@@ -7,11 +7,13 @@ const {
   category     = "classic",
   inStock      = true,
   pinned       = false,
+  description  = "",
 } = Astro.props;
 const hasVideo = productVideo?.length > 0;
+const id = `fc-${Math.random().toString(36).slice(2,7)}`;
 ---
 
-<article class={`fc${!inStock ? ' fc-out' : ''}${pinned ? ' fc-pin' : ''}`}>
+<article class={`fc${!inStock ? ' fc-out' : ''}${pinned ? ' fc-pin' : ''}`} data-id={id} tabindex="0">
   <div class="fc__img">
     {hasVideo
       ? <video src={productVideo} autoplay muted loop playsinline class="fc__fill"/>
@@ -30,26 +32,103 @@ const hasVideo = productVideo?.length > 0;
   </div>
 </article>
 
+<!-- POPUP MODAL -->
+<div class="fcm" id={id} role="dialog" aria-modal="true" aria-label={flavorName}>
+  <div class="fcm__backdrop"/>
+  <div class="fcm__box">
+    <button class="fcm__close" aria-label="Close">✕</button>
+    <div class="fcm__media">
+      {hasVideo
+        ? <video src={productVideo} autoplay muted loop playsinline class="fcm__fill"/>
+        : productImage
+          ? <img src={productImage} alt={flavorName} class="fcm__fill"/>
+          : <div class="fcm__fill fcm__ph">🍦</div>
+      }
+    </div>
+    <div class="fcm__info">
+      {moodNumber && <span class="fcm__num">{moodNumber}</span>}
+      <h2 class="fcm__name">{flavorName}</h2>
+      <span class="fcm__cat">{category}</span>
+      {description && <p class="fcm__desc">{description}</p>}
+      <div class="fcm__meta">
+        <span class={`fcm__stock${inStock ? ' fcm__stock--in' : ''}`}>
+          {inStock ? 'Available now' : 'Archive'}
+        </span>
+        {pinned && <span class="fcm__pinned">Signature Flavor</span>}
+      </div>
+    </div>
+  </div>
+</div>
+
 <style>
+  /* CARD */
   .fc { background:var(--g1); cursor:pointer; position:relative; display:flex; flex-direction:column; transition:background 0.22s ease; }
   .fc:hover { background:#101010; }
+  .fc:focus { outline:1px solid var(--g3); }
   .fc-out { filter:grayscale(0.65); opacity:0.55; }
   .fc-pin { outline:1px solid rgba(255,255,255,0.1); }
 
-  .fc__img { position:relative; overflow:hidden; background:#080808; }
+  .fc__img { position:relative; overflow:hidden; background:#080808; aspect-ratio:1/1; }
   .fc__fill { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.55s ease; }
   .fc:hover .fc__fill { transform:scale(1.05); }
   .fc__ph { display:flex; align-items:center; justify-content:center; font-size:2.5rem; }
 
   .fc__badge { position:absolute; font-family:var(--f); font-size:0.48rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.18rem 0.52rem; font-weight:400; }
-  .fc__badge--pin { top:0.65rem; left:0.65rem; background:var(--white); color:var(--black); }
+  .fc__badge--pin { top:0.65rem; left:0.65rem; background:#FFFFFF; color:#000000; }
   .fc__badge--out { top:0.65rem; right:0.65rem; background:rgba(0,0,0,0.82); color:var(--g5); border:1px solid var(--g3); }
 
-  .fc__bar { position:absolute; bottom:0; left:0; height:1px; width:0; background:var(--white); transition:width 0.4s ease; }
+  .fc__bar { position:absolute; bottom:0; left:0; height:1px; width:0; background:#FFFFFF; transition:width 0.4s ease; }
   .fc:hover .fc__bar { width:100%; }
 
   .fc__body { padding:0.8rem 0.9rem 1rem; display:flex; flex-direction:column; gap:0.2rem; }
   .fc__num  { font-family:var(--f); font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--g4); font-weight:400; }
-  .fc__name { font-family:var(--f); font-weight:500; font-size:clamp(0.85rem,1.4vw,1.1rem); color:var(--white); letter-spacing:-0.01em; line-height:1.15; }
+  .fc__name { font-family:var(--f); font-weight:500; font-size:clamp(0.85rem,1.4vw,1.1rem); color:#FFFFFF; letter-spacing:-0.01em; line-height:1.15; }
   .fc__cat  { font-family:var(--f); font-size:0.48rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--g3); font-weight:300; }
+
+  /* MODAL */
+  .fcm { position:fixed; inset:0; z-index:8000; display:flex; align-items:center; justify-content:center; opacity:0; visibility:hidden; pointer-events:none; transition:opacity 0.3s ease, visibility 0.3s ease; padding:1rem; }
+  .fcm.open { opacity:1; visibility:visible; pointer-events:all; }
+  .fcm__backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.88); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); cursor:pointer; }
+  .fcm__box { position:relative; z-index:1; background:var(--g1); display:grid; grid-template-columns:1fr 1fr; max-width:720px; width:100%; max-height:90vh; overflow:hidden; border:1px solid var(--g2); }
+  .fcm__close { position:absolute; top:0.75rem; right:0.75rem; background:rgba(0,0,0,0.6); border:1px solid var(--g3); color:var(--g5); width:28px; height:28px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.65rem; font-family:var(--f); transition:all 0.2s; z-index:2; }
+  .fcm__close:hover { background:#FFFFFF; color:#000000; }
+  .fcm__media { overflow:hidden; aspect-ratio:1/1; }
+  .fcm__fill { width:100%; height:100%; object-fit:cover; display:block; }
+  .fcm__ph { display:flex; align-items:center; justify-content:center; font-size:4rem; background:var(--g2); }
+  .fcm__info { padding:2rem 1.5rem; display:flex; flex-direction:column; gap:0.75rem; justify-content:center; overflow-y:auto; }
+  .fcm__num  { font-family:var(--f); font-size:0.52rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--g4); font-weight:400; }
+  .fcm__name { font-family:var(--f); font-weight:500; font-size:clamp(1.2rem,2.5vw,1.8rem); color:#FFFFFF; letter-spacing:-0.01em; line-height:1.1; }
+  .fcm__cat  { font-family:var(--f); font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--g4); font-weight:300; }
+  .fcm__desc { font-family:var(--f); font-size:0.85rem; color:var(--g5); line-height:1.8; font-weight:300; margin-top:0.5rem; }
+  .fcm__meta { display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:0.5rem; padding-top:1rem; border-top:1px solid var(--g2); }
+  .fcm__stock { font-family:var(--f); font-size:0.5rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--g4); font-weight:300; }
+  .fcm__stock--in { color:#FFFFFF; }
+  .fcm__pinned { font-family:var(--f); font-size:0.5rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--g4); font-weight:300; border-left:1px solid var(--g3); padding-left:0.75rem; }
+
+  @media(max-width:560px){
+    .fcm__box { grid-template-columns:1fr; max-height:85vh; overflow-y:auto; }
+    .fcm__media { aspect-ratio:4/3; }
+  }
 </style>
+
+<script define:vars={{ id }}>
+  var card    = document.querySelector(`[data-id="${id}"]`);
+  var modal   = document.getElementById(id);
+  var backdrop = modal?.querySelector('.fcm__backdrop');
+  var closeBtn = modal?.querySelector('.fcm__close');
+
+  function openModal() {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  card?.addEventListener('click', openModal);
+  card?.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' ') openModal(); });
+  backdrop?.addEventListener('click', closeModal);
+  closeBtn?.addEventListener('click', closeModal);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+</script>
