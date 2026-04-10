@@ -1,124 +1,95 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  const collabs = [
-    {
-      slug:"rimowa",
-      partnerName:"RIMOWA",
-      heroImage:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80",
-      heroVideo:"",
-      projectType:"Collab Flavor",
-      year:2023,
-      flavorName:"Papaya Sorbet & Mint Cookie Chip",
-      intro:"When RIMOWA approached us to craft an exclusive flavor for their Bangkok flagship launch, we knew this wasn't just about ice cream. It was about crafting a feeling that matched the precision and elegance of their legendary aluminum cases.",
-      challenge:"RIMOWA wanted something global yet tropical — a flavor that spoke to the traveler who is always moving, always arriving somewhere new.",
-      process:"We spent three weeks in the kitchen. The answer came from a Bangkok street market at 7am: papaya at peak ripeness, morning air mixing with the fruit's warmth. Papaya Sorbet & Mint Cookie Chip was born.",
-      result:"Served exclusively at the RIMOWA Bangkok flagship opening. 400 scoops in 2 hours. Zero left over.",
-      workStationImages:[
-        "https://images.unsplash.com/photo-1556909172-8c2f041fca1e?w=800&q=70",
-        "https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=800&q=70",
-        "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=800&q=70",
-        "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?w=800&q=70",
-      ],
-      workStationVideo:"",
-    },
-    {
-      slug:"valentino",
-      partnerName:"Valentino",
-      heroImage:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&q=80",
-      heroVideo:"",
-      projectType:"Collab Flavor",
-      year:2023,
-      flavorName:"Greek Yogurt Lemon & Black Sesame",
-      intro:"A study in contrast. The softness of Greek yogurt against the depth of black sesame. The brightness of lemon against the darkness of a Valentino evening.",
-      challenge:"Valentino's creative direction was simple: tension. Light and dark. Past and future. East and West.",
-      process:"Greek Yogurt Lemon carries the lightness of Mediterranean afternoons. Black Sesame carries the quiet weight of Asian heritage. Together they are something neither could be alone.",
-      result:"Launched at Valentino SS23 Bangkok preview. Featured in Vogue Thailand.",
-      workStationImages:[
-        "https://images.unsplash.com/photo-1556909172-8c2f041fca1e?w=800&q=70",
-        "https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=800&q=70",
-        "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?w=800&q=70",
-        "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=800&q=70",
-      ],
-      workStationVideo:"",
-    },
-  ];
-  return collabs.map(c=>({ params:{slug:c.slug}, props:{collab:c} }));
+  const collabs = await getCollection('collabs').catch(() => []);
+  return collabs.map(c => ({
+    params: { slug: c.id },
+    props: { collab: c.data, id: c.id },
+  }));
 }
 
-const { collab } = Astro.props;
+const { collab, id } = Astro.props;
 ---
 
-<BaseLayout title={`${collab.partnerName} × Guss Damn Good`}>
+<BaseLayout title={`${collab.partner_name} × Guss Damn Good`}>
   <Nav/>
 
-  <!-- HERO — supports video or image -->
-  <div class="ch">
-    {collab.heroVideo
-      ? <video class="ch__media" src={collab.heroVideo} autoplay muted loop playsinline/>
-      : <img class="ch__media" src={collab.heroImage} alt={collab.partnerName}/>
+  <!-- HERO -->
+  <div class="ch" style="margin-top:var(--nav-h);">
+    {collab.hero_video
+      ? <video class="ch__media" src={collab.hero_video} autoplay muted loop playsinline/>
+      : collab.hero_image
+        ? <img class="ch__media" src={collab.hero_image} alt={collab.partner_name}/>
+        : <div class="ch__media ch__ph"/>
     }
     <div class="ch__dim"/>
     <div class="ch__meta">
-      <span class="eyebrow">{collab.projectType} · {collab.year}</span>
-      <h1 class="ch__title">{collab.partnerName} × Guss</h1>
-      {collab.flavorName && <p class="ch__flavor">{collab.flavorName}</p>}
+      <span class="eyebrow">{collab.project_type?.replace(/_/g,' ')} · {collab.year}</span>
+      <h1 class="ch__title">{collab.partner_name} × Guss</h1>
+      {collab.flavor_name && <p class="ch__flavor">{collab.flavor_name}</p>}
     </div>
   </div>
 
-  <!-- CASE STUDY BODY -->
+  <!-- CASE STUDY -->
   <div class="cs">
     <div class="cs__main">
-
-      <!-- INTRO -->
-      <section class="cs__section">
-        <p class="eyebrow" style="margin-bottom:1rem;">The Collaboration</p>
-        <p class="cs__body cs__body--large">{collab.intro}</p>
-      </section>
-
-      <!-- CHALLENGE + PROCESS side by side -->
-      <section class="cs__two">
-        <div>
-          <p class="eyebrow" style="margin-bottom:1rem;">The Brief</p>
-          <p class="cs__body">{collab.challenge}</p>
-        </div>
-        <div>
-          <p class="eyebrow" style="margin-bottom:1rem;">Story-to-Flavor</p>
-          <p class="cs__body">{collab.process}</p>
-        </div>
-      </section>
-
-      <!-- RESULT -->
-      <section class="cs__section cs__result">
-        <p class="eyebrow" style="margin-bottom:1rem;">The Result</p>
-        <p class="cs__body cs__body--large">{collab.result}</p>
-      </section>
-
+      {collab.intro && (
+        <section class="cs__sec">
+          <p class="eyebrow" style="margin-bottom:0.75rem;">The Collaboration</p>
+          <p class="cs__lead">{collab.intro}</p>
+        </section>
+      )}
+      {(collab.challenge || collab.process) && (
+        <section class="cs__two">
+          {collab.challenge && (
+            <div>
+              <p class="eyebrow" style="margin-bottom:0.75rem;">The Brief</p>
+              <p class="cs__body">{collab.challenge}</p>
+            </div>
+          )}
+          {collab.process && (
+            <div>
+              <p class="eyebrow" style="margin-bottom:0.75rem;">Story-to-Flavor</p>
+              <p class="cs__body">{collab.process}</p>
+            </div>
+          )}
+        </section>
+      )}
+      {collab.result && (
+        <section class="cs__sec cs__result">
+          <p class="eyebrow" style="margin-bottom:0.75rem;">The Result</p>
+          <p class="cs__lead">{collab.result}</p>
+        </section>
+      )}
     </div>
 
-    <!-- SIDEBAR -->
     <aside class="cs__side">
       <div class="cs__card">
-        <p class="eyebrow" style="margin-bottom:0.4rem;">Partner</p>
-        <p class="cs__card-val">{collab.partnerName}</p>
+        <p class="eyebrow" style="margin-bottom:0.3rem;">Partner</p>
+        <p class="cs__val">{collab.partner_name}</p>
       </div>
-      <div class="cs__card">
-        <p class="eyebrow" style="margin-bottom:0.4rem;">Type</p>
-        <p class="cs__card-val">{collab.projectType}</p>
-      </div>
-      <div class="cs__card">
-        <p class="eyebrow" style="margin-bottom:0.4rem;">Year</p>
-        <p class="cs__card-val">{collab.year}</p>
-      </div>
-      {collab.flavorName && (
+      {collab.project_type && (
         <div class="cs__card">
-          <p class="eyebrow" style="margin-bottom:0.4rem;">Flavor</p>
-          <p class="cs__card-val">{collab.flavorName}</p>
+          <p class="eyebrow" style="margin-bottom:0.3rem;">Type</p>
+          <p class="cs__val">{collab.project_type.replace(/_/g,' ')}</p>
         </div>
       )}
-      <div class="cs__cta-block">
+      {collab.year && (
+        <div class="cs__card">
+          <p class="eyebrow" style="margin-bottom:0.3rem;">Year</p>
+          <p class="cs__val">{collab.year}</p>
+        </div>
+      )}
+      {collab.flavor_name && (
+        <div class="cs__card">
+          <p class="eyebrow" style="margin-bottom:0.3rem;">Flavor</p>
+          <p class="cs__val">{collab.flavor_name}</p>
+        </div>
+      )}
+      <div class="cs__cta">
         <p class="cs__cta-title">Start a collaboration</p>
         <p class="cs__cta-body">Custom flavors, branded products, events and campaigns.</p>
         <a href="mailto:collab@gussdamngood.com" class="cs__cta-btn">Get in touch →</a>
@@ -126,147 +97,130 @@ const { collab } = Astro.props;
     </aside>
   </div>
 
-  <!-- WORK STATION — the creative process workshop -->
-  <section class="ws">
-    <div class="ws__head">
-      <div>
-        <p class="eyebrow" style="margin-bottom:0.75rem;">Work Station</p>
-        <h2 class="ws__title">Where it gets made.</h2>
+  <!-- WORK STATION -->
+  {(collab.work_station_images?.length > 0 || collab.work_station_video) && (
+    <section class="ws">
+      <div class="ws__head">
+        <div>
+          <p class="eyebrow" style="margin-bottom:0.5rem;">Work Station</p>
+          <h2 class="ws__title">Where it gets made.</h2>
+        </div>
+        <p class="ws__sub">Every collaboration begins in our kitchen — where ingredients, stories, and instincts collide.</p>
       </div>
-      <p class="ws__sub">Every collaboration begins in our kitchen — where ingredients, stories, and instincts collide until something damn good emerges.</p>
-    </div>
 
-    <!-- WORK STATION PROCESS STEPS -->
-    <div class="ws__steps">
-      <div class="ws__step">
-        <span class="ws__step-n">01</span>
-        <h3 class="ws__step-title">Brief & Story Gathering</h3>
-        <p class="ws__step-body">We sit with the brand team. We learn what the partner cares about — their history, their customer, the feeling they want to create. We gather stories.</p>
-      </div>
-      <div class="ws__step">
-        <span class="ws__step-n">02</span>
-        <h3 class="ws__step-title">Flavor Prototyping</h3>
-        <p class="ws__step-body">Using our Story-to-Flavor methodology, we translate narrative into ingredient combinations. The first batch is usually wrong. The third is getting warm. The fifth, sometimes, is exactly right.</p>
-      </div>
-      <div class="ws__step">
-        <span class="ws__step-n">03</span>
-        <h3 class="ws__step-title">Tasting & Refinement</h3>
-        <p class="ws__step-body">Partners come to our kitchen. We eat together. We push further — adjusting sweetness, texture, temperature behavior. Nothing ships until everyone goes quiet after the first bite.</p>
-      </div>
-      <div class="ws__step">
-        <span class="ws__step-n">04</span>
-        <h3 class="ws__step-title">Production & Launch</h3>
-        <p class="ws__step-body">Small-batch production using our Boston texture method. Custom packaging, branded cups, event logistics. We handle everything from the kitchen to the moment it reaches the guest.</p>
-      </div>
-    </div>
-
-    <!-- WORK STATION PHOTO/VIDEO GRID — supports video uploads -->
-    <div class="ws__media">
-      {collab.workStationVideo
-        ? <div class="ws__media-hero">
-            <video src={collab.workStationVideo} autoplay muted loop playsinline class="ws__media-fill"/>
-          </div>
-        : <div class="ws__media-hero">
-            <img src={collab.workStationImages[0]} alt="Work station" class="ws__media-fill" loading="lazy"/>
-          </div>
-      }
-      <div class="ws__media-grid">
-        {collab.workStationImages.slice(1,4).map((src,i)=>(
-          <div class="ws__media-cell">
-            {src.match(/\.(mp4|webm)$/i)
-              ? <video src={src} autoplay muted loop playsinline class="ws__media-fill"/>
-              : <img src={src} alt={`Process ${i+2}`} class="ws__media-fill" loading="lazy"/>
-            }
+      <div class="ws__steps">
+        {["Brief & Story Gathering","Flavor Prototyping","Tasting & Refinement","Production & Launch"].map((s,i)=>(
+          <div class="ws__step">
+            <span class="ws__n">0{i+1}</span>
+            <h3 class="ws__st">{s}</h3>
           </div>
         ))}
       </div>
-    </div>
-  </section>
 
-  <!-- BACK + CTA -->
+      {(collab.work_station_images?.length > 0 || collab.work_station_video) && (
+        <div class="ws__media">
+          <div class="ws__hero">
+            {collab.work_station_video
+              ? <video src={collab.work_station_video} autoplay muted loop playsinline class="ws__fill"/>
+              : collab.work_station_images?.[0]
+                ? <img src={collab.work_station_images[0]} alt="Work station" class="ws__fill" loading="lazy"/>
+                : null
+            }
+          </div>
+          <div class="ws__grid">
+            {(collab.work_station_images || []).slice(1,4).map((src,i) => (
+              <div class="ws__cell">
+                <img src={src} alt={`Process ${i+2}`} class="ws__fill" loading="lazy"/>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </section>
+  )}
+
   <div class="cs__foot">
     <a href="/collabs" class="cs__back">← All collaborations</a>
     <a href="mailto:collab@gussdamngood.com" class="cs__contact">Start your collaboration ↗</a>
   </div>
 
-  <footer class="ffoot">
-    <p style="font-family:var(--f-head);font-weight:600;font-size:1.5rem;color:var(--white);letter-spacing:0.02em;text-transform:uppercase;">Guss Damn Good</p>
-    <nav style="display:flex;gap:2rem;">
-      <a href="/flavors" style="font-family:var(--f-ui);font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--g4);text-decoration:none;">Flavors</a>
-      <a href="/collabs" style="font-family:var(--f-ui);font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--g4);text-decoration:none;">All Collabs</a>
-      <a href="/story" style="font-family:var(--f-ui);font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--g4);text-decoration:none;">Story</a>
-    </nav>
+  <footer class="foot">
+    <div class="foot__top">
+      <p class="foot__brand">Guss Damn Good</p>
+      <nav class="foot__nav">
+        <a href="/flavors">Flavors</a>
+        <a href="/collabs">All Collabs</a>
+        <a href="/story">Story</a>
+      </nav>
+    </div>
+    <p class="foot__copy">© 2014–2025 Guss Damn Good</p>
   </footer>
 </BaseLayout>
 
 <style>
-  /* HERO */
-  .ch { position:relative; height:65vh; min-height:420px; overflow:hidden; margin-top:var(--nav-h); }
-  .ch__media { width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(0.2); }
-  .ch__dim { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.3) 55%,rgba(0,0,0,0.05) 100%); }
+  .ch { position:relative; height:65vh; min-height:420px; overflow:hidden; }
+  .ch__media { width:100%; height:100%; object-fit:cover; display:block; }
+  .ch__ph { background:var(--g2); }
+  .ch__dim { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.25) 55%); }
   .ch__meta { position:absolute; bottom:2.5rem; left:var(--gutter); right:var(--gutter); }
-  .ch__title { font-size:clamp(2.5rem,7vw,5.5rem); font-weight:600; color:var(--white); letter-spacing:-0.02em; margin-top:0.75rem; line-height:1; }
-  .ch__flavor { font-family:var(--f-body); font-size:0.85rem; color:rgba(255,255,255,0.5); margin-top:0.5rem; font-weight:300; }
+  .ch__title { font-size:clamp(2rem,6vw,5rem); font-weight:600; color:#FFFFFF; letter-spacing:-0.02em; margin-top:0.5rem; line-height:1; }
+  .ch__flavor { font-family:var(--f); font-size:0.85rem; color:rgba(255,255,255,0.5); margin-top:0.5rem; font-weight:300; }
 
-  /* CASE STUDY LAYOUT */
-  .cs { display:grid; grid-template-columns:1fr 300px; gap:0; border-bottom:1px solid var(--g2); }
-  .cs__main { padding:clamp(3rem,6vw,5rem) var(--gutter); display:flex; flex-direction:column; gap:3rem; border-right:1px solid var(--g2); }
-  .cs__section { display:flex; flex-direction:column; gap:1rem; }
-  .cs__two { display:grid; grid-template-columns:1fr 1fr; gap:clamp(1.5rem,4vw,3rem); padding-top:2rem; border-top:1px solid var(--g2); }
+  .cs { display:grid; grid-template-columns:1fr 280px; border-bottom:1px solid var(--g2); }
+  .cs__main { padding:clamp(3rem,5vw,5rem) var(--gutter); display:flex; flex-direction:column; gap:2.5rem; border-right:1px solid var(--g2); }
+  .cs__sec { display:flex; flex-direction:column; gap:0.75rem; }
+  .cs__two { display:grid; grid-template-columns:1fr 1fr; gap:2rem; padding-top:2rem; border-top:1px solid var(--g2); }
   .cs__result { padding-top:2rem; border-top:1px solid var(--g2); }
-  .cs__body { font-family:var(--f-body); font-size:0.9rem; color:var(--g6); line-height:1.85; font-weight:300; }
-  .cs__body--large { font-size:1.05rem; color:var(--white); font-weight:300; line-height:1.75; }
+  .cs__lead { font-family:var(--f); font-size:1rem; color:#FFFFFF; line-height:1.85; font-weight:300; opacity:0.85; }
+  .cs__body { font-family:var(--f); font-size:0.88rem; color:#FFFFFF; line-height:1.85; font-weight:300; opacity:0.6; }
 
-  /* SIDEBAR */
-  .cs__side { padding:3rem 2rem; display:flex; flex-direction:column; gap:0; }
+  .cs__side { padding:3rem 1.75rem; display:flex; flex-direction:column; gap:0; }
   .cs__card { padding:1rem 0; border-bottom:1px solid var(--g2); }
-  .cs__card-val { font-family:var(--f-body); font-size:0.9rem; color:var(--white); font-weight:300; margin-top:0.25rem; }
-  .cs__cta-block { padding-top:2rem; display:flex; flex-direction:column; gap:0.75rem; }
-  .cs__cta-title { font-family:var(--f-head); font-weight:500; font-size:1rem; color:var(--white); }
-  .cs__cta-body { font-family:var(--f-body); font-size:0.78rem; color:var(--g4); line-height:1.6; font-weight:300; }
-  .cs__cta-btn { font-family:var(--f-ui); font-size:0.58rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--black); background:var(--white); padding:0.65rem 1.25rem; text-decoration:none; text-align:center; transition:opacity 0.2s; font-weight:500; }
-  .cs__cta-btn:hover { opacity:0.8; }
+  .cs__val  { font-family:var(--f); font-size:0.9rem; color:#FFFFFF; font-weight:300; margin-top:0.25rem; text-transform:capitalize; }
+  .cs__cta  { padding-top:1.75rem; display:flex; flex-direction:column; gap:0.65rem; }
+  .cs__cta-title { font-family:var(--f); font-weight:500; font-size:1rem; color:#FFFFFF; }
+  .cs__cta-body  { font-family:var(--f); font-size:0.78rem; color:rgba(255,255,255,0.45); line-height:1.6; font-weight:300; }
+  .cs__cta-btn   { font-family:var(--f); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:#000000; background:#FFFFFF; padding:0.65rem 1.25rem; text-decoration:none; text-align:center; font-weight:500; transition:opacity 0.22s; }
+  .cs__cta-btn:hover { opacity:0.85; }
 
-  /* WORK STATION */
   .ws { border-bottom:1px solid var(--g2); }
-  .ws__head { display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,5vw,4rem); padding:clamp(3rem,6vw,5rem) var(--gutter); border-bottom:1px solid var(--g2); align-items:end; }
-  .ws__title { font-size:clamp(1.8rem,4vw,3.2rem); font-weight:500; color:var(--white); letter-spacing:-0.02em; margin-top:0.75rem; }
-  .ws__sub { font-family:var(--f-body); font-size:0.9rem; color:var(--g5); line-height:1.8; font-weight:300; }
-
-  /* PROCESS STEPS */
+  .ws__head { display:grid; grid-template-columns:1fr 1fr; gap:3rem; padding:clamp(3rem,5vw,5rem) var(--gutter); border-bottom:1px solid var(--g2); align-items:end; }
+  .ws__title { font-size:clamp(1.5rem,3.5vw,3rem); font-weight:500; color:#FFFFFF; letter-spacing:-0.02em; margin-top:0.5rem; }
+  .ws__sub { font-family:var(--f); font-size:0.88rem; color:rgba(255,255,255,0.55); line-height:1.8; font-weight:300; }
   .ws__steps { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--gap); background:var(--g2); border-bottom:1px solid var(--g2); }
-  .ws__step { background:var(--g1); padding:2rem 1.5rem; display:flex; flex-direction:column; gap:0.75rem; }
-  .ws__step-n { font-family:var(--f-ui); font-size:0.55rem; letter-spacing:0.25em; color:var(--g3); font-weight:400; }
-  .ws__step-title { font-family:var(--f-head); font-weight:500; font-size:1rem; color:var(--white); letter-spacing:-0.01em; }
-  .ws__step-body { font-family:var(--f-body); font-size:0.8rem; color:var(--g5); line-height:1.7; font-weight:300; }
+  .ws__step { background:var(--g1); padding:1.75rem 1.5rem; }
+  .ws__n { font-family:var(--f); font-size:0.5rem; letter-spacing:0.25em; color:var(--g3); font-weight:400; display:block; margin-bottom:0.5rem; }
+  .ws__st { font-family:var(--f); font-weight:500; font-size:0.9rem; color:#FFFFFF; letter-spacing:-0.01em; }
+  .ws__media { display:grid; grid-template-columns:2fr 1fr; gap:var(--gap); background:var(--g2); }
+  .ws__hero,.ws__cell { overflow:hidden; background:#080808; }
+  .ws__hero { aspect-ratio:4/3; }
+  .ws__grid { display:grid; grid-template-rows:repeat(3,1fr); gap:var(--gap); }
+  .ws__cell { aspect-ratio:unset; }
+  .ws__fill { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.5s ease; }
+  .ws__hero:hover .ws__fill,.ws__cell:hover .ws__fill { transform:scale(1.04); }
 
-  /* MEDIA GRID — supports video -->
-  .ws__media { display:grid; grid-template-columns:2fr 1fr; grid-template-rows:300px; gap:var(--gap); background:var(--g2); }
-  .ws__media-hero { overflow:hidden; background:#080808; }
-  .ws__media-grid { display:grid; grid-template-rows:repeat(3,1fr); gap:var(--gap); }
-  .ws__media-cell { overflow:hidden; background:#080808; }
-  .ws__media-fill { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.5s ease; filter:grayscale(0.2); }
-  .ws__media-hero:hover .ws__media-fill,
-  .ws__media-cell:hover .ws__media-fill { transform:scale(1.04); filter:grayscale(0); }
-
-  /* FOOTER AREA */
   .cs__foot { display:flex; align-items:center; justify-content:space-between; padding:2rem var(--gutter); border-bottom:1px solid var(--g2); flex-wrap:wrap; gap:1rem; }
-  .cs__back { font-family:var(--f-ui); font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--g4); text-decoration:none; transition:color 0.2s; font-weight:400; }
-  .cs__back:hover { color:var(--white); }
-  .cs__contact { font-family:var(--f-ui); font-size:0.58rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--black); background:var(--white); padding:0.65rem 1.5rem; text-decoration:none; font-weight:500; transition:opacity 0.2s; }
-  .cs__contact:hover { opacity:0.8; }
-  .ffoot { padding:2rem var(--gutter); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem; border-top:1px solid var(--g2); }
+  .cs__back    { font-family:var(--f); font-size:0.55rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--g4); text-decoration:none; transition:color 0.22s; font-weight:300; }
+  .cs__back:hover { color:#FFFFFF; }
+  .cs__contact { font-family:var(--f); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:#000000; background:#FFFFFF; padding:0.65rem 1.5rem; text-decoration:none; font-weight:500; transition:opacity 0.22s; }
+  .cs__contact:hover { opacity:0.85; }
 
-  @media(max-width:900px){
+  .foot { padding:2rem var(--gutter); display:flex; flex-direction:column; gap:1rem; border-top:1px solid var(--g2); }
+  .foot__top { display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap; padding-bottom:1.25rem; border-bottom:1px solid var(--g2); }
+  .foot__brand { font-family:var(--f); font-weight:600; font-size:1.1rem; color:#FFFFFF; letter-spacing:0.06em; text-transform:uppercase; }
+  .foot__nav { display:flex; gap:2rem; }
+  .foot__nav a { font-family:var(--f); font-size:0.5rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--g4); text-decoration:none; transition:color 0.22s; }
+  .foot__nav a:hover { color:#FFFFFF; }
+  .foot__copy { font-family:var(--f); font-size:0.46rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--g2); }
+
+  @media(max-width:768px){
     .cs { grid-template-columns:1fr; }
     .cs__main { border-right:none; border-bottom:1px solid var(--g2); }
     .cs__two { grid-template-columns:1fr; }
     .ws__head { grid-template-columns:1fr; }
     .ws__steps { grid-template-columns:repeat(2,1fr); }
-    .ws__media { grid-template-columns:1fr; grid-template-rows:auto; }
-    .ws__media-hero { aspect-ratio:16/9; }
-    .ws__media-grid { grid-template-columns:repeat(3,1fr); grid-template-rows:auto; }
-    .ws__media-cell { aspect-ratio:1/1; }
+    .ws__media { grid-template-columns:1fr; }
+    .ws__hero { aspect-ratio:16/9; }
+    .ws__grid { grid-template-rows:auto; grid-template-columns:repeat(3,1fr); }
   }
-  @media(max-width:560px){ .ws__steps { grid-template-columns:1fr; } }
 </style>

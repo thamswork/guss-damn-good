@@ -11,12 +11,20 @@ const pinned  = allFlavors.filter(f => f.data.pinned).slice(0,2);
 const rest    = allFlavors.filter(f => !f.data.pinned && f.data.status !== 'archive');
 const display = [...pinned, ...rest].slice(0, 8);
 
-const collabs = [
-  { name:"RIMOWA",    type:"Collab Flavor", img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",  slug:"rimowa"    },
-  { name:"Valentino", type:"Collab Flavor", img:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80", slug:"valentino" },
-  { name:"Hermes",    type:"Collab Flavor", img:"https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80",   slug:"rimowa"    },
-  { name:"La Mer",    type:"Campaign",      img:"https://images.unsplash.com/photo-1570194065650-d99fb4b8ccb4?w=800&q=80", slug:"rimowa"    },
-];
+const cmsCollabs = await getCollection('collabs').catch(() => []);
+const collabs = cmsCollabs.length > 0
+  ? cmsCollabs.slice(0,4).map(c => ({
+      name: c.data.partner_name,
+      type: c.data.project_type?.replace(/_/g,' ') || 'Collab',
+      img:  c.data.hero_image || '',
+      slug: c.id,
+    }))
+  : [
+    { name:"RIMOWA",    type:"Collab Flavor", img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80", slug:"rimowa" },
+    { name:"Valentino", type:"Collab Flavor", img:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80", slug:"valentino" },
+    { name:"Hermes",    type:"Collab Flavor", img:"https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80", slug:"rimowa" },
+    { name:"La Mer",    type:"Campaign",      img:"https://images.unsplash.com/photo-1570194065650-d99fb4b8ccb4?w=800&q=80", slug:"rimowa" },
+  ];
 ---
 
 <BaseLayout title="Guss Damn Good — Feeling-Crafted Ice Cream">
