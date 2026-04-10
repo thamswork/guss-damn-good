@@ -2,7 +2,7 @@ backend:
   name: github
   repo: thamswork/guss-damn-good
   branch: main
-  base_url: https://guss-damngood.pages.dev
+  base_url: https://main.guss-damngood.pages.dev
   auth_endpoint: api/auth
 
 media_folder: public/images
@@ -52,7 +52,6 @@ collections:
     folder: src/content/collections
     create: true
     slug: "{{slug}}"
-    summary: "{{fields.title}}"
     fields:
       - { label: "Collection Title", name: title, widget: string }
       - { label: "Slug (URL, no spaces)", name: slug, widget: string }

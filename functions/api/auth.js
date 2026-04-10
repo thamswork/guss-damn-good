@@ -18,23 +18,20 @@ export async function onRequest(context) {
     }),
   });
 
-  const tokenData = await tokenRes.json();
-  const token = tokenData.access_token;
+  const { access_token } = await tokenRes.json();
 
-  const script = `
+  const html = `<!DOCTYPE html><html><body><script>
     (function() {
       function receiveMessage(e) {
         window.opener.postMessage(
-          'authorization:github:success:' + JSON.stringify({ token: '${token.replace(/'/g, "\\'")}', provider: 'github' }),
+          'authorization:github:success:' + JSON.stringify({ token: '${access_token}', provider: 'github' }),
           e.origin
         );
       }
       window.addEventListener("message", receiveMessage, false);
       window.opener.postMessage("authorizing:github", "*");
     })();
-  `;
+  <\/script></body></html>`;
 
-  return new Response(`<!DOCTYPE html><html><body><script>${script}<\/script></body></html>`, {
-    headers: { 'Content-Type': 'text/html' }
-  });
+  return new Response(html, { headers: { 'Content-Type': 'text/html' } });
 }
