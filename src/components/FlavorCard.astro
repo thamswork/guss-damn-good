@@ -10,11 +10,11 @@ const {
   description  = "",
 } = Astro.props;
 const hasVideo = productVideo?.length > 0;
-const id = `fc-${Math.random().toString(36).slice(2,7)}`;
+const uid = `fc-${Math.random().toString(36).slice(2,9)}`;
 ---
 
-<article class={`fc${!inStock ? ' fc-out' : ''}${pinned ? ' fc-pin' : ''}`} data-id={id} tabindex="0">
-  <div class="fc__img">
+<article class={`fc${!inStock?' fc-out':''}${pinned?' fc-pin':''}`} data-uid={uid} tabindex="0" role="button" aria-label={`View ${flavorName}`}>
+  <div class="fc__media">
     {hasVideo
       ? <video src={productVideo} autoplay muted loop playsinline class="fc__fill"/>
       : productImage
@@ -32,12 +32,12 @@ const id = `fc-${Math.random().toString(36).slice(2,7)}`;
   </div>
 </article>
 
-<!-- POPUP MODAL -->
-<div class="fcm" id={id} role="dialog" aria-modal="true" aria-label={flavorName}>
-  <div class="fcm__backdrop"/>
+<!-- POPUP MODAL — larger, full readable -->
+<div class="fcm" id={uid} role="dialog" aria-modal="true" aria-label={flavorName}>
+  <div class="fcm__back"/>
   <div class="fcm__box">
     <button class="fcm__close" aria-label="Close">✕</button>
-    <div class="fcm__media">
+    <div class="fcm__img">
       {hasVideo
         ? <video src={productVideo} autoplay muted loop playsinline class="fcm__fill"/>
         : productImage
@@ -46,15 +46,13 @@ const id = `fc-${Math.random().toString(36).slice(2,7)}`;
       }
     </div>
     <div class="fcm__info">
-      {moodNumber && <span class="fcm__num">{moodNumber}</span>}
+      {moodNumber && <p class="fcm__num">{moodNumber}</p>}
       <h2 class="fcm__name">{flavorName}</h2>
-      <span class="fcm__cat">{category}</span>
+      <p class="fcm__cat">{category}</p>
       {description && <p class="fcm__desc">{description}</p>}
-      <div class="fcm__meta">
-        <span class={`fcm__stock${inStock ? ' fcm__stock--in' : ''}`}>
-          {inStock ? 'Available now' : 'Archive'}
-        </span>
-        {pinned && <span class="fcm__pinned">Signature Flavor</span>}
+      <div class="fcm__footer">
+        <span class={`fcm__avail${inStock?' fcm__avail--yes':''}`}>{inStock?'Available Now':'Archive'}</span>
+        {pinned && <span class="fcm__sig">Signature Flavor</span>}
       </div>
     </div>
   </div>
@@ -62,73 +60,69 @@ const id = `fc-${Math.random().toString(36).slice(2,7)}`;
 
 <style>
   /* CARD */
-  .fc { background:var(--g1); cursor:pointer; position:relative; display:flex; flex-direction:column; transition:background 0.22s ease; }
-  .fc:hover { background:#101010; }
-  .fc:focus { outline:1px solid var(--g3); }
-  .fc-out { filter:grayscale(0.65); opacity:0.55; }
-  .fc-pin { outline:1px solid rgba(255,255,255,0.1); }
+  .fc { background:var(--g1); cursor:pointer; display:flex; flex-direction:column; transition:background 0.22s ease; }
+  .fc:hover,.fc:focus { background:#111; outline:none; }
+  .fc-out { opacity:0.5; filter:grayscale(0.7); }
+  .fc-pin { box-shadow:inset 0 0 0 1px rgba(255,255,255,0.12); }
 
-  .fc__img { position:relative; overflow:hidden; background:#080808; aspect-ratio:1/1; }
+  /* 4:5 PORTRAIT RATIO */
+  .fc__media { position:relative; aspect-ratio:4/5; overflow:hidden; background:#080808; }
   .fc__fill { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.55s ease; }
-  .fc:hover .fc__fill { transform:scale(1.05); }
-  .fc__ph { display:flex; align-items:center; justify-content:center; font-size:2.5rem; }
+  .fc:hover .fc__fill { transform:scale(1.04); }
+  .fc__ph { display:flex; align-items:center; justify-content:center; font-size:3rem; }
 
-  .fc__badge { position:absolute; font-family:var(--f); font-size:0.48rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.18rem 0.52rem; font-weight:400; }
-  .fc__badge--pin { top:0.65rem; left:0.65rem; background:#FFFFFF; color:#000000; }
-  .fc__badge--out { top:0.65rem; right:0.65rem; background:rgba(0,0,0,0.82); color:var(--g5); border:1px solid var(--g3); }
+  .fc__badge { position:absolute; font-family:var(--f); font-size:0.48rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.2rem 0.55rem; font-weight:500; top:0.65rem; }
+  .fc__badge--pin { left:0.65rem; background:#FFFFFF; color:#000000; }
+  .fc__badge--out { right:0.65rem; background:rgba(0,0,0,0.75); color:var(--g5); border:1px solid var(--g3); }
 
-  .fc__bar { position:absolute; bottom:0; left:0; height:1px; width:0; background:#FFFFFF; transition:width 0.4s ease; }
+  .fc__bar { position:absolute; bottom:0; left:0; height:2px; width:0; background:#FFFFFF; transition:width 0.38s ease; }
   .fc:hover .fc__bar { width:100%; }
 
-  .fc__body { padding:0.8rem 0.9rem 1rem; display:flex; flex-direction:column; gap:0.2rem; }
-  .fc__num  { font-family:var(--f); font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--g4); font-weight:400; }
-  .fc__name { font-family:var(--f); font-weight:500; font-size:clamp(0.85rem,1.4vw,1.1rem); color:#FFFFFF; letter-spacing:-0.01em; line-height:1.15; }
+  .fc__body { padding:0.75rem 0.85rem 1rem; display:flex; flex-direction:column; gap:0.18rem; }
+  .fc__num  { font-family:var(--f); font-size:0.52rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--g4); font-weight:400; }
+  .fc__name { font-family:var(--f); font-weight:500; font-size:1rem; color:#FFFFFF; line-height:1.2; letter-spacing:-0.005em; }
   .fc__cat  { font-family:var(--f); font-size:0.48rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--g3); font-weight:300; }
 
-  /* MODAL */
-  .fcm { position:fixed; inset:0; z-index:8000; display:flex; align-items:center; justify-content:center; opacity:0; visibility:hidden; pointer-events:none; transition:opacity 0.3s ease, visibility 0.3s ease; padding:1rem; }
+  /* MODAL — large, readable */
+  .fcm { position:fixed; inset:0; z-index:8000; display:flex; align-items:center; justify-content:center; padding:1.5rem; opacity:0; visibility:hidden; pointer-events:none; transition:opacity 0.28s ease,visibility 0.28s ease; }
   .fcm.open { opacity:1; visibility:visible; pointer-events:all; }
-  .fcm__backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.88); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); cursor:pointer; }
-  .fcm__box { position:relative; z-index:1; background:var(--g1); display:grid; grid-template-columns:1fr 1fr; max-width:720px; width:100%; max-height:90vh; overflow:hidden; border:1px solid var(--g2); }
-  .fcm__close { position:absolute; top:0.75rem; right:0.75rem; background:rgba(0,0,0,0.6); border:1px solid var(--g3); color:var(--g5); width:28px; height:28px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.65rem; font-family:var(--f); transition:all 0.2s; z-index:2; }
-  .fcm__close:hover { background:#FFFFFF; color:#000000; }
-  .fcm__media { overflow:hidden; aspect-ratio:1/1; }
-  .fcm__fill { width:100%; height:100%; object-fit:cover; display:block; }
-  .fcm__ph { display:flex; align-items:center; justify-content:center; font-size:4rem; background:var(--g2); }
-  .fcm__info { padding:2rem 1.5rem; display:flex; flex-direction:column; gap:0.75rem; justify-content:center; overflow-y:auto; }
-  .fcm__num  { font-family:var(--f); font-size:0.52rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--g4); font-weight:400; }
-  .fcm__name { font-family:var(--f); font-weight:500; font-size:clamp(1.2rem,2.5vw,1.8rem); color:#FFFFFF; letter-spacing:-0.01em; line-height:1.1; }
-  .fcm__cat  { font-family:var(--f); font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--g4); font-weight:300; }
-  .fcm__desc { font-family:var(--f); font-size:0.85rem; color:var(--g5); line-height:1.8; font-weight:300; margin-top:0.5rem; }
-  .fcm__meta { display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:0.5rem; padding-top:1rem; border-top:1px solid var(--g2); }
-  .fcm__stock { font-family:var(--f); font-size:0.5rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--g4); font-weight:300; }
-  .fcm__stock--in { color:#FFFFFF; }
-  .fcm__pinned { font-family:var(--f); font-size:0.5rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--g4); font-weight:300; border-left:1px solid var(--g3); padding-left:0.75rem; }
+  .fcm__back { position:absolute; inset:0; background:rgba(0,0,0,0.9); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); cursor:pointer; }
+  .fcm__box { position:relative; z-index:1; background:var(--g1); display:grid; grid-template-columns:1fr 1fr; width:100%; max-width:880px; max-height:88vh; overflow:hidden; border:1px solid var(--g2); }
+  .fcm__close { position:absolute; top:1rem; right:1rem; z-index:2; background:rgba(0,0,0,0.7); border:1px solid var(--g3); color:#FFFFFF; width:32px; height:32px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:0.7rem; font-family:var(--f); transition:all 0.2s; border-radius:0; }
+  .fcm__close:hover { background:#FFFFFF; color:#000000; border-color:#FFFFFF; }
 
-  @media(max-width:560px){
-    .fcm__box { grid-template-columns:1fr; max-height:85vh; overflow-y:auto; }
-    .fcm__media { aspect-ratio:4/3; }
+  /* 4:5 modal image */
+  .fcm__img { aspect-ratio:4/5; overflow:hidden; background:#080808; }
+  .fcm__fill { width:100%; height:100%; object-fit:cover; display:block; }
+  .fcm__ph { display:flex; align-items:center; justify-content:center; font-size:5rem; }
+
+  .fcm__info { padding:2.5rem 2rem; display:flex; flex-direction:column; gap:1rem; justify-content:center; overflow-y:auto; }
+  .fcm__num  { font-family:var(--f); font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--g4); font-weight:400; }
+  .fcm__name { font-family:var(--f); font-weight:600; font-size:clamp(1.5rem,3vw,2.4rem); color:#FFFFFF; letter-spacing:-0.02em; line-height:1.05; }
+  .fcm__cat  { font-family:var(--f); font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--g5); font-weight:300; }
+  .fcm__desc { font-family:var(--f); font-size:0.95rem; color:#FFFFFF; line-height:1.85; font-weight:300; opacity:0.8; }
+  .fcm__footer { display:flex; gap:1rem; flex-wrap:wrap; padding-top:1.25rem; border-top:1px solid var(--g2); margin-top:0.5rem; }
+  .fcm__avail { font-family:var(--f); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--g4); font-weight:300; }
+  .fcm__avail--yes { color:#FFFFFF; }
+  .fcm__sig   { font-family:var(--f); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--g4); font-weight:300; border-left:1px solid var(--g3); padding-left:1rem; }
+
+  @media(max-width:600px){
+    .fcm__box { grid-template-columns:1fr; overflow-y:auto; }
+    .fcm__img { aspect-ratio:4/3; }
+    .fcm__info { padding:1.5rem 1.25rem; }
   }
 </style>
 
-<script define:vars={{ id }}>
-  var card    = document.querySelector(`[data-id="${id}"]`);
-  var modal   = document.getElementById(id);
-  var backdrop = modal?.querySelector('.fcm__backdrop');
-  var closeBtn = modal?.querySelector('.fcm__close');
-
-  function openModal() {
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal() {
-    modal.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  card?.addEventListener('click', openModal);
-  card?.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' ') openModal(); });
-  backdrop?.addEventListener('click', closeModal);
-  closeBtn?.addEventListener('click', closeModal);
-  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+<script define:vars={{ uid }}>
+  var card = document.querySelector('[data-uid="'+uid+'"]');
+  var modal = document.getElementById(uid);
+  var back  = modal && modal.querySelector('.fcm__back');
+  var btn   = modal && modal.querySelector('.fcm__close');
+  function open()  { if(modal){ modal.classList.add('open'); document.body.style.overflow='hidden'; } }
+  function close() { if(modal){ modal.classList.remove('open'); document.body.style.overflow=''; } }
+  card && card.addEventListener('click', open);
+  card && card.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' ') open(); });
+  back && back.addEventListener('click', close);
+  btn  && btn.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
 </script>

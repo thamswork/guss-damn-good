@@ -49,6 +49,7 @@ const total    = allFlavors.length;
               productVideo={f.data.product_video}
               category={f.data.category}
               inStock={f.data.in_stock}
+            description={f.data.description}
               description={f.data.description}
               pinned={f.data.pinned}
             />
@@ -91,9 +92,9 @@ const total    = allFlavors.length;
   .ft-active { color:#FFFFFF; background:var(--g1); }
 
   /* 3-COL GRID — same as homepage */
-  .fgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap); background:var(--g2); border-bottom:1px solid var(--g2); }
+  .fgrid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--gap); background:var(--g2); border-bottom:1px solid var(--g2); }
   .fgrid__item.hidden { display:none; }
-  .fgrid .fc__img { aspect-ratio:1/1; }
+  .fgrid .fc__img { aspect-ratio:4/5; }
 
   .fcta { display:flex; align-items:center; justify-content:space-between; padding:1.25rem var(--gutter); border-bottom:1px solid var(--g2); flex-wrap:wrap; gap:1rem; }
 
