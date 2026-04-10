@@ -1,13 +1,14 @@
 ---
-flavor_name: "Pandan Coconut"
+flavor_name: B-Cube
 mood_number: "Mood #55"
-product_image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&q=80"
-description: "Fragrant pandan with thick coconut milk from Southern Thailand. A tropical lullaby."
-category: "classic"
-status: "emerging"
+product_image: https://res.cloudinary.com/dynjnftnu/image/upload/v1775792178/B-CUBE_Large_gopy1m.jpg
+description: Sweet, chewy, and indulgent. A rich Brown Sugar and Brown Butter
+  ice cream base loaded with generous chunks of chocolate brownies.
+category: classic
+status: emerging
 in_stock: true
 pinned: false
 locations:
-  - "EmQuartier"
-  - "Limited Run"
+  - EmQuartier
+  - Limited Run
 ---
